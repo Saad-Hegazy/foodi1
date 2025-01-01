@@ -57,18 +57,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAnDha73sa2FmGmbiugrdqCnGrVFd_xuqg',
-    appId: '1:836519579068:android:0d8ac267c5355b939fafb9',
+    appId: '1:836519579068:android:2fe6f5a8832123ea9fafb9',
     messagingSenderId: '836519579068',
     projectId: 'ecommerce-5ae51',
-    storageBucket: 'ecommerce-5ae51.appspot.com',
+    storageBucket: 'ecommerce-5ae51.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCBkGieey5j334rxxcMqIS1jUW0S0gzzSc',
-    appId: '1:836519579068:ios:6d0b1578e435fa339fafb9',
+    apiKey: 'AIzaSyA1cwnTFwnaZxPuicZho5DiB-FDlGPOtF4',
+    appId: '1:836519579068:ios:a0c7f3988c1749c99fafb9',
     messagingSenderId: '836519579068',
     projectId: 'ecommerce-5ae51',
-    storageBucket: 'ecommerce-5ae51.appspot.com',
-    iosBundleId: 'com.example.ecommerceApp',
+    storageBucket: 'ecommerce-5ae51.firebasestorage.app',
+    iosBundleId: 'com.foodi1.app',
   );
+
 }
