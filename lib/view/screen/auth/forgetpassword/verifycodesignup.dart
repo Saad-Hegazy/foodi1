@@ -14,8 +14,6 @@ class VerifyCodeSignUp extends StatelessWidget {
   Widget build(BuildContext context) {
   Get.put(VerifyCodeSignUpControllerImp());
     return Scaffold(
-        backgroundColor: AppColor.backgroundcolor,
-
         appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColor.backgroundcolor,

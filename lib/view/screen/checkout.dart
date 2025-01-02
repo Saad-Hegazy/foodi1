@@ -15,8 +15,6 @@ class Checkout extends StatelessWidget {
   Widget build(BuildContext context) {
     CheckoutController controller = Get.put(CheckoutController());
     return Scaffold(
-      backgroundColor: AppColor.backgroundcolor,
-
       appBar: AppBar(
         title: const Text('Checkout'),
       ),

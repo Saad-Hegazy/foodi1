@@ -18,9 +18,7 @@ class Items extends StatelessWidget {
   Widget build(BuildContext context) {
     ItemsControllerImp controller = Get.put(ItemsControllerImp());
     FavoriteController controllerFav = Get.put(FavoriteController());
-
     return Scaffold(
-      backgroundColor: AppColor.backgroundcolor,
       body: Container(
         padding: const EdgeInsets.all(15),
         child: ListView(children: [

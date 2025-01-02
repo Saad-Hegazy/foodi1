@@ -16,8 +16,6 @@ class VerfiyCode extends StatelessWidget {
     VerifyCodeControllerImp controller =
     Get.put(VerifyCodeControllerImp());
     return Scaffold(
-      backgroundColor: AppColor.backgroundcolor,
-
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColor.backgroundcolor,

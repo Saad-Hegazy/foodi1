@@ -10,8 +10,6 @@ class OrdersPending extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(OrdersPendingController());
     return Scaffold(
-        backgroundColor: AppColor.backgroundcolor,
-
         appBar: AppBar(
           title: const Text('Orders'),
         ),

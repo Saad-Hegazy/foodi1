@@ -11,7 +11,6 @@ class Language extends GetView<LocaleController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.backgroundcolor,
       body: Container(
         padding:const EdgeInsets.all(15),
         child: Column(

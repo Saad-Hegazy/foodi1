@@ -15,8 +15,6 @@ class AddressView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(AddressViewController());
     return Scaffold(
-        backgroundColor: AppColor.backgroundcolor,
-
         appBar: AppBar(
           title: const Text('address'),
         ),

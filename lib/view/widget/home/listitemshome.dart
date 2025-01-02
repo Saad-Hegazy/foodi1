@@ -37,20 +37,20 @@ class ItemsHome extends GetView<HomeControllerImp> {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            margin: const EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 5),
             child: Image.network(
               "${AppLink.imagestItems}/${itemsModel.itemsImage}",
               height: 100,
-              width: 150,
+              width: 100,
               fit: BoxFit.fill,
             ),
           ),
           Container(
             decoration: BoxDecoration(
-                color: AppColor.black.withOpacity(0.3),
+                color: AppColor.black.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(20)),
             height: 120,
-            width: 200,
+            width: 150,
           ),
           Positioned(
               left: 10,
@@ -58,7 +58,7 @@ class ItemsHome extends GetView<HomeControllerImp> {
                 "${itemsModel.itemsName}",
                 style: const TextStyle(
                     color: Colors.white,
-                    // fontWeight: FontWeight.bold,
+                     fontWeight: FontWeight.bold,
                     fontSize: 14),
               ))
         ],

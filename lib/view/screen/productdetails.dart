@@ -10,7 +10,6 @@ class ProductDetails extends StatelessWidget {
   const ProductDetails({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
     Get.put(ProductDetailsControllerImp());
     return Scaffold(
         body: GetBuilder<ProductDetailsControllerImp>(
@@ -69,7 +68,7 @@ class ProductDetails extends StatelessWidget {
           child: MaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
-              color: AppColor.secondColor,
+              color: AppColor.primaryColor,
               onPressed: () {
                 Get.toNamed(AppRoute.cart);
               },

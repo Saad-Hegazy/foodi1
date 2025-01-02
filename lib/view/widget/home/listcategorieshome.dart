@@ -45,7 +45,7 @@ class Categories extends GetView<HomeControllerImp> {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: AppColor.thirdColor,
+                color: AppColor.primaryColor,
                 borderRadius: BorderRadius.circular(20)),
             padding: const EdgeInsets.symmetric(horizontal: 10),
             height: 70,

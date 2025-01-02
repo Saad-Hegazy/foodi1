@@ -14,8 +14,6 @@ class AddressAddDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(AddAddressDetailsController());
     return Scaffold(
-      backgroundColor: AppColor.backgroundcolor,
-
       appBar: AppBar(
         title: const Text('add details address'),
       ),

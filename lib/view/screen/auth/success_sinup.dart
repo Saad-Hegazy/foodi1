@@ -11,8 +11,6 @@ class SuccessSignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     SuccessSignUpControllerImp controller =Get.put(SuccessSignUpControllerImp());
     return Scaffold(
-      backgroundColor: AppColor.backgroundcolor,
-
       appBar:AppBar(
         centerTitle: true,
         elevation: 0.0,
