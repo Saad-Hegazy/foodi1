@@ -25,10 +25,10 @@ class ImageSlider extends StatelessWidget {
                 fit: BoxFit.fill,);
               },
               options: CarouselOptions(
+                scrollPhysics: const BouncingScrollPhysics(),
                 autoPlay: true,
-                enlargeCenterPage: true,
-                aspectRatio: 16/9,
-                viewportFraction: 1.0,
+                aspectRatio: 2,
+                viewportFraction: 1,
               ),
       ),
     );

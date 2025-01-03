@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../../../controller/onboarding_controller.dart';
 import '../../../core/constant/color.dart';
 import '../../../data/datasource/static/static.dart';
@@ -27,7 +27,7 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImp> {
           const SizedBox(
             height: 80,
           ),
-          Image.asset(
+          SvgPicture.asset(
             onBoardingList[i].image!,
            // width: 200,
             height: Get.width/1.5,
