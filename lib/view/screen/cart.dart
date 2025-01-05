@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/cart_controller.dart';
 import '../../core/class/handlingdataview.dart';
-import '../../core/constant/color.dart';
 import '../widget/cart/appbarcart.dart';
 import '../widget/cart/custom_bottom_navgationbar_cart.dart';
 import '../widget/cart/customitemscartlist.dart';
@@ -30,13 +29,12 @@ class Cart extends StatelessWidget {
                 statusRequest: controller.statusRequest,
                 widget: ListView(
                   children: [
-                    const TopAppbarCart(
-                      title: 'My Cart',
+                     TopAppbarCart(
+                      title: '71'.tr,
                     ),
                     const SizedBox(height: 10),
                     TopCardCart(
-                        message:
-                        "You Have ${cartController.totalcountitems} Items in Your List"),
+                        message:"72".tr + "  ${cartController.totalcountitems}  " + "73".tr),
                     Container(
                       padding: const EdgeInsets.all(10),
                       child: Column(

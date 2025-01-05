@@ -19,14 +19,18 @@ class CustomTextFormAuth extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       child: TextFormField(
+        style:  TextStyle(color: Colors.black),
         obscureText:obscureText==null||obscureText==false ?false:true,
         validator:valid ,
         controller: mycontroller,
         keyboardType: isNumber?const TextInputType.numberWithOptions(decimal: true):TextInputType.text,
         decoration: InputDecoration(
+            filled:true,
+            fillColor: Colors.white,
             hintText:hinttext,
             hintStyle:const  TextStyle(
               fontSize: 14,
+              color: Colors.black,
             ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             contentPadding:const  EdgeInsets.symmetric(vertical: 5 , horizontal: 30),

@@ -18,7 +18,7 @@ class CardOrdersList extends GetView<OrdersPendingController> {
             children: [
               Row(
                 children: [
-                  Text("Order Number : #${listdata.ordersId}",
+                  Text("112 : #${listdata.ordersId}".tr,
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold)),
                   const Spacer(),
@@ -33,15 +33,15 @@ class CardOrdersList extends GetView<OrdersPendingController> {
               ),
               const Divider(),
               Text(
-                  "Order Type : ${controller.printOrderType(listdata.ordersType!)}"),
-              Text("Order Price : ${listdata.ordersPrice?.toStringAsFixed(2)} SAR"),
-              Text("Delivery Price : ${listdata.ordersPricedelivery?.toStringAsFixed(2)} SAR "),
+                  "113 : ${controller.printOrderType(listdata.ordersType!)}".tr),
+              Text("114 : ${listdata.ordersPrice?.toStringAsFixed(2)} SAR".tr),
+              Text("115 : ${listdata.ordersPricedelivery?.toStringAsFixed(2)} SAR ".tr),
               Text(
-                  "Payment Method : ${controller.printPaymentMethod(listdata.ordersPaymentmethod!)} "),
+                  "116 : ${controller.printPaymentMethod(listdata.ordersPaymentmethod!)} ".tr),
               Text(
-                  "Order Status : ${controller.printOrderStatus(listdata.ordersStatus!)} "),
+                  "117 : ${controller.printOrderStatus(listdata.ordersStatus!)} ".tr),
               const Divider(),
-              Text("Total Price : ${listdata.ordersTotalprice!.toStringAsFixed(2)} SAR ",
+              Text("118 : ${listdata.ordersTotalprice!.toStringAsFixed(2)} SAR ".tr,
                         style: const TextStyle(
                             color: AppColor.primaryColor,
                             fontWeight: FontWeight.bold)),
@@ -55,7 +55,7 @@ class CardOrdersList extends GetView<OrdersPendingController> {
                     },
                     color: AppColor.thirdColor,
                     textColor: AppColor.secondColor,
-                    child: const Text("Details"),
+                    child:  Text("119".tr),
                   ),
                   const SizedBox(width: 3),
                   if (listdata.ordersStatus! == 0) MaterialButton(
@@ -64,7 +64,7 @@ class CardOrdersList extends GetView<OrdersPendingController> {
                     },
                     color: AppColor.thirdColor,
                     textColor: AppColor.secondColor,
-                    child: const Text("Delete"),
+                    child:  Text("120".tr),
                   )
                 ],
               ),

@@ -21,9 +21,9 @@ class Login extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: AppColor.backgroundcolor,
+        backgroundColor: AppColor.primaryColor,
         elevation: 0.0,
-        title: Text('Sign In',
+        title: Text("41".tr,
             style: Theme.of(context)
                 .textTheme
                 .displayLarge!
@@ -80,6 +80,7 @@ class Login extends StatelessWidget {
                       controller.goToForgetPassword();
                     },
                     child: Text(
+                      style: TextStyle(color: Colors.black),
                       "14".tr,
                       textAlign: TextAlign.right,
                     ),

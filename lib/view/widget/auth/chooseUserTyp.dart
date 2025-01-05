@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../controller/auth/signup_controller.dart';
 class chooseUserType extends StatelessWidget {
   const chooseUserType({
@@ -10,12 +11,12 @@ class chooseUserType extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
-          "Choose your account type",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+         Text(
+          "175".tr,
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.black),
         ),
         RadioListTile(
-          title: const Text("Normal User"),
+          title:  Text("176".tr),
           value: "Normal User",
           groupValue: SignUpController.selectedUserType,
           onChanged: ( value) {
@@ -25,7 +26,7 @@ class chooseUserType extends StatelessWidget {
           },
         ),
         RadioListTile(
-          title: const Text("Mosque"),
+          title:  Text("177".tr),
           value: "mosque",
           groupValue: SignUpController.selectedUserType,
           onChanged: (value) {
@@ -35,7 +36,7 @@ class chooseUserType extends StatelessWidget {
           },
         ),
         RadioListTile(
-          title: const Text("Merchant"),
+          title:  Text("178".tr),
           value: "Merchant",
           groupValue: SignUpController.selectedUserType,
           onChanged: ( value) {

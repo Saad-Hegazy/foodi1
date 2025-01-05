@@ -33,7 +33,7 @@ class PriceAndCountItems extends StatelessWidget {
                 BoxDecoration(border: Border.all(color: Colors.black)),
                 child: Text(
                   count,
-                  style: const TextStyle(fontSize: 20, height: 1.1),
+                  style: const TextStyle(fontSize: 20, height: 1.1,color: Colors.black),
                 )),
             IconButton(onPressed: () {onRemove!();}, icon: const Icon(Icons.remove)),
           ],

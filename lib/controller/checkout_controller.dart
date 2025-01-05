@@ -74,13 +74,13 @@ class CheckoutController extends GetxController {
 
   checkout() async {
     if (paymentMethod == null) {
-      return Get.snackbar("Error", "Please select a payment method");
+      return Get.snackbar("147".tr, "148".tr);
     }
     if (deliveryType == null) {
-      return Get.snackbar("Error", "Please select a order Type");
+      return Get.snackbar("147".tr, "149".tr);
     }
     if(dataaddress.isEmpty){
-      return Get.snackbar("Error", "Please select Shipping Address");
+      return Get.snackbar("147".tr, "150".tr);
     }
 
     statusRequest = StatusRequest.loading;
@@ -112,10 +112,10 @@ class CheckoutController extends GetxController {
       // Start backend
       if (response['status'] == "success") {
         Get.offAllNamed(AppRoute.homepage);
-        Get.snackbar("Success", "the order was successfully");
+        Get.snackbar("151".tr, "152".tr);
       } else {
         statusRequest = StatusRequest.none;
-        Get.snackbar("Error", "try again");
+        Get.snackbar("147".tr, "153".tr);
       }
       // End
     }

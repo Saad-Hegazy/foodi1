@@ -39,7 +39,7 @@ class SignUpControllerImp extends SignUpController {
           // data.addAll(response['data']);
           Get.offNamed(AppRoute.verifyCodeSignUp,arguments: {"email": email.text});
         } else {
-          Get.defaultDialog(title: "ُWarning" , middleText: "Phone Number Or Email Already Exists") ;
+          Get.defaultDialog(title: "158".tr , middleText: "173".tr,middleTextStyle:TextStyle(color: Colors.black)) ;
           statusRequest = StatusRequest.failure;
         }
       }

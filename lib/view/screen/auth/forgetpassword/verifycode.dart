@@ -18,9 +18,9 @@ class VerfiyCode extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: AppColor.backgroundcolor,
+        backgroundColor: AppColor.primaryColor,
         elevation: 0.0,
-        title: Text('Verification Code',
+        title: Text('85'.tr,
             style: Theme.of(context)
                 .textTheme
                 .displayLarge!
@@ -30,14 +30,14 @@ class VerfiyCode extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         child: ListView(children: [
           const SizedBox(height: 20),
-          const CustomTextTitleAuth(text: "Check code"),
+           CustomTextTitleAuth(text: "86".tr),
           const SizedBox(height: 10),
            CustomTextBodyAuth(
               text:
-              "Please Enter The Digit Code Sent To ${controller.email}"),
+              "87".tr+" ${controller.email}"),
           const SizedBox(height: 15),
           OtpTextField(
-
+            textStyle: TextStyle(color: Colors.black),
             fieldWidth: 50.0,
             borderRadius: BorderRadius.circular(20),
             numberOfFields: 5,
@@ -56,7 +56,7 @@ class VerfiyCode extends StatelessWidget {
           const SizedBox(height: 40),
           InkWell(onTap: (){
             controller.reSend() ;
-          }, child: const Center(child: Text("Resend verfiy code" , style: TextStyle(color: AppColor.primaryColor , fontSize: 20 ),)),)
+          }, child:  Center(child: Text("88".tr , style: TextStyle(color: AppColor.primaryColor , fontSize: 20 ),)),)
 
 
         ]),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodi1/core/class/statusrequest.dart';
 import 'package:lottie/lottie.dart';
-
 import '../constant/imageassets.dart';
+
 class HandlingDataView extends StatelessWidget {
   final StatusRequest statusRequest;
   final Widget widget;

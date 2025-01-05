@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/address/adddetails_controller.dart';
 import '../../../core/class/handlingdataview.dart';
-import '../../../core/constant/color.dart';
 import '../../../core/shared/custombutton.dart';
 import '../../widget/auth/customtextformauth.dart';
 
 
 class AddressAddDetails extends StatelessWidget {
-  const AddressAddDetails({Key? key}) : super(key: key);
+  const AddressAddDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
     Get.put(AddAddressDetailsController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('add details address'),
+        title:  Text('93'.tr),
       ),
       body: Container(
           padding: const EdgeInsets.all(15),
@@ -24,8 +23,8 @@ class AddressAddDetails extends StatelessWidget {
                 statusRequest: controller.statusRequest,
                 widget: ListView(children: [
                   CustomTextFormAuth(
-                      hinttext: "city",
-                      labeltext: "city",
+                      hinttext: "94".tr,
+                      labeltext: "95".tr,
                       iconData: Icons.location_city,
                       mycontroller: controller.city,
                       valid: (val) {
@@ -33,8 +32,8 @@ class AddressAddDetails extends StatelessWidget {
                       },
                       isNumber: false),
                   CustomTextFormAuth(
-                      hinttext: "street",
-                      labeltext: "street",
+                      hinttext: "96".tr,
+                      labeltext: "97".tr,
                       iconData: Icons.streetview,
                       mycontroller: controller.street,
                       valid: (val) {
@@ -42,8 +41,8 @@ class AddressAddDetails extends StatelessWidget {
                       },
                       isNumber: false),
                   CustomTextFormAuth(
-                      hinttext: "name",
-                      labeltext: "name",
+                      hinttext: "98".tr,
+                      labeltext: "99".tr,
                       iconData: Icons.near_me,
                       mycontroller: controller.name,
                       valid: (val) {
@@ -51,7 +50,7 @@ class AddressAddDetails extends StatelessWidget {
                       },
                       isNumber: false),
                   CustomButton(
-                    text: "Add",
+                    text: "100".tr,
                     onPressed: () {
                       controller.addAddress() ;
                     },

@@ -13,7 +13,7 @@ import '../../widget/auth/customtexttitleauth.dart';
 import '../../widget/auth/textsignup.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  const SignUp({super.key});
   @override
   Widget build(BuildContext context) {
      Get.put(SignUpControllerImp());

@@ -44,21 +44,21 @@ class Settings extends StatelessWidget {
                     Get.toNamed(AppRoute.orderspending);
                   },
                   trailing: const Icon(Icons.card_travel),
-                  title: const Text("Orders"),
+                  title: Text("40".tr),
                 ),
                 ListTile(
                   onTap: () {
                     Get.toNamed(AppRoute.ordersarchive );
                   },
                   trailing: const Icon(Icons.card_travel),
-                  title: const Text("Archive"),
+                  title:  Text("48".tr),
                 ),
                 ListTile(
                   onTap: () {
                     Get.toNamed(AppRoute.addressview)  ;
                   },
                   trailing: const Icon(Icons.location_on_outlined),
-                  title: const Text("Address"),
+                  title:  Text("49".tr),
                 ),
                 // ListTile(
                 //   onTap: () {},
@@ -70,13 +70,13 @@ class Settings extends StatelessWidget {
                   await  launchUrl(Uri.parse("tel:+97337044837"));
                   },
                   trailing: const Icon(Icons.phone_callback_outlined),
-                  title: const Text("Contact us"),
+                  title:  Text("50".tr),
                 ),
                 ListTile(
                   onTap: () {
                     controller.logout();
                   },
-                  title: const Text("Logout"),
+                  title:  Text("51".tr),
                   trailing: const Icon(Icons.exit_to_app),
                 ),
               ]),

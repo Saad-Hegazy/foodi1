@@ -11,7 +11,8 @@ class ListItemsHome extends GetView<HomeControllerImp> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 140,
+      height: 100,
+
       child: ListView.builder(
           itemCount: controller.items.length,
           scrollDirection: Axis.horizontal,
@@ -36,8 +37,8 @@ class ItemsHome extends GetView<HomeControllerImp> {
       child: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            margin: const EdgeInsets.symmetric(horizontal: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            margin: const EdgeInsets.symmetric(horizontal: 1),
             child: Image.network(
               "${AppLink.imagestItems}/${itemsModel.itemsImage}",
               height: 100,
@@ -50,7 +51,7 @@ class ItemsHome extends GetView<HomeControllerImp> {
                 color: AppColor.black.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(20)),
             height: 120,
-            width: 150,
+            width: 105,
           ),
           Positioned(
               left: 10,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../core/constant/color.dart';
 
@@ -18,7 +19,7 @@ class TopCardCart extends StatelessWidget {
       ),
       child: Text(message,
           textAlign: TextAlign.center,
-          style: const TextStyle(color: AppColor.primaryColor)),
+          style: const TextStyle(color: AppColor.black)),
     ) ;
   }
 }

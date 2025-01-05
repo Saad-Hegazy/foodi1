@@ -42,8 +42,8 @@ class CartController extends GetxController {
       // Start backend
       if (response['status'] == "success") {
         Get.rawSnackbar(
-            title: "اشعار",
-            messageText: const Text("تم اضافة المنتج الى السلة "));
+            title: "155".tr,
+            messageText:  Text("154".tr));
         // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
@@ -54,7 +54,7 @@ class CartController extends GetxController {
   }
 
   goToPageCheckout() {
-    if (data!.isEmpty) return Get.snackbar("تنبيه", "السله فارغه");
+    if (data!.isEmpty) return Get.snackbar("146".tr, "156".tr);
     Get.toNamed(AppRoute.checkout, arguments: {
       "couponid": couponid ?? 0,
       "priceorder": priceorders.toString() ,
@@ -78,8 +78,8 @@ class CartController extends GetxController {
       // Start backend
       if (response['status'] == "success") {
         Get.rawSnackbar(
-            title: "اشعار",
-            messageText: const Text("تم ازالة المنتج من السلة "));
+            title: "155".tr,
+            messageText:  Text("157".tr));
         // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
@@ -108,7 +108,7 @@ class CartController extends GetxController {
         discountcoupon = 0;
         couponname = null;
         couponid = null;
-        Get.snackbar("Warning", "Coupon Not Valid") ;
+        Get.snackbar("158".tr, "159".tr) ;
       }
       // End
     }

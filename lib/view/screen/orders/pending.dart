@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/orders/pending_controller.dart';
 import '../../../core/class/handlingdataview.dart';
-import '../../../core/constant/color.dart';
 import '../../widget/orders/orderslistcard.dart';
 class OrdersPending extends StatelessWidget {
-  const OrdersPending({Key? key}) : super(key: key);
+  const OrdersPending({super.key});
   @override
   Widget build(BuildContext context) {
     Get.put(OrdersPendingController());
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Orders'),
+          title:  Text('74'.tr),
         ),
         body: Container(
           padding:const  EdgeInsets.all(10),

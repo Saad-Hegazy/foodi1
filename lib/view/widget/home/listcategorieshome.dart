@@ -13,7 +13,7 @@ class ListCategoriesHome extends GetView<HomeControllerImp> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 122,
       child: ListView.separated(
         separatorBuilder: (context, index) => const SizedBox(width: 10),
         itemCount: controller.categories.length,

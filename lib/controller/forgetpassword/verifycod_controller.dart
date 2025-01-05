@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/class/statusrequest.dart';
 import '../../core/constant/routes.dart';
@@ -38,7 +40,7 @@ class VerifyCodeControllerImp extends VerifyCodeController {
         });
       } else {
         Get.defaultDialog(
-            title: "ُWarning", middleText: "Verify Code Not Correct");
+            title: "158".tr, middleText: "169".tr,middleTextStyle: TextStyle(color:Colors.black));
         statusRequest = StatusRequest.failure;
       }
     }

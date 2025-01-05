@@ -10,7 +10,7 @@ class CustomTitleHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 1),
       child: Text(title,
           style:const  TextStyle(
               fontSize: 20,

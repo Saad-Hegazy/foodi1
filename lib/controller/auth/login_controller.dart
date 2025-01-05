@@ -63,7 +63,7 @@ class LoginControllerImp extends LoginController {
                 arguments: {"email": email.text});
           }
         } else {
-          Get.defaultDialog(title: "ُWarning" , middleText: "Email Or Password Not Correct");
+          Get.defaultDialog(title: "158".tr , middleText: "179".tr,middleTextStyle: TextStyle(color: Colors.black));
           statusRequest = StatusRequest.failure;
         }
       }

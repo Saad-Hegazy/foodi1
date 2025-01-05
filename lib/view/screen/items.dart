@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../controller/favorite_controller.dart';
 import '../../controller/items_controller.dart';
 import '../../core/class/handlingdataview.dart';
-import '../../core/constant/color.dart';
 import '../../core/constant/routes.dart';
 import '../../data/model/itemsmodel.dart';
 import '../widget/customappbar.dart';
@@ -24,7 +23,7 @@ class Items extends StatelessWidget {
         child: ListView(children: [
           CustomAppBar(
             mycontroller: controller.search!,
-            titleappbar: "Find Product",
+            titleappbar: "55".tr,
             // onPressedIcon: () {},
             onPressedSearch: () {
               controller.onSearchItems();

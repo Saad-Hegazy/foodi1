@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../controller/address/view_controller.dart';
 import '../../../core/class/handlingdataview.dart';
-import '../../../core/constant/color.dart';
 import '../../../core/constant/routes.dart';
 import '../../../data/model/addressmodel.dart';
 
@@ -16,7 +14,7 @@ class AddressView extends StatelessWidget {
     Get.put(AddressViewController());
     return Scaffold(
         appBar: AppBar(
-          title: const Text('address'),
+          title:  Text('92'.tr),
         ),
         floatingActionButton: FloatingActionButton(
             onPressed: () {

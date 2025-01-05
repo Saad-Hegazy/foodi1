@@ -14,7 +14,7 @@ class SuccessSignUp extends StatelessWidget {
       appBar:AppBar(
         centerTitle: true,
         elevation: 0.0,
-        backgroundColor: AppColor.backgroundcolor,
+        backgroundColor: AppColor.primaryColor,
         title:  Text('32'.tr,style: Theme.of(context).textTheme.displayLarge!.copyWith(color: AppColor.grey),),
       ),
       body: Container(

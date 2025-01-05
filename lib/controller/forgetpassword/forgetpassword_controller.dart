@@ -30,7 +30,7 @@ class ForgetPasswordImp extends ForgetPassword {
             "email":email.text
           });
         } else {
-          Get.defaultDialog(title: "ُWarning" , middleText: " Email  Not Found") ;
+          Get.defaultDialog(title: "158".tr , middleText: "171".tr,middleTextStyle: TextStyle(color: Colors.black)) ;
           statusRequest = StatusRequest.failure;
         }
       }

@@ -24,9 +24,9 @@ class HomeScreen extends StatelessWidget {
           body: WillPopScope(
               child: controller.listPage.elementAt(controller.currentpage),
               onWillPop: (){
-                Get.defaultDialog(title: "Warning",
+                Get.defaultDialog(title: "56".tr,
                     titleStyle: const TextStyle(fontWeight: FontWeight.bold,color: AppColor.primaryColor),
-                    middleText: "Do You Want To Exit The App",
+                    middleText: "57".tr,
                     onCancel: (){
                     },
                     cancelTextColor: AppColor.secondColor,

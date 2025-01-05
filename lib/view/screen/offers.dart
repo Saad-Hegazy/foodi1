@@ -7,6 +7,7 @@ import '../../core/constant/routes.dart';
 import '../widget/customappbar.dart';
 import '../widget/offers/customitemsoffer.dart';
 import 'home.dart';
+
 class OffersView extends StatelessWidget {
   const OffersView({super.key});
 
@@ -21,7 +22,7 @@ class OffersView extends StatelessWidget {
         children: [
           CustomAppBar(
             mycontroller: controller.search!,
-            titleappbar: "Find Product",
+            titleappbar: "53".tr,
             // onPressedIcon: () {},
             onPressedSearch: () {
               controller.onSearchItems();

@@ -13,7 +13,7 @@ class OrdersDetails extends StatelessWidget {
 Get.put(OrdersDetailsController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Orders Details'),
+        title:  Text('75'.tr),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -64,7 +64,7 @@ Get.put(OrdersDetailsController());
                           const SizedBox(height: 10),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child:   Text("Total Price : ${controller.ordersModel.ordersTotalprice?.toStringAsFixed(2)}SAR",
+                            child:   Text('"76". ":" .${controller.ordersModel.ordersTotalprice?.toStringAsFixed(2)}."SAR"'.tr,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     color: AppColor.primaryColor,
@@ -77,7 +77,7 @@ Get.put(OrdersDetailsController());
                   if (controller.ordersModel.ordersType == 0)    Card(
                     child: Container(
                         child: ListTile(
-                          title: const Text("Shipping Address",
+                          title:  Text("77".tr,
                               style: TextStyle(
                                   color: AppColor.primaryColor,
                                   fontWeight: FontWeight.bold)),

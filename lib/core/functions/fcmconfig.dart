@@ -1,7 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import '../../controller/orders/pending_controller.dart';
-import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
 requestPermissionNotification() async {
   NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(

@@ -16,34 +16,34 @@ class OrdersArchiveController extends GetxController {
 
   String printOrderType(int val) {
     if (val == 0) {
-      return "delivery";
+      return "167".tr;
     } else {
-      return "Recive";
+      return "168".tr;
     }
   }
 
   String printPaymentMethod(int val) {
     if (val == 0) {
-      return "Cash On Delivery";
+      return "165".tr;
     } else {
-      return "Payment Card";
+      return "166".tr;
     }
   }
+
 
   String printOrderStatus(int val) {
     if (val == 0) {
-      return "Pending Approval";
+      return "160".tr;
     } else if (val == 1) {
-      return "The Order is being Prepared ";
+      return "161".tr;
     } else if (val == 2) {
-      return "Ready To Picked up by Delivery man";
+      return "162".tr;
     }  else if (val == 3) {
-      return "On The Way";
+      return "163".tr;
     } else {
-      return "Archive";
+      return "164".tr;
     }
   }
-
   getOrders() async {
     data.clear();
     statusRequest = StatusRequest.loading;

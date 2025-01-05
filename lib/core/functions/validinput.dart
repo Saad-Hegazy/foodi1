@@ -1,34 +1,34 @@
-import 'package:get/get_utils/src/get_utils/get_utils.dart';
+import 'package:get/get.dart';
 
   validInput(String val,int min,int max,String type){
       if(type=="username"){
 
           if(!GetUtils.isUsername(val)){
 
-            return "not valid user Name";
+            return "42".tr;
       }
     }
       if(type=="email"){
 
         if(!GetUtils.isEmail(val)){
 
-          return "not valid Email";
+          return "43".tr;
         }
       }
       if(type=="phone"){
 
         if(!GetUtils.isPhoneNumber(val)){
 
-          return "not valid phone";
+          return "44".tr;
         }
       }
       if(val.isEmpty){
-        return "value can not be Empty";
+        return "45".tr;
       }
       if(val.length<min){
-        return "value can not be less than $min";
+        return "46 $min".tr;
       }
       if(val.length>max){
-        return "value can not be larger than $max";
+        return "47 $max";
       }
   }

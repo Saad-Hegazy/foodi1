@@ -16,9 +16,9 @@ class VerifyCodeSignUp extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
         centerTitle: true,
-        backgroundColor: AppColor.backgroundcolor,
+        backgroundColor: AppColor.primaryColor,
         elevation: 0.0,
-        title: Text('Verification Code',
+        title: Text('79'.tr,
             style: Theme.of(context)
                 .textTheme
                 .displayLarge!
@@ -31,16 +31,17 @@ class VerifyCodeSignUp extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         child: ListView(children: [
           const SizedBox(height: 20),
-          const CustomTextTitleAuth(text: "Check Code"),
+           CustomTextTitleAuth(text: "80".tr),
           const SizedBox(height: 10),
            CustomTextBodyAuth(
-              text:"Please Enter The Digit Code Sent To ${controller.email}"),
+              text:"81".tr + "  ${controller.email}"),
           const SizedBox(height: 15),
           OtpTextField(
+            textStyle: TextStyle(color: Colors.black),
             borderRadius: BorderRadius.circular(20),
             fieldWidth: 50.0,
             numberOfFields: 5,
-            borderColor: const Color(0xFF512DA8),
+            borderColor: AppColor.primaryColor,
             //set to true to show as box or false to show as dash
             showFieldAsBox: true,
             //runs when a code is typed in
@@ -55,8 +56,8 @@ class VerifyCodeSignUp extends StatelessWidget {
                   context: context,
                   builder: (context){
                     return AlertDialog(
-                      title: const Text("Verification Code"),
-                      content: Text('Code entered is $verificationCode'),
+                      title:  Text("82".tr,style: TextStyle(color: Colors.black),),
+                      content: Text('83 $verificationCode'.tr,style: TextStyle(color: Colors.black)),
                     );
                   }
               );
@@ -64,7 +65,7 @@ class VerifyCodeSignUp extends StatelessWidget {
           ), const SizedBox(height: 40),
           InkWell(onTap: (){
             controller.reSend() ;
-          }, child: const Center(child: Text("Resend verfiy code" , style: TextStyle(color: AppColor.primaryColor , fontSize: 20 ),)),)
+          }, child:  Center(child: Text("84".tr , style: TextStyle(color: AppColor.primaryColor , fontSize: 20 ),)),)
         ]),
       ),
       )

@@ -21,7 +21,7 @@ class CardOrdersListArchive extends GetView<OrdersArchiveController> {
             children: [
               Row(
                 children: [
-                  Text("Order Number : #${listdata.ordersId}",
+                  Text("103 : #${listdata.ordersId}".tr,
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold)),
                   const Spacer(),
@@ -36,16 +36,14 @@ class CardOrdersListArchive extends GetView<OrdersArchiveController> {
               ),
               const Divider(),
               Text(
-                  "Order Type : ${controller.printOrderType(listdata.ordersType!)}"),
-              Text("Order Price : ${listdata.ordersPrice} \$"),
-              Text("Delivery Price : ${listdata.ordersPricedelivery} \$ "),
+                  "104 : ${controller.printOrderType(listdata.ordersType!)}".tr),
+              Text("105 : ${listdata.ordersPrice} \S\A\R".tr),
+              Text("106 : ${listdata.ordersPricedelivery} \S\A\R ".tr),
+              Text("107 : ${controller.printPaymentMethod(listdata.ordersPaymentmethod!)} ".tr),
               Text(
-                  "Payment Method : ${controller.printPaymentMethod(listdata.ordersPaymentmethod!)} "),
-              Text(
-                  "Order Status : ${controller.printOrderStatus(listdata.ordersStatus!)} "),
+                  "108 : ${controller.printOrderStatus(listdata.ordersStatus!)} ".tr),
               const Divider(),
-
-                  Text("Total Price : ${listdata.ordersTotalprice!.toStringAsFixed(2)} SAR ",
+                  Text("109 : ${listdata.ordersTotalprice!.toStringAsFixed(2)} SAR ".tr,
                       style: const TextStyle(
                           color: AppColor.primaryColor,
                           fontWeight: FontWeight.bold)),
@@ -60,7 +58,7 @@ class CardOrdersListArchive extends GetView<OrdersArchiveController> {
                       },
                       color: AppColor.thirdColor,
                       textColor: AppColor.secondColor,
-                      child: const Text("Details"),
+                      child:  Text("110".tr),
                     ),
                   const SizedBox(width: 3),
                   MaterialButton(
@@ -69,7 +67,7 @@ class CardOrdersListArchive extends GetView<OrdersArchiveController> {
                     },
                     color: AppColor.thirdColor,
                     textColor: AppColor.secondColor,
-                    child: const Text("Rating"),
+                    child:  Text("111".tr),
 
                   ),
                 ],

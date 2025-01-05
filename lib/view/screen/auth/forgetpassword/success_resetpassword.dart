@@ -15,7 +15,7 @@ class SuccessRestPasword extends StatelessWidget {
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: AppColor.backgroundcolor,
-        title:  Text("Success",style: Theme.of(context).textTheme.displayLarge!.copyWith(color: AppColor.grey),),
+        title:  Text("89".tr,style: Theme.of(context).textTheme.displayLarge!.copyWith(color: AppColor.grey),),
       ),
       body: Container(
         padding: const EdgeInsets.all(15),
@@ -27,7 +27,7 @@ class SuccessRestPasword extends StatelessWidget {
             const Spacer(),
             SizedBox(
               width: double.infinity,
-              child: CustomButtomAuth(text: "Go To Login", onPressed: () {
+              child: CustomButtomAuth(text: "90".tr, onPressed: () {
                 controller.goToPageLogin();
               }),
             ),

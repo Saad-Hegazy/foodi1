@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
               children: [
                 CustomAppBar(
                   mycontroller: controller.search!,
-                  titleappbar: "Find Product",
+                  titleappbar: "58".tr,
                   // onPressedIcon: () {},
                   onPressedSearch: () {
                     controller.onSearchItems();
@@ -39,13 +39,13 @@ class HomePage extends StatelessWidget {
                 HandlingDataView(
                     statusRequest: controller.statusRequest,
                     widget: !controller.isSearch
-                        ? const Column(
+                        ?  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ImageSlider(),
-                        CustomTitleHome(title: "Categories"),
+                        CustomTitleHome(title: "59".tr),
                         ListCategoriesHome(),
-                        CustomTitleHome(title: "Product for you"),
+                        CustomTitleHome(title: "60".tr),
                         ListItemsHome(),
                       ],
                     )
