@@ -13,8 +13,8 @@ class CardDeliveryTypeCheckout extends StatelessWidget {
       height: 120,
       width: 120,
       decoration: BoxDecoration(
-          color:active  ? AppColor.secondColor : null ,
-          border: Border.all(color: AppColor.secondColor)),
+          color:active  ? AppColor.primaryColor : null ,
+          border: Border.all(color: AppColor.primaryColor)),
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Image.asset(
           imagename,
@@ -23,7 +23,7 @@ class CardDeliveryTypeCheckout extends StatelessWidget {
         ),
         Text(
           title,
-          style: TextStyle(color:active ? Colors.white : AppColor.secondColor, fontWeight:FontWeight.bold ),
+          style: TextStyle(color:active ? Colors.white : AppColor.primaryColor, fontWeight:FontWeight.bold ),
         )
       ]),
     );

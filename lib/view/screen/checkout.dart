@@ -16,18 +16,19 @@ class Checkout extends StatelessWidget {
     CheckoutController controller = Get.put(CheckoutController());
     return Scaffold(
       appBar: AppBar(
-        title:  Text('61'.tr),
+        backgroundColor: AppColor.primaryColor,
+        title:  Text('61'.tr,style: TextStyle(color: Colors.white),),
       ),
       bottomNavigationBar: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: MaterialButton(
-            color: AppColor.secondColor,
+            color: AppColor.primaryColor,
             textColor: Colors.white,
             onPressed: () {
               controller.checkout();
             },
             child:  Text("63".tr,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.white)),
           )),
       body: GetBuilder<CheckoutController>(
           builder: (controller) => HandlingDataView(
@@ -39,7 +40,7 @@ class Checkout extends StatelessWidget {
                        Text(
                         "63".tr,
                         style: TextStyle(
-                            color: AppColor.secondColor,
+                            color: AppColor.primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 16),
                       ),
@@ -69,7 +70,7 @@ class Checkout extends StatelessWidget {
                        Text(
                         "66".tr,
                         style: TextStyle(
-                            color: AppColor.secondColor,
+                            color: AppColor.primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 16),
                       ),
@@ -109,7 +110,7 @@ class Checkout extends StatelessWidget {
                             if(controller.dataaddress.isNotEmpty)   Text(
                               "69".tr,
                               style: TextStyle(
-                                  color: AppColor.secondColor,
+                                  color: AppColor.primaryColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),

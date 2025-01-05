@@ -42,8 +42,9 @@ class CartController extends GetxController {
       // Start backend
       if (response['status'] == "success") {
         Get.rawSnackbar(
+            backgroundColor:Colors.grey,
             title: "155".tr,
-            messageText:  Text("154".tr));
+            messageText:  Text("154".tr,style: TextStyle(color: Colors.white),));
         // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;

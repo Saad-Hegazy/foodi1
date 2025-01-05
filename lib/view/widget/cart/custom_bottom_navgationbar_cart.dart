@@ -54,7 +54,7 @@ class BottomNavgationBarCart extends GetView<CartController> {
                             onPressed: onApplyCoupon,
                           ))
                     ]))
-                    : Container(child: Text("127 ${controller.couponname!}".tr , style: const TextStyle(color: Colors.black , fontWeight: FontWeight.bold),))
+                    : Container(child: Text("127".tr+" ${controller.couponname!}" , style: const TextStyle(color: Colors.black , fontWeight: FontWeight.bold),))
             ),
             Container(
               margin: const EdgeInsets.all(10),

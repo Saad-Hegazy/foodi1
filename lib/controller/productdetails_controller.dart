@@ -65,8 +65,9 @@ class ProductDetailsControllerImp extends ProductDetailsController {
       // Start backend
       if (response['status'] == "success") {
         Get.rawSnackbar(
-            title: "اشعار",
-            messageText: const Text("تم اضافة المنتج الى السلة "));
+            backgroundColor:Colors.grey,
+            title: "155".tr,
+            messageText:  Text("154".tr,style: TextStyle(color: Colors.white),));
         // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
