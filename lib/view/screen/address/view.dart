@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/address/view_controller.dart';
 import '../../../core/class/handlingdataview.dart';
+import '../../../core/constant/color.dart';
 import '../../../core/constant/routes.dart';
 import '../../../data/model/addressmodel.dart';
 
@@ -14,7 +15,8 @@ class AddressView extends StatelessWidget {
     Get.put(AddressViewController());
     return Scaffold(
         appBar: AppBar(
-          title:  Text('92'.tr),
+          backgroundColor: AppColor.primaryColor,
+          title:  Text('92'.tr,style: TextStyle(color: Colors.white)),
         ),
         floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -30,9 +32,16 @@ class AddressView extends StatelessWidget {
                 itemBuilder: (context, i) {
                   return CardAddress(
                     addressModel: controller.data[i],
-                    onDelete: () {
-                      controller.deleteAddress(controller.data[i].addressId!);
-                    },
+                      onDelete:(){Get.defaultDialog(
+                          title: "158".tr,
+                          middleText: "180".tr,
+                          onCancel: (){},
+                          onWillPop:null,
+                          onConfirm:(){
+                            controller.deleteAddress(controller.data[i].addressId!);
+                            Get.back();
+                          }
+                      );}
                   );
                 },
               ),

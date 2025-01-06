@@ -8,7 +8,6 @@ import 'custombuttoncoupon.dart';
 class BottomNavgationBarCart extends GetView<CartController> {
   final String price;
   final String discount;
-  final String shipping;
   final String totalprice;
   final TextEditingController controllercoupon;
   final void Function()? onApplyCoupon;
@@ -16,7 +15,6 @@ class BottomNavgationBarCart extends GetView<CartController> {
       {Key? key,
         required this.price,
         required this.discount,
-        required this.shipping,
         required this.totalprice,
         required this.controllercoupon,
         this.onApplyCoupon})
@@ -91,9 +89,6 @@ class BottomNavgationBarCart extends GetView<CartController> {
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child:  Text("130".tr, style: TextStyle(fontSize: 16,color: Colors.black))),
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text("$shipping ", style: const TextStyle(fontSize: 16,color: Colors.black)))
                   ],
                 ),
                 const Divider(),

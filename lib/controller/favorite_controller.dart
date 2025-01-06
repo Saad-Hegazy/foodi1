@@ -38,7 +38,7 @@ class FavoriteController extends GetxController {
       if (response['status'] == "success") {
         Get.rawSnackbar(
             title: "146".tr,
-            messageText:  Text("145".tr));
+            messageText:  Text("145".tr,style: TextStyle(color: Colors.white)));
         // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;

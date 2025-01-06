@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodi1/core/constant/color.dart';
 import 'package:get/get.dart';
 import '../core/class/statusrequest.dart';
 import '../core/functions/handlingData.dart';
@@ -65,7 +66,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
       // Start backend
       if (response['status'] == "success") {
         Get.rawSnackbar(
-            backgroundColor:Colors.grey,
+            backgroundColor:AppColor.primaryColor,
             title: "155".tr,
             messageText:  Text("154".tr,style: TextStyle(color: Colors.white),));
         // data.addAll(response['data']);
@@ -88,8 +89,9 @@ class ProductDetailsControllerImp extends ProductDetailsController {
       // Start backend
       if (response['status'] == "success") {
         Get.rawSnackbar(
-            title: "اشعار",
-            messageText: const Text("تم ازالة المنتج من السلة "));
+            backgroundColor:AppColor.primaryColor,
+            title: "155".tr,
+            messageText:  Text("157".tr,style: TextStyle(color: Colors.white)));
         // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;

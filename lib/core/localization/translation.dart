@@ -122,7 +122,7 @@ class MyTranslation extends Translations {
       "117":"حالة الطلب",
       "118":"السعر الإجمالي",
       "119":"تفاصيل",
-      "120":"تفاصيل",
+      "120":"إلغاء",
       "121":"تقييم الطلب",
       "122":"اضغط على نجمة لتعيين تقييمك. أضف المزيد من الوصف هنا إذا كنت تريد.",
       "123":"ارسال",
@@ -182,6 +182,8 @@ class MyTranslation extends Translations {
       "177":"مسجد",
       "178":"متجر",
       "179":"البريد الإلكتروني أو كلمة المرور غير صحيحة",
+      "180":"هل أنت متأكد من حذف هذا العنوان",
+      "181":"هل أنت متأكد من إلغاء هذا الطلب",
     },
     "en": {
       "1": "Choose Language",
@@ -302,7 +304,7 @@ class MyTranslation extends Translations {
       "117": "Order Status",
       "118": "Total Price",
       "119": "Details",
-      "120": "Details",
+      "120": "Delete",
       "121": "Rating Order",
       "122": "Tap a star to set your rating. Add more description here if you want.",
       "123": "Submit",
@@ -362,6 +364,8 @@ class MyTranslation extends Translations {
       "177": "Mosque",
       "178": "Merchant",
       "179": "Email Or Password Not Correct",
+      "180": "are you sure from deleting this address",
+      "181": "are you sure from deleting this order",
     }
   };
 }

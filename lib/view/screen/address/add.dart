@@ -13,7 +13,9 @@ class AddressAdd extends StatelessWidget {
      Get.put(AddAddressController());
     return Scaffold(
       appBar: AppBar(
-        title:  Text('101'.tr),
+        backgroundColor: AppColor.primaryColor,
+
+        title:  Text('101'.tr,style: TextStyle(color: Colors.white)),
       ),
       body: GetBuilder<AddAddressController>(
           builder: ((controllerpage) => HandlingDataView(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/address/adddetails_controller.dart';
 import '../../../core/class/handlingdataview.dart';
+import '../../../core/constant/color.dart';
 import '../../../core/shared/custombutton.dart';
 import '../../widget/auth/customtextformauth.dart';
 
@@ -14,7 +15,9 @@ class AddressAddDetails extends StatelessWidget {
     Get.put(AddAddressDetailsController());
     return Scaffold(
       appBar: AppBar(
-        title:  Text('93'.tr),
+        backgroundColor: AppColor.primaryColor,
+
+        title:  Text('93'.tr,style: TextStyle(color: Colors.white)),
       ),
       body: Container(
           padding: const EdgeInsets.all(15),

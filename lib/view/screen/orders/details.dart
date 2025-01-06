@@ -13,7 +13,9 @@ class OrdersDetails extends StatelessWidget {
 Get.put(OrdersDetailsController());
     return Scaffold(
       appBar: AppBar(
-        title:  Text('75'.tr),
+        backgroundColor: AppColor.primaryColor,
+
+        title:  Text('75'.tr,style: TextStyle(color: Colors.white)),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -64,7 +66,7 @@ Get.put(OrdersDetailsController());
                           const SizedBox(height: 10),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child:   Text('"76". ":" .${controller.ordersModel.ordersTotalprice?.toStringAsFixed(2)}."SAR"'.tr,
+                            child:   Text("76".tr+" : ${controller.ordersModel.ordersTotalprice?.toStringAsFixed(2)} SAR",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     color: AppColor.primaryColor,

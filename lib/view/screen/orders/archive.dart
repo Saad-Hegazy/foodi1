@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../controller/orders/archive_controller.dart';
 import '../../../core/class/handlingdataview.dart';
+import '../../../core/constant/color.dart';
 import '../../widget/orders/orderslistcardarchive.dart';
 
 
@@ -15,7 +16,8 @@ class OrdersArchiveView extends StatelessWidget {
     Get.put(OrdersArchiveController());
     return Scaffold(
         appBar: AppBar(
-          title:  Text('78'.tr),
+          backgroundColor: AppColor.primaryColor,
+          title:  Text('78'.tr,style: TextStyle(color: Colors.white)),
         ),
         body: Container(
           padding:const  EdgeInsets.all(10),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/orders/pending_controller.dart';
 import '../../../core/class/handlingdataview.dart';
+import '../../../core/constant/color.dart';
 import '../../widget/orders/orderslistcard.dart';
 class OrdersPending extends StatelessWidget {
   const OrdersPending({super.key});
@@ -10,7 +11,8 @@ class OrdersPending extends StatelessWidget {
     Get.put(OrdersPendingController());
     return Scaffold(
         appBar: AppBar(
-          title:  Text('74'.tr),
+          backgroundColor: AppColor.primaryColor,
+          title:  Text('74'.tr,style: TextStyle(color: Colors.white),),
         ),
         body: Container(
           padding:const  EdgeInsets.all(10),
