@@ -31,11 +31,14 @@ class CartController extends GetxController {
 
   num totalcountitems = 0;
 
-  add(int itemsid) async {
+  add(int itemsid ,int count) async {
     statusRequest = StatusRequest.loading;
     update();
-    var response = await cartData.addCart(
-        myServices.sharedPreferences.getString("id")!, itemsid.toString());
+    var response;
+    for(int i =1; i<= count ;i++) {
+       response = await cartData.addCart(
+          myServices.sharedPreferences.getString("id")!, itemsid.toString());
+    }
     print("=============================== addCartController $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
@@ -67,17 +70,19 @@ class CartController extends GetxController {
     return (priceorders - priceorders * discountcoupon! / 100);
   }
 
-  delete(int itemsid) async {
+  delete(int itemsid , gepcount) async {
     statusRequest = StatusRequest.loading;
     update();
-
-    var response = await cartData.deleteCart(
-        myServices.sharedPreferences.getString("id")!, itemsid.toString());
+    var response;
+    for(int i=0;i<= gepcount;i++) {
+      response = await cartData.deleteCart(
+          myServices.sharedPreferences.getString("id")!, itemsid.toString());
+    }
     print("=============================== Controller $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       // Start backend
-      if (response['status'] == "success") {
+      if (response['status'] == "success" ) {
         Get.rawSnackbar(
             title: "155".tr,
             messageText:  Text("157".tr));
@@ -89,6 +94,7 @@ class CartController extends GetxController {
     }
     update();
   }
+
 
   checkcoupon() async {
     statusRequest = StatusRequest.loading;
