@@ -53,9 +53,22 @@ class LoginControllerImp extends LoginController {
             myServices.sharedPreferences.setString("phone", response['data']['users_phone'].toString());
             myServices.sharedPreferences.setString("userType", response['data']['users_type']);
             myServices.sharedPreferences.setString("step", "2");
+            switch (response['data']['users_type']){
+              case "Normal User":
+                FirebaseMessaging.instance.subscribeToTopic("users");
+                FirebaseMessaging.instance.subscribeToTopic("users${userid}");
+                break;
+              case "Mosque":
+                FirebaseMessaging.instance.subscribeToTopic("Mosque");
+                FirebaseMessaging.instance.subscribeToTopic("users${userid}");
+                break;
+              case "Merchant":
+                FirebaseMessaging.instance.subscribeToTopic("Merchant");
+                FirebaseMessaging.instance.subscribeToTopic("users${userid}");
+                break;
+    }
 
-            FirebaseMessaging.instance.subscribeToTopic("users");
-            FirebaseMessaging.instance.subscribeToTopic("users${userid}");
+
 
             NotificationService notificationService =NotificationService();
             String DeviceToken =await notificationService.getDeviceToken();
