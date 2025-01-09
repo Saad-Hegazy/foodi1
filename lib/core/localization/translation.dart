@@ -189,7 +189,7 @@ class MyTranslation extends Translations {
       "1": "Choose Language",
       "2": "Shopping is easy 😉",
       "3": "Everything you need in one place\n Easier, faster, closer to you ✌️",
-      "4": "Specify your address and leave the rest to us ☺️",
+      "4": "Specify your address\n and leave the rest to us ☺️",
       "5": "You can pay in cash \n or through credit card",
       "6": "Save time and effort 🥳",
       "7": "The order can be tracked at every stage \n we are here for your convenience",

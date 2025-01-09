@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import '../../core/class/statusrequest.dart';
 import '../../core/constant/routes.dart';
 import '../../core/functions/handlingData.dart';
+import '../../core/services/notification_service.dart';
 import '../../core/services/services.dart';
 import '../../data/datasource/remote/auth/login.dart';
 
@@ -26,7 +27,6 @@ class LoginControllerImp extends LoginController {
 
   bool isshowpassword = true;
   MyServices myServices=Get.find();
-  String? deviceToken;
   StatusRequest statusRequest=StatusRequest.none ;
 
   showPassword() {
@@ -47,7 +47,6 @@ class LoginControllerImp extends LoginController {
           // data.addAll(response['data']);
           if (response['data']['users_approve'] == 1) {
             myServices.sharedPreferences.setString("id", response['data']['users_id'].toString());
-            myServices.sharedPreferences.setString("deviceToken",deviceToken!);
             String userid = myServices.sharedPreferences.getString("id")!;
             myServices.sharedPreferences.setString("username", response['data']['users_name']);
             myServices.sharedPreferences.setString("email", response['data']['users_email']);
@@ -57,6 +56,10 @@ class LoginControllerImp extends LoginController {
 
             FirebaseMessaging.instance.subscribeToTopic("users");
             FirebaseMessaging.instance.subscribeToTopic("users${userid}");
+
+            NotificationService notificationService =NotificationService();
+            String DeviceToken =await notificationService.getDeviceToken();
+            myServices.sharedPreferences.setString("DeviceToken", DeviceToken);
             Get.offNamed(AppRoute.homepage);
           } else {
             Get.toNamed(AppRoute.verifyCodeSignUp,
@@ -81,11 +84,6 @@ class LoginControllerImp extends LoginController {
   void onInit() async{
     email = TextEditingController();
     password = TextEditingController();
-    deviceToken = await FirebaseMessaging.instance.getToken();
-    print("================deviceToken================");
-    print("================$deviceToken================");
-    print("================/deviceToken================");
-
     super.onInit();
   }
 

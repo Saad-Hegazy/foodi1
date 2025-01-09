@@ -1,38 +1,8 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import '../../controller/orders/pending_controller.dart';
 
-requestPermissionNotification() async {
-  NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
-  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    print('User granted permission');
-  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-    print('User granted provisional permission');
-  } else {
-    print('User declined or has not accepted permission');
-  }
-}
 
 
-fcmconfig() {
-  print("hai =======================================================");
-  FirebaseMessaging.onMessage.listen((message) {
-    print("================== Notification =================");
-    print(message.notification!.title);
-    print(message.notification!.body);
-   // FlutterRingtonePlayer.playNotification();
-    Get.snackbar(message.notification!.title!, message.notification!.body!);
-    refreshPageNotification(message.data);
-  });
-}
 
 refreshPageNotification(data) {
   print("============================= page id ");

@@ -89,7 +89,7 @@ class CheckoutController extends GetxController {
 
     Map data = {
       "usersid": myServices.sharedPreferences.getString("id"),
-      "customerdeviceToken": myServices.sharedPreferences.getString("deviceToken"),
+      "customerdeviceToken": myServices.sharedPreferences.getString("DeviceToken"),
       "userstype": myServices.sharedPreferences.getString("userType"),
       "addressid": addressid.toString(),
       "orderstype": deliveryType.toString(),
