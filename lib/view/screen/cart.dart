@@ -41,23 +41,24 @@ class Cart extends StatelessWidget {
                           ...List.generate(
                             cartController.data!.length,
                                 (index) => CustomItemsCartList(
-
-                                // onAdd: () async {
-                                //   await cartController
-                                //       .add(cartController.data![index].itemsId!);
-                                //   cartController.refreshPage();
-                                // },
-                                // onRemove: () async {
-                                //   await cartController.delete(
-                                //       cartController.data![index].itemsId!);
-                                //   cartController.refreshPage();
-                                // },
+                                count: cartController.data![index].countitems!.toString(),
+                                onAdd: () async {
+                                  await cartController
+                                      .add(cartController.data![index].itemsId!);
+                                  cartController.refreshPage();
+                                },
+                                  onRemove: () async {
+                                  await cartController.delete(
+                                      cartController.data![index].itemsId!);
+                                  cartController.refreshPage();
+                                },
                                 imagename:
                                 "${cartController.data?[index].itemsImage}",
                                 name: "${cartController.data?[index].itemsName}",
                                 price:
                                 "${cartController.getPrice(cartController.data![index])!.toStringAsFixed(2)} SAR",
-                                count: cartController.data![index].countitems!),
+
+                                ),
                           )
                         ],
                       ),

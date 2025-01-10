@@ -67,6 +67,13 @@ class Settings extends StatelessWidget {
                 // ),
                 ListTile(
                   onTap: () async{
+                    await  launch("https://wa.me/37044837");
+                  },
+                  trailing: const Icon(Icons.message),
+                  title:  Text("182".tr),
+                ),
+                ListTile(
+                  onTap: () async{
                   await  launchUrl(Uri.parse("tel:+97337044837"));
                   },
                   trailing: const Icon(Icons.phone_callback_outlined),

@@ -41,7 +41,7 @@ class ProductDetails extends StatelessWidget {
                                 controller.remove();
                               },
                               price: "${controller.getPrice(controller.itemsModel).toStringAsFixed(2)}",
-                              count: "${controller.countitems}"
+                              count: controller.countitems.toString(),
                           ),
                           const SizedBox(height: 10),
                           Text("${controller.itemsModel!.itemsDesc}",

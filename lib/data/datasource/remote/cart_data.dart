@@ -10,7 +10,15 @@ class CartData {
         .postData(AppLink.cartadd, {"usersid": usersid, "itemsid": itemsid});
     return response.fold((l) => l, (r) => r);
   }
-
+  addCartByQuantity(String usersid, String itemsid,String quantity) async {
+    var response = await crud
+        .postData(AppLink.cartaddbyquantity, {
+      "usersid": usersid,
+      "itemsid": itemsid,
+      "quantity": quantity,
+    });
+    return response.fold((l) => l, (r) => r);
+  }
   deleteCart(String usersid, String itemsid) async {
     var response = await crud
         .postData(AppLink.cartdelete, {"usersid": usersid, "itemsid": itemsid});

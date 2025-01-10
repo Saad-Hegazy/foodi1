@@ -3,18 +3,22 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constant/color.dart';
+import '../../../core/shared/CustomTextfield.dart';
+import '../items/quantitypicker.dart';
 
 class PriceAndCountItems extends StatelessWidget {
   final void Function()? onAdd;
   final void Function()? onRemove;
   final String price;
   final String count;
-  const PriceAndCountItems(
+
+   PriceAndCountItems(
       {Key? key,
         required this.onAdd,
         required this.onRemove,
         required this.price,
-        required this.count})
+        required this.count,
+      })
       : super(key: key);
 
   @override
@@ -34,7 +38,8 @@ class PriceAndCountItems extends StatelessWidget {
                 child: Text(
                   count,
                   style: const TextStyle(fontSize: 20, height: 1.1,color: Colors.black),
-                )),
+                )
+            ),
             IconButton(onPressed: () {onRemove!();}, icon: const Icon(Icons.remove)),
           ],
         ),

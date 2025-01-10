@@ -77,6 +77,28 @@ class ProductDetailsControllerImp extends ProductDetailsController {
     }
     update();
   }
+   addItemsbyquantity(int itemsid , String quantity) async {
+     statusRequest = StatusRequest.loading;
+     update();
+     var response = await cartData.addCartByQuantity(
+         myServices.sharedPreferences.getString("id")!, itemsid.toString(),quantity);
+     print("=============================== Controller $response ");
+     statusRequest = handlingData(response);
+     if (StatusRequest.success == statusRequest) {
+       // Start backend
+       if (response['status'] == "success") {
+         Get.rawSnackbar(
+             backgroundColor:AppColor.primaryColor,
+             title: "155".tr,
+             messageText:  Text("154".tr,style: TextStyle(color: Colors.white),));
+         // data.addAll(response['data']);
+       } else {
+         statusRequest = StatusRequest.failure;
+       }
+       // End
+     }
+     update();
+   }
 
   deleteitems(int itemsid) async {
     statusRequest = StatusRequest.loading;

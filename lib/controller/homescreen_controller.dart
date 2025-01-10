@@ -21,7 +21,7 @@ class  HomeScreenControllerImp extends HomeScreenController{
   List bottomappbar = [
     {"title": "home", "icon": Icons.home_outlined},
     {"title": "notifications", "icon": Icons.notifications_active_outlined},
-    {"title": "Offers", "icon": Icons.offline_bolt_outlined},
+    {"title": "Offers", "icon": Icons.local_offer_outlined},
     {"title": "settings", "icon": Icons.settings_outlined}
   ];
   @override

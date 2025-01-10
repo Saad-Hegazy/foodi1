@@ -31,14 +31,13 @@ class CartController extends GetxController {
 
   num totalcountitems = 0;
 
-  add(int itemsid ,int count) async {
+  add(int itemsid ) async {
     statusRequest = StatusRequest.loading;
     update();
     var response;
-    for(int i =1; i<= count ;i++) {
        response = await cartData.addCart(
           myServices.sharedPreferences.getString("id")!, itemsid.toString());
-    }
+
     print("=============================== addCartController $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
@@ -70,14 +69,12 @@ class CartController extends GetxController {
     return (priceorders - priceorders * discountcoupon! / 100);
   }
 
-  delete(int itemsid , gepcount) async {
+  delete(int itemsid ) async {
     statusRequest = StatusRequest.loading;
     update();
     var response;
-    for(int i=0;i<= gepcount;i++) {
       response = await cartData.deleteCart(
           myServices.sharedPreferences.getString("id")!, itemsid.toString());
-    }
     print("=============================== Controller $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
