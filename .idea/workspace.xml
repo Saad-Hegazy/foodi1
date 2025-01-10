@@ -9,21 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="update FirebaseMessaging subscribeToTopic">
-      <change afterPath="$PROJECT_DIR$/lib/core/shared/CustomTextfield.dart" afterDir="false" />
+    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="update quantity Item">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/cart_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/cart_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/homescreen_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/homescreen_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/productdetails_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/productdetails_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/localization/translation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/localization/translation.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/datasource/remote/cart_data.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/datasource/remote/cart_data.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/linkabi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/linkabi.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/cart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/cart.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/productdetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/productdetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/cart/customitemscartlist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/cart/customitemscartlist.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/items/quantitypicker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/items/quantitypicker.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/productdetails/priceandcount.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/productdetails/priceandcount.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/constant/apptheme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/constant/apptheme.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +70,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/LENOVO/projects/adminfoodi1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/LENOVO/projects/foodi1&quot;,
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -185,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736457205455</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update quantity Item">
+      <option name="closed" value="true" />
+      <created>1736473260637</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1736473260637</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,6 +205,7 @@
     <MESSAGE value="update add item  function" />
     <MESSAGE value="update FCM  function" />
     <MESSAGE value="update FirebaseMessaging subscribeToTopic" />
-    <option name="LAST_COMMIT_MESSAGE" value="update FirebaseMessaging subscribeToTopic" />
+    <MESSAGE value="update quantity Item" />
+    <option name="LAST_COMMIT_MESSAGE" value="update quantity Item" />
   </component>
 </project>

@@ -40,9 +40,9 @@ ThemeData themeArabic = ThemeData(
           fontWeight: FontWeight.bold, fontSize: 26, color: AppColor.black),
       bodyLarge: TextStyle(
           height: 2,
-          color: AppColor.backgroundcolor,
+          color: AppColor.black,
           fontWeight: FontWeight.bold,
           fontSize: 14),
-      bodyMedium: TextStyle(height: 2, color: AppColor.backgroundcolor, fontSize: 14)),
+      bodyMedium: TextStyle(height: 2, color: AppColor.black, fontSize: 14)),
   primarySwatch: Colors.green,
 );
