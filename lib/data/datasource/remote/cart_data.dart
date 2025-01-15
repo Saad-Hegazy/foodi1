@@ -5,12 +5,12 @@ import '../../../linkabi.dart';
 class CartData {
   Crud crud;
   CartData(this.crud);
-  addCart(String usersid, String itemsid,int isbox , String itemprice,int countitembyunit) async {
+  addCart(String usersid, String itemsid,String isbox , String itemprice,int countitembyunit) async {
     var response = await crud
         .postData(AppLink.cartadd, {
       "usersid": usersid,
       "itemsid": itemsid,
-      "cart_itemisbox":isbox.toString(),
+      "isbox":isbox,
       "itemprice": itemprice,
       "countitembyunit":countitembyunit.toString()
     });

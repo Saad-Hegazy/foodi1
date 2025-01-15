@@ -41,11 +41,11 @@ class Cart extends StatelessWidget {
                           ...List.generate(
                             cartController.data!.length,
                                 (index) => CustomItemsCartList(
-                                count: "${cartController.data![index].cartitemisbox==1?cartController.data![index].countitems!~/cartController.data![index].itemsquantityinbox!.toInt():cartController.data![index].countitems!}",
+                                count: cartController.data![index].cartitemisbox==1?"${cartController.data![index].countitems!~/cartController.data![index].itemsquantityinbox!.toInt()}":cartController.data![index].countitems!.toString(),
                                 onAdd: () async {
                                   await cartController
                                       .add(cartController.data![index].itemsId!,
-                                      cartController.data![index].cartitemisbox!,
+                                      cartController.data![index].cartitemisbox!.toString(),
                                     cartController.getPrice(cartController.data![index])!.toString(),
                                       cartController.data![index].cartitemisbox==1? cartController.data![index].itemsquantityinbox!:1,
                                   );

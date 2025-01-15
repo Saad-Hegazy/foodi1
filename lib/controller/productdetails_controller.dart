@@ -31,12 +31,8 @@ class ProductDetailsControllerImp extends ProductDetailsController {
   intialData() async {
     statusRequest = StatusRequest.loading;
     itemsModel = Get.arguments['itemsmodel'];
-    isbox= itemsModel!.itemsquantityinbox! > 1 ? true :false;
-    print("isbox from intialData ");
-    print(isbox);
+    isbox= true ;
     countitems = await getCountItems(itemsModel!.itemsId!);
-    print("countitems from intialData ");
-    print(countitems);
     statusRequest = StatusRequest.success;
     update();
   }
@@ -66,7 +62,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
     }
   }
 
-  addItems(int itemsid,int isbox, String itemprice,int countitembyunit) async {
+  addItems(int itemsid,String isbox, String itemprice,int countitembyunit) async {
     statusRequest = StatusRequest.loading;
     update();
     var response = await cartData.addCart(
@@ -129,10 +125,13 @@ class ProductDetailsControllerImp extends ProductDetailsController {
   add()  async{
     num itemprice = getPriceforcart(itemsModel);
     if( isbox!){
-      addItems(itemsModel!.itemsId!,1,itemprice.toString(),itemsModel!.itemsquantityinbox!);
+      String itemisbox = "1";
+      addItems(itemsModel!.itemsId!,itemisbox ,itemprice.toString(),itemsModel!.itemsquantityinbox!);
       countitems= countitems +itemsModel!.itemsquantityinbox!;
     } else{
-      addItems(itemsModel!.itemsId!,0,itemprice.toString(),1);
+      String itemisbox = "0";
+
+      addItems(itemsModel!.itemsId!,itemisbox,itemprice.toString(),1);
       countitems++;
     }
 
@@ -156,7 +155,6 @@ class ProductDetailsControllerImp extends ProductDetailsController {
 
     }else{
       int rem =countitems % itemsModel!.itemsquantityinbox!.toInt();
-      print(rem);
       deleteitems(itemsModel!.itemsId!,rem);
       countitems= countitems -rem;
       update();

@@ -36,8 +36,6 @@ class ProductDetails extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: InkWell(
-                                  onTap:(){},
                                   child: RadioListTile(
                                     activeColor: AppColor.primaryColor,
                                     selected: controller.itemsModel!.itemsquantityinbox! > 1 ? true : false,
@@ -51,7 +49,7 @@ class ProductDetails extends StatelessWidget {
                                       }
                                     },
                                   ),
-                                ),
+
                               ),
                               Expanded(
                                 child: RadioListTile(

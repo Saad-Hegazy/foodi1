@@ -31,7 +31,7 @@ class CartController extends GetxController {
 
   num totalcountitems = 0;
 
-  add(int itemsid,int isbox , String itemprice ,int countitembyunit ) async {
+  add(int itemsid,String isbox , String itemprice ,int countitembyunit ) async {
     statusRequest = StatusRequest.loading;
     update();
     var response;
