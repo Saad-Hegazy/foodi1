@@ -8,6 +8,7 @@ class ItemsModel {
   String? itemsImage;
   var itemsCount;
   int? itemsActive;
+  int? itemsquantityinbox;
   num? itemsPrice;
   num? itemsPriceMerchant;
   num? itemsPriceMosque;
@@ -31,6 +32,7 @@ class ItemsModel {
         this.itemsImage,
         this.itemsCount,
         this.itemsActive,
+        this.itemsquantityinbox,
         this.itemsPrice,
         this.itemsPriceMerchant,
         this.itemsPriceMosque,
@@ -55,6 +57,7 @@ class ItemsModel {
     itemsImage = json['items_image'];
     itemsCount = json['items_count'];
     itemsActive = json['items_active'];
+    itemsquantityinbox = json['items_quantityinbox'];
     itemsPrice = json['items_price'];
     itemsPriceMerchant = json['items_price_merchant'];
     itemsPriceMosque = json['items_price_mosque'];
@@ -81,6 +84,7 @@ class ItemsModel {
     data['items_image'] = itemsImage;
     data['items_count'] = itemsCount;
     data['items_active'] = itemsActive;
+    data['items_quantityinbox'] = itemsquantityinbox;
     data['items_price'] = itemsPrice;
     data['items_price_merchant'] = itemsPriceMerchant;
     data['items_price_mosque'] = itemsPriceMosque;

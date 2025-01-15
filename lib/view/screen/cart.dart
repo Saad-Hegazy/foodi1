@@ -41,22 +41,28 @@ class Cart extends StatelessWidget {
                           ...List.generate(
                             cartController.data!.length,
                                 (index) => CustomItemsCartList(
-                                count: cartController.data![index].countitems!.toString(),
+                                count: "${cartController.data![index].cartitemisbox==1?cartController.data![index].countitems!~/cartController.data![index].itemsquantityinbox!.toInt():cartController.data![index].countitems!}",
                                 onAdd: () async {
                                   await cartController
-                                      .add(cartController.data![index].itemsId!);
+                                      .add(cartController.data![index].itemsId!,
+                                      cartController.data![index].cartitemisbox!,
+                                    cartController.getPrice(cartController.data![index])!.toString(),
+                                      cartController.data![index].cartitemisbox==1? cartController.data![index].itemsquantityinbox!:1,
+                                  );
                                   cartController.refreshPage();
                                 },
                                   onRemove: () async {
                                   await cartController.delete(
-                                      cartController.data![index].itemsId!);
+                                      cartController.data![index].itemsId!,
+                                      cartController.data![index].cartitemisbox==1? cartController.data![index].itemsquantityinbox!:1,
+                                  );
                                   cartController.refreshPage();
                                 },
                                 imagename:
                                 "${cartController.data?[index].itemsImage}",
                                 name: "${cartController.data?[index].itemsName}",
                                 price:
-                                "${cartController.getPrice(cartController.data![index])!.toStringAsFixed(2)} SAR",
+                                "${ cartController.data![index].cartitemisbox==1?cartController.getPrice(cartController.data![index])! *cartController.data![index].itemsquantityinbox! :cartController.getPrice(cartController.data![index])!.toStringAsFixed(2)  } SAR",
 
                                 ),
                           )

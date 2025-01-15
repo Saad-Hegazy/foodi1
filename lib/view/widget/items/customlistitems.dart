@@ -37,25 +37,23 @@ class CustomListItems extends GetView<ItemsControllerImp> {
                           fit: BoxFit.fill,
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      Expanded(
-                        child: Text(
-                            translateDatabase(
+                      const SizedBox(height: 5),
+                   Text(translateDatabase(
                                 itemsModel.itemsNameAr, itemsModel.itemsName),
                             style: const TextStyle(
                                 color: AppColor.black,
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold)),
-                      ),
-                      Text("${controller.getPrice(itemsModel).toStringAsFixed(2)} SAR",
-                          style: const TextStyle(
-                              color: AppColor.primaryColor,
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "sans")),
+
                              Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Text("${controller.getPrice(itemsModel).toStringAsFixed(2)} SAR",
+                              style: const TextStyle(
+                                  color: AppColor.primaryColor,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "sans")),
                           GetBuilder<FavoriteController>(
                               builder: (controller) => IconButton(
                                   onPressed: () {
@@ -79,11 +77,6 @@ class CustomListItems extends GetView<ItemsControllerImp> {
                                   )
                               ),
                           ),
-                          IconButton(onPressed: () {
-                            controller.addItems(itemsModel.itemsId!);
-                          },
-                            icon: const Icon(Icons.add_shopping_cart,
-                              color: AppColor.primaryColor,),)
                         ],
                       ),
                     ]),

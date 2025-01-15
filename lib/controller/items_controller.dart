@@ -115,28 +115,32 @@ class ItemsControllerImp extends SearchMixController {
   goToPageProductDetails(itemsModel) {
     Get.toNamed("productdetails", arguments: {"itemsmodel": itemsModel});
   }
-  addItems(int itemsid) async {
-    statusRequest = StatusRequest.loading;
-    update();
-    var response = await cartData.addCart(
-        myServices.sharedPreferences.getString("id")!, itemsid.toString());
-    print("=============================== Controller $response ");
-    statusRequest = handlingData(response);
-    if (StatusRequest.success == statusRequest) {
-      // Start backend
-      if (response['status'] == "success") {
-        Get.rawSnackbar(
-            backgroundColor:Colors.grey,
-            title: "155".tr,
-            messageText:  Text("154".tr,style: TextStyle(color: Colors.white),));
-        // data.addAll(response['data']);
-      } else {
-        statusRequest = StatusRequest.failure;
-      }
-      // End
-    }
-    update();
-  }
+  // addItems(int itemsid ,int isbox, String itemprice ) async {
+  //   statusRequest = StatusRequest.loading;
+  //   update();
+  //   var response = await cartData.addCart(
+  //       myServices.sharedPreferences.getString("id")!,
+  //       itemsid.toString(),
+  //       isbox,
+  //       itemprice,
+  //       1);
+  //   print("=============================== Controller $response ");
+  //   statusRequest = handlingData(response);
+  //   if (StatusRequest.success == statusRequest) {
+  //     // Start backend
+  //     if (response['status'] == "success") {
+  //       Get.rawSnackbar(
+  //           backgroundColor:Colors.grey,
+  //           title: "155".tr,
+  //           messageText:  Text("154".tr,style: TextStyle(color: Colors.white),));
+  //       // data.addAll(response['data']);
+  //     } else {
+  //       statusRequest = StatusRequest.failure;
+  //     }
+  //     // End
+  //   }
+  //   update();
+  // }
 
 }
 

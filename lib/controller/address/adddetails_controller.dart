@@ -46,7 +46,7 @@ class AddAddressDetailsController extends GetxController {
         lat!,
         long!);
 
-    print("=============================== Controller $response ");
+    print("=============================== addAddressController $response ");
 
     statusRequest = handlingData(response);
 

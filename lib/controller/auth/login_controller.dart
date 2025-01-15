@@ -58,8 +58,8 @@ class LoginControllerImp extends LoginController {
                 FirebaseMessaging.instance.subscribeToTopic("users");
                 FirebaseMessaging.instance.subscribeToTopic("users${userid}");
                 break;
-              case "Mosque":
-                FirebaseMessaging.instance.subscribeToTopic("Mosque");
+              case "mosque":
+                FirebaseMessaging.instance.subscribeToTopic("mosque");
                 FirebaseMessaging.instance.subscribeToTopic("users${userid}");
                 break;
               case "Merchant":

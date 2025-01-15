@@ -5,23 +5,25 @@ import '../../../linkabi.dart';
 class CartData {
   Crud crud;
   CartData(this.crud);
-  addCart(String usersid, String itemsid) async {
+  addCart(String usersid, String itemsid,int isbox , String itemprice,int countitembyunit) async {
     var response = await crud
-        .postData(AppLink.cartadd, {"usersid": usersid, "itemsid": itemsid});
-    return response.fold((l) => l, (r) => r);
-  }
-  addCartByQuantity(String usersid, String itemsid,String quantity) async {
-    var response = await crud
-        .postData(AppLink.cartaddbyquantity, {
+        .postData(AppLink.cartadd, {
       "usersid": usersid,
       "itemsid": itemsid,
-      "quantity": quantity,
+      "cart_itemisbox":isbox.toString(),
+      "itemprice": itemprice,
+      "countitembyunit":countitembyunit.toString()
     });
     return response.fold((l) => l, (r) => r);
   }
-  deleteCart(String usersid, String itemsid) async {
+
+  deleteCart(String usersid, String itemsid,int countitembyunit) async {
     var response = await crud
-        .postData(AppLink.cartdelete, {"usersid": usersid, "itemsid": itemsid});
+        .postData(AppLink.cartdelete, {
+      "usersid": usersid,
+      "itemsid": itemsid,
+      "countitembyunit":countitembyunit.toString()
+    });
     return response.fold((l) => l, (r) => r);
   }
 

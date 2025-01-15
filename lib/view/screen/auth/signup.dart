@@ -20,7 +20,7 @@ class SignUp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: AppColor.backgroundcolor,
+        backgroundColor: AppColor.primaryColor,
         elevation: 0.0,
         title: Text('17'.tr,
             style: Theme.of(context)
@@ -78,6 +78,10 @@ class SignUp extends StatelessWidget {
                   // mycontroller: ,
                 ),
                 CustomTextFormAuth(
+                  obscureText: controller.isshowpassword,
+                  onTapIcon: () {
+                    controller.showPassword();
+                  },
                   isNumber: false,
                   valid: (val) {
                     return validInput(val!, 3, 30, "password");

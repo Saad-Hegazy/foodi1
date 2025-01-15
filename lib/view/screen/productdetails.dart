@@ -33,6 +33,42 @@ class ProductDetails extends StatelessWidget {
                                 color: AppColor.fourthColor,
                               )),
                           const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: InkWell(
+                                  onTap:(){},
+                                  child: RadioListTile(
+                                    activeColor: AppColor.primaryColor,
+                                    selected: controller.itemsModel!.itemsquantityinbox! > 1 ? true : false,
+                                    title: Text("183".tr),
+                                    value: true,
+                                    groupValue: controller.isbox,
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        controller.isBox(value);
+                                        controller.modifyquantity();
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: RadioListTile(
+                                  activeColor: AppColor.primaryColor,
+                                  selected: controller.itemsModel!.itemsquantityinbox! > 1 ? true : false,
+                                  title: Text("184".tr),
+                                  value: false,
+                                  groupValue: controller.isbox,
+                                  onChanged: (value) {
+                                    if (value != null) {
+                                      controller.isBox(value);
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                           PriceAndCountItems(
                               onAdd: () {
                                 controller.add();
@@ -41,7 +77,7 @@ class ProductDetails extends StatelessWidget {
                                 controller.remove();
                               },
                               price: "${controller.getPrice(controller.itemsModel).toStringAsFixed(2)}",
-                              count: controller.countitems.toString(),
+                              count: controller.isbox!? "${controller.countitems ~/controller.itemsModel!.itemsquantityinbox!.toInt()}" : controller.countitems.toString(),
                           ),
                           const SizedBox(height: 10),
                           Text("${controller.itemsModel!.itemsDesc}",

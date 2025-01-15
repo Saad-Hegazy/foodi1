@@ -19,7 +19,7 @@ class chooseUserType extends StatelessWidget {
           title:  Text("176".tr),
           value: "Normal User",
           groupValue: SignUpController.selectedUserType,
-          onChanged: ( value) {
+          onChanged: (value) {
             if (value != null) {
               SignUpController.setUserType(value);
             }
@@ -39,7 +39,7 @@ class chooseUserType extends StatelessWidget {
           title:  Text("178".tr),
           value: "Merchant",
           groupValue: SignUpController.selectedUserType,
-          onChanged: ( value) {
+          onChanged: (value) {
             if (value != null) {
               SignUpController.setUserType(value);
             }

@@ -15,6 +15,7 @@ class SignUpControllerImp extends SignUpController {
   late TextEditingController phone;
   late TextEditingController password;
   String? selectedUserType ;
+  bool isshowpassword = true;
 
   StatusRequest statusRequest= StatusRequest.none;
 
@@ -32,7 +33,7 @@ class SignUpControllerImp extends SignUpController {
       update();
       var response = await signupData.postdata(
           username.text, password.text, email.text, phone.text,selectedUserType!);
-      print("=============================== Controller $response ");
+      print("=============================== signUpController $response ");
       statusRequest = handlingData(response);
       if (StatusRequest.success == statusRequest) {
         if (response['status'] == "success") {
@@ -46,7 +47,10 @@ class SignUpControllerImp extends SignUpController {
       update();
     } else {}
   }
-
+  showPassword() {
+    isshowpassword = isshowpassword == true ? false : true;
+    update();
+  }
   @override
   goToSignIn() {
     Get.offNamed(AppRoute.login);

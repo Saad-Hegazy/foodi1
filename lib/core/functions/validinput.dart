@@ -26,9 +26,9 @@ import 'package:get/get.dart';
         return "45".tr;
       }
       if(val.length<min){
-        return "46 $min".tr;
+        return "46".tr+"${min}";
       }
       if(val.length>max){
-        return "47 $max";
+        return "47".tr +" ${max}";
       }
   }

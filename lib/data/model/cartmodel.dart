@@ -11,6 +11,8 @@ class CartModel {
   String? itemsImage;
   var itemsCount;
   int? itemsActive;
+  int? itemsquantityinbox;
+  int? cartitemisbox;
   num? itemsPrice;
   num? itemsDescount;
   num? itemsPriceMerchant;
@@ -34,6 +36,8 @@ class CartModel {
         this.itemsImage,
         this.itemsCount,
         this.itemsActive,
+        this.itemsquantityinbox,
+        this.cartitemisbox,
         this.itemsPrice,
         this.itemsDescount,
         this.itemsPriceMerchant,
@@ -56,6 +60,8 @@ class CartModel {
     itemsImage = json['items_image'];
     itemsCount = json['items_count'];
     itemsActive = json['items_active'];
+    itemsquantityinbox = json['items_quantityinbox'];
+    cartitemisbox = json['cart_itemisbox'];
     itemsPrice = json['items_price'];
     itemsDescount = json['items_descount'];
     itemsPriceMerchant = json['items_price_merchant'];
@@ -80,6 +86,8 @@ class CartModel {
     data['items_image'] = itemsImage;
     data['items_count'] = itemsCount;
     data['items_active'] = itemsActive;
+    data['items_quantityinbox'] = itemsquantityinbox;
+    data['cart_itemisbox'] = cartitemisbox;
     data['items_price'] = itemsPrice;
     data['items_descount'] = itemsDescount;
     data['items_price_merchant'] = itemsPriceMerchant;

@@ -185,6 +185,8 @@ class MyTranslation extends Translations {
       "180":"هل أنت متأكد من حذف هذا العنوان",
       "181":"هل أنت متأكد من إلغاء هذا الطلب",
       "182":"WhatsApp",
+      "183": "كرتونه",
+      "184": "حبة",
     },
     "en": {
       "1": "Choose Language",
@@ -368,6 +370,8 @@ class MyTranslation extends Translations {
       "180": "are you sure from deleting this address",
       "181": "are you sure from deleting this order",
       "182": "WhatsApp",
+      "183": "Box",
+      "184": "one unit",
     }
   };
 }
