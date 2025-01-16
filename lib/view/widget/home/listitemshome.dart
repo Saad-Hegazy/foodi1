@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/home_controller.dart';
 import '../../../core/constant/color.dart';
+import '../../../core/functions/translatefatabase.dart';
+import '../../../core/functions/truncatetext.dart';
 import '../../../data/model/itemsmodel.dart';
 import '../../../linkabi.dart';
 
@@ -11,8 +13,7 @@ class ListItemsHome extends GetView<HomeControllerImp> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
-
+      height: 120,
       child: ListView.builder(
           itemCount: controller.items.length,
           scrollDirection: Axis.horizontal,
@@ -37,8 +38,8 @@ class ItemsHome extends GetView<HomeControllerImp> {
       child: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            margin: const EdgeInsets.symmetric(horizontal: 1),
+            padding: const EdgeInsets.symmetric(horizontal:5, vertical: 0),
+            margin: const EdgeInsets.symmetric(horizontal: 5),
             child: Image.network(
               "${AppLink.imagestItems}/${itemsModel.itemsImage}",
               height: 100,
@@ -46,22 +47,23 @@ class ItemsHome extends GetView<HomeControllerImp> {
               fit: BoxFit.fill,
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-                color: AppColor.black.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(20)),
-            height: 120,
-            width: 105,
-          ),
+          // Container(
+          //   decoration: BoxDecoration(
+          //       color: AppColor.black.withOpacity(0.2),
+          //       borderRadius: BorderRadius.circular(20)),
+          //   height: 120,
+          //   width: 105,
+          // ),
           Positioned(
-              left: 10,
-              child: Text(
-                "${itemsModel.itemsName}",
-                style: const TextStyle(
-                    color: Colors.white,
-                     fontWeight: FontWeight.bold,
-                    fontSize: 14),
-              ))
+            top: 100,
+              right: 10,
+              child:Text(translateDatabase(
+                  itemsModel.itemsNameAr.toString(),truncateProductName(itemsModel.itemsName.toString()) ),
+                  style: const TextStyle(
+                      color: AppColor.primaryColor,
+                      fontSize: 12,
+                      overflow: TextOverflow.ellipsis,
+                      fontWeight: FontWeight.w900),textAlign: TextAlign.center,),)
         ],
       ),
     );

@@ -23,7 +23,7 @@ class ItemsControllerImp extends SearchMixController {
   List categories = [];
   String? catid;
   int? selectedCat;
-  ItemsData testData = ItemsData(Get.find());
+  ItemsData itemsData = ItemsData(Get.find());
   List data = [];
   @override
   late StatusRequest statusRequest;
@@ -53,7 +53,7 @@ class ItemsControllerImp extends SearchMixController {
   getItems(categoryid) async {
     data.clear();
     statusRequest = StatusRequest.loading;
-    var response = await testData.getData(
+    var response = await itemsData.getData(
         categoryid, myServices.sharedPreferences.getString("id")!);
     print("=============================== ItemsController $response ");
     statusRequest = handlingData(response);

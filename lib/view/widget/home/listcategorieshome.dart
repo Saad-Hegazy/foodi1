@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../controller/home_controller.dart';
 import '../../../core/constant/color.dart';
@@ -13,9 +13,9 @@ class ListCategoriesHome extends GetView<HomeControllerImp> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 122,
+      height: 100, // Adjusted height for icon and label spacing
       child: ListView.separated(
-        separatorBuilder: (context, index) => const SizedBox(width: 10),
+        separatorBuilder: (context, index) => const SizedBox(width: 16),
         itemCount: controller.categories.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
@@ -39,25 +39,40 @@ class Categories extends GetView<HomeControllerImp> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        controller.goToItems(controller.categories, i! , categoriesModel.categoriesId!.toString());
+        controller.goToItems(controller.categories, i!, categoriesModel.categoriesId!.toString());
       },
       child: Column(
         children: [
+          // Circular container with gradient
           Container(
-            decoration: BoxDecoration(
-                color: AppColor.primaryColor,
-                borderRadius: BorderRadius.circular(20)),
-            padding: const EdgeInsets.symmetric(horizontal: 10),
             height: 70,
             width: 70,
-            child: SvgPicture.network(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: const LinearGradient(
+                colors: [Color(0xFF639c1d), Color(0xFF64DD17)], // Green gradient
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              border: Border.all(color: Color(0xFFe78705), width: 2.5), // Optional border
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SvgPicture.network(
                 "${AppLink.imagestCategories}/${categoriesModel.categoriesImage}",
-                color: AppColor.secondColor),
+                color: Colors.white, // Icon color
+              ),
+            ),
           ),
           Text(
             "${translateDatabase(categoriesModel.categoriesNameAr, categoriesModel.categoriesName)}",
-            style: const TextStyle(fontSize: 13, color: AppColor.black),
-          )
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+            textAlign: TextAlign.center, // Center align text
+          ),
         ],
       ),
     );

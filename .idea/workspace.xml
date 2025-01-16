@@ -9,27 +9,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="roll back point">
+    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="update count item function">
+      <change afterPath="$PROJECT_DIR$/lib/core/functions/truncatetext.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/address/adddetails_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/address/adddetails_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/auth/login_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/auth/login_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/auth/signup_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/auth/signup_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/cart_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/cart_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/checkout_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/checkout_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/controller/items_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/items_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/productdetails_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/productdetails_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/functions/validinput.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/functions/validinput.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/localization/translation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/localization/translation.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/datasource/remote/cart_data.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/datasource/remote/cart_data.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/model/cartmodel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/model/cartmodel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/model/itemsmodel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/model/itemsmodel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/model/ordersmodel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/model/ordersmodel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/linkabi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/linkabi.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/auth/signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/auth/signup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/cart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/cart.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/screen/productdetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/productdetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/auth/chooseUserTyp.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/auth/chooseUserTyp.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/widget/home/listcategorieshome.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/home/listcategorieshome.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/widget/home/listitemshome.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/home/listitemshome.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/widget/items/customlistitems.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/items/customlistitems.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/widget/items/listcaregoirseitems.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/items/listcaregoirseitems.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +195,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736551660244</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="UPDATE SIGN UP FUNCTION">
+      <option name="closed" value="true" />
+      <created>1736900523963</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1736900523963</updated>
+    </task>
+    <task id="LOCAL-00014" summary="update count item function">
+      <option name="closed" value="true" />
+      <created>1736903155606</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1736903155606</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -233,6 +237,8 @@
     <MESSAGE value="update FirebaseMessaging subscribeToTopic" />
     <MESSAGE value="update quantity Item" />
     <MESSAGE value="roll back point" />
-    <option name="LAST_COMMIT_MESSAGE" value="roll back point" />
+    <MESSAGE value="UPDATE SIGN UP FUNCTION" />
+    <MESSAGE value="update count item function" />
+    <option name="LAST_COMMIT_MESSAGE" value="update count item function" />
   </component>
 </project>
