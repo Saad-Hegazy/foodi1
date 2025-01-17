@@ -58,7 +58,7 @@ Get.put(OrdersDetailsController());
                                     Text("${controller.data[index].itemsName}",
                                         textAlign: TextAlign.center),
                                     Text("${controller.data[index].countitems}", textAlign: TextAlign.center),
-                                    Text("${controller.getPrice(controller.data[index]).toStringAsFixed(2)}",
+                                    Text("${controller.data[index].cartitemprice!.toStringAsFixed(2)}",
                                         textAlign: TextAlign.center),
                                   ]))
                             ],

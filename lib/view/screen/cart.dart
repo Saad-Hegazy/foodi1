@@ -62,7 +62,7 @@ class Cart extends StatelessWidget {
                                 "${cartController.data?[index].itemsImage}",
                                 name: "${cartController.data?[index].itemsName}",
                                 price:
-                                "${ cartController.data![index].cartitemisbox==1?cartController.getPrice(cartController.data![index])! *cartController.data![index].itemsquantityinbox! :cartController.getPrice(cartController.data![index])!.toStringAsFixed(2)  } SAR",
+                                "${cartController.getPrice(cartController.data![index]).toStringAsFixed(2)  } SAR",
 
                                 ),
                           )

@@ -157,19 +157,70 @@ class CartController extends GetxController {
     }
     update();
   }
-
-  getPrice(CartModel? CartModel ){
+  getPrice(CartModel){
     switch(myServices.sharedPreferences.getString("userType")){
-      case "Normal User":
-        return CartModel!.itemsPrice! - CartModel.itemsPrice! * CartModel.itemsDescount! /100;
-      case "mosque":
-        return CartModel!.itemsPriceMosque! - CartModel.itemsPriceMosque! * CartModel.itemsDescountMosque! /100;
-      case "Merchant":
-        return CartModel!.itemsPriceMerchant! - CartModel.itemsPriceMerchant! * CartModel.itemsDescountMerchant! /100;
+      case  "Normal User":
+        if(CartModel.itemsDescount >0){
+          if(CartModel.cartitemisbox==1){
+            return  (CartModel.itemspricrofbox - CartModel.itemspricrofbox *CartModel.itemsDescount /100) ;
+          }else{
+            return  CartModel.itemsPrice - CartModel.itemsPrice *CartModel.itemsDescount /100;
+          }
+        }else {
+          if(CartModel.cartitemisbox==1){
+            return  CartModel.itemspricrofbox ;
+          }else{
+            return  CartModel.itemsPrice;
+          }
+
+        }
+      case  "mosque":
+        if(CartModel.itemsDescountMosque >0){
+          if(CartModel.cartitemisbox==1){
+            return  (CartModel.itemspricrofboxmosque - CartModel.itemspricrofboxmosque *CartModel.itemsDescountMosque /100);
+          }else{
+            return  CartModel.itemsPriceMosque - CartModel.itemsPriceMosque *CartModel.itemsDescountMosque /100;
+          }
+        }else {
+          if(CartModel.cartitemisbox==1){
+            return  CartModel.itemspricrofboxmosque ;
+          }else{
+            return  CartModel.itemsPriceMosque;
+          }
+        }
+      case  "Merchant":
+        if(CartModel.itemsPriceMerchant >0){
+          if(CartModel.cartitemisbox==1){
+            return  (CartModel.itemspricrofboxmerchant - CartModel.itemspricrofboxmerchant *CartModel.itemsDescountMerchant /100) ;
+
+          }else{
+            return  CartModel.itemsPriceMerchant - CartModel.itemsPriceMerchant *CartModel.itemsDescountMerchant /100;
+          }
+        }else {
+          if(CartModel.cartitemisbox==1){
+            return  CartModel.itemspricrofboxmerchant;
+
+          }else{
+            return  CartModel.itemsPriceMerchant;
+
+          }
+
+        }
 
     }
-
   }
+  // getPrice(CartModel? CartModel ){
+  //   switch(myServices.sharedPreferences.getString("userType")){
+  //     case "Normal User":
+  //       return CartModel!.itemsPrice! - CartModel.itemsPrice! * CartModel.itemsDescount! /100;
+  //     case "mosque":
+  //       return CartModel!.itemsPriceMosque! - CartModel.itemsPriceMosque! * CartModel.itemsDescountMosque! /100;
+  //     case "Merchant":
+  //       return CartModel!.itemsPriceMerchant! - CartModel.itemsPriceMerchant! * CartModel.itemsDescountMerchant! /100;
+  //
+  //   }
+  //
+  // }
 
   @override
   void onInit() {

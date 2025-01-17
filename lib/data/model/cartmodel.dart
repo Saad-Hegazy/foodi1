@@ -3,6 +3,7 @@ class CartModel {
   int? cartId;
   int? cartUsersid;
   int? cartItemsid;
+  num? cartitemprice;
   int? itemsId;
   String? itemsName;
   String? itemsNameAr;
@@ -13,6 +14,9 @@ class CartModel {
   int? itemsActive;
   int? itemsquantityinbox;
   int? cartitemisbox;
+  num? itemspricrofbox;
+  num? itemspricrofboxmerchant;
+  num? itemspricrofboxmosque;
   num? itemsPrice;
   num? itemsDescount;
   num? itemsPriceMerchant;
@@ -28,6 +32,7 @@ class CartModel {
         this.cartId,
         this.cartUsersid,
         this.cartItemsid,
+        this.cartitemprice,
         this.itemsId,
         this.itemsName,
         this.itemsNameAr,
@@ -38,6 +43,9 @@ class CartModel {
         this.itemsActive,
         this.itemsquantityinbox,
         this.cartitemisbox,
+        this.itemspricrofbox,
+        this.itemspricrofboxmerchant,
+        this.itemspricrofboxmosque,
         this.itemsPrice,
         this.itemsDescount,
         this.itemsPriceMerchant,
@@ -52,6 +60,7 @@ class CartModel {
     cartId = json['cart_id'];
     cartUsersid = json['cart_usersid'];
     cartItemsid = json['cart_itemsid'];
+    cartitemprice = json['cart_itemprice'];
     itemsId = json['items_id'];
     itemsName = json['items_name'];
     itemsNameAr = json['items_name_ar'];
@@ -63,6 +72,9 @@ class CartModel {
     itemsquantityinbox = json['items_quantityinbox'];
     cartitemisbox = json['cart_itemisbox'];
     itemsPrice = json['items_price'];
+    itemspricrofbox = json['items_pricrofbox'];
+    itemspricrofboxmerchant = json['items_pricrofbox_merchant'];
+    itemspricrofboxmosque = json['items_pricrofbox_mosque'];
     itemsDescount = json['items_descount'];
     itemsPriceMerchant = json['items_price_merchant'];
     itemsPriceMosque = json['items_price_mosque'];
@@ -78,6 +90,7 @@ class CartModel {
     data['cart_id'] = cartId;
     data['cart_usersid'] = cartUsersid;
     data['cart_itemsid'] = cartItemsid;
+    data['cart_itemprice'] =cartitemprice;
     data['items_id'] = itemsId;
     data['items_name'] = itemsName;
     data['items_name_ar'] = itemsNameAr;
@@ -89,6 +102,9 @@ class CartModel {
     data['items_quantityinbox'] = itemsquantityinbox;
     data['cart_itemisbox'] = cartitemisbox;
     data['items_price'] = itemsPrice;
+    data['items_pricrofbox'] = itemspricrofbox;
+    data['items_pricrofbox_merchant'] = itemspricrofboxmerchant;
+    data['items_pricrofbox_mosque'] = itemspricrofboxmosque;
     data['items_descount'] = itemsDescount;
     data['items_price_merchant'] = itemsPriceMerchant;
     data['items_price_mosque'] = itemsPriceMosque;

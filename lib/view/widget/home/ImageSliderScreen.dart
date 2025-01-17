@@ -22,7 +22,9 @@ class ImageSlider extends StatelessWidget {
               CachedNetworkImage (
                 imageUrl:  "${AppLink.imageSliderUpload}/" +  controller.data[index]["ImageSlider_name"],
                 height: 100,
-                fit: BoxFit.fill,);
+                fit: BoxFit.fill,
+                placeholder: (context, url) => CircularProgressIndicator(),
+              );
               },
               options: CarouselOptions(
                 scrollPhysics: const BouncingScrollPhysics(),

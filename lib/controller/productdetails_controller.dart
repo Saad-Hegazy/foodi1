@@ -122,10 +122,10 @@ class ProductDetailsControllerImp extends ProductDetailsController {
     {"name": "black", "id": 3, "active": '1'}
   ];
 
-  add()  async{
-    num itemprice = getPriceforcart(itemsModel);
+  add(num itemprice)  async{
     if( isbox!){
       String itemisbox = "1";
+      itemprice = itemprice / itemsModel!.itemsquantityinbox!;
       addItems(itemsModel!.itemsId!,itemisbox ,itemprice.toString(),itemsModel!.itemsquantityinbox!);
       countitems= countitems +itemsModel!.itemsquantityinbox!;
     } else{
@@ -180,7 +180,6 @@ class ProductDetailsControllerImp extends ProductDetailsController {
              return  itemsModel.itemsPriceMerchant - itemsModel.itemsPriceMerchant *itemsModel.itemsDescountMerchant /100;
          }else {
              return  itemsModel.itemsPriceMerchant;
-
            }
 
          }
@@ -188,61 +187,103 @@ class ProductDetailsControllerImp extends ProductDetailsController {
      }
 
 
+   getPrice(itemsModel){
+     switch(myServices.sharedPreferences.getString("userType")){
+       case  "Normal User":
+         if(itemsModel.itemsDescount >0){
+           if(isbox!){
+             return  (itemsModel.itemspricrofbox - itemsModel.itemspricrofbox *itemsModel.itemsDescount /100) ;
+           }else{
+             return  itemsModel.itemsPrice - itemsModel.itemsPrice *itemsModel.itemsDescount /100;
+           }
+         }else {
+           if(isbox!){
+             return  itemsModel.itemspricrofbox ;
+           }else{
+             return  itemsModel.itemsPrice;
+           }
 
-  getPrice(itemsModel){
-    switch(myServices.sharedPreferences.getString("userType")){
-      case  "Normal User":
-        if(itemsModel.itemsDescount >0){
-          if(isbox!){
-            return  (itemsModel.itemsPrice - itemsModel.itemsPrice *itemsModel.itemsDescount /100) * itemsModel.itemsquantityinbox;
-          }else{
-            return  itemsModel.itemsPrice - itemsModel.itemsPrice *itemsModel.itemsDescount /100;
-          }
-        }else {
-          if(isbox!){
-            return  itemsModel.itemsPrice * itemsModel.itemsquantityinbox ;
-          }else{
-            return  itemsModel.itemsPrice;
-          }
+         }
+       case  "mosque":
+         if(itemsModel.itemsDescountMosque >0){
+           if(isbox!){
+             return  (itemsModel.itemspricrofboxmosque - itemsModel.itemspricrofboxmosque *itemsModel.itemsDescountMosque /100);
+           }else{
+             return  itemsModel.itemsPriceMosque - itemsModel.itemsPriceMosque *itemsModel.itemsDescountMosque /100;
+           }
+         }else {
+           if(isbox!){
+             return  itemsModel.itemspricrofboxmosque ;
+           }else{
+             return  itemsModel.itemsPriceMosque;
+           }
+         }
+       case  "Merchant":
+         if(itemsModel.itemsPriceMerchant >0){
+           if(isbox!){
+             return  (itemsModel.itemspricrofboxmerchant - itemsModel.itemspricrofboxmerchant *itemsModel.itemsDescountMerchant /100) ;
 
-        }
-      case  "mosque":
-        if(itemsModel.itemsDescountMosque >0){
-          if(isbox!){
-            return  (itemsModel.itemsPriceMosque - itemsModel.itemsPriceMosque *itemsModel.itemsDescountMosque /100) * itemsModel.itemsquantityinbox;
+           }else{
+             return  itemsModel.itemsPriceMerchant - itemsModel.itemsPriceMerchant *itemsModel.itemsDescountMerchant /100;
+           }
+         }else {
+           if(isbox!){
+             return  itemsModel.itemspricrofboxmerchant;
 
-          }else{
-            return  itemsModel.itemsPriceMosque - itemsModel.itemsPriceMosque *itemsModel.itemsDescountMosque /100;
-          }
-        }else {
-          if(isbox!){
-            return  itemsModel.itemsPriceMosque * itemsModel.itemsquantityinbox;
-          }else{
-            return  itemsModel.itemsPriceMosque;
+           }else{
+             return  itemsModel.itemsPriceMerchant;
 
-          }
-        }
-      case  "Merchant":
-        if(itemsModel.itemsPriceMerchant >0){
-          if(isbox!){
-            return  (itemsModel.itemsPriceMerchant - itemsModel.itemsPriceMerchant *itemsModel.itemsDescountMerchant /100) * itemsModel.itemsquantityinbox;
+           }
 
-          }else{
-            return  itemsModel.itemsPriceMerchant - itemsModel.itemsPriceMerchant *itemsModel.itemsDescountMerchant /100;
-          }
-        }else {
-          if(isbox!){
-            return  itemsModel.itemsPriceMerchant * itemsModel.itemsquantityinbox;
+         }
 
-          }else{
-            return  itemsModel.itemsPriceMerchant;
+     }
+   }
 
-          }
-
-        }
-
-    }
-  }
+   getPricewithoutDiscount(itemsModel){
+     switch(myServices.sharedPreferences.getString("userType")){
+       case  "Normal User":
+           if(isbox!){
+             return  itemsModel.itemspricrofbox  ;
+           }else{
+             return  itemsModel.itemsPrice;
+         }
+       case  "mosque":
+           if(isbox!){
+             return  itemsModel.itemspricrofboxmosque;
+           }else{
+             return  itemsModel.itemsPriceMosque;
+         }
+       case  "Merchant":
+           if(isbox!){
+             return  itemsModel.itemspricrofboxmerchant;
+           }else{
+             return  itemsModel.itemsPriceMerchant;
+         }
+     }
+   }
+   hasDiscount(itemsModel){
+     switch(myServices.sharedPreferences.getString("userType")){
+       case  "Normal User":
+         if(itemsModel.itemsDescount >0){
+           return 1;
+         }else{
+           return 0 ;
+         }
+       case  "mosque":
+         if(itemsModel.itemsDescountMosque >0){
+           return 1;
+         }else{
+           return 0 ;
+         }
+       case  "Merchant":
+         if(itemsModel.itemsPriceMerchant >0){
+           return 1;
+         }else{
+           return 0 ;
+         }
+     }
+   }
   @override
   void onInit() {
     intialData();

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/home_controller.dart';
@@ -40,8 +41,19 @@ class ItemsHome extends GetView<HomeControllerImp> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal:5, vertical: 0),
             margin: const EdgeInsets.symmetric(horizontal: 5),
-            child: Image.network(
-              "${AppLink.imagestItems}/${itemsModel.itemsImage}",
+            decoration: BoxDecoration(
+              color: Color(0xfff4f6f7),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                ),
+              ],
+            ),
+            child: CachedNetworkImage(
+              imageUrl:"${AppLink.imagestItems}/${itemsModel.itemsImage}",
               height: 100,
               width: 100,
               fit: BoxFit.fill,
@@ -56,14 +68,16 @@ class ItemsHome extends GetView<HomeControllerImp> {
           // ),
           Positioned(
             top: 100,
-              right: 10,
+            bottom: 0,
+            right: 0,
+            left: 0,
               child:Text(translateDatabase(
                   itemsModel.itemsNameAr.toString(),truncateProductName(itemsModel.itemsName.toString()) ),
                   style: const TextStyle(
-                      color: AppColor.primaryColor,
+                      color: Colors.black,
                       fontSize: 12,
                       overflow: TextOverflow.ellipsis,
-                      fontWeight: FontWeight.w900),textAlign: TextAlign.center,),)
+                      fontWeight: FontWeight.bold),textAlign: TextAlign.center,),)
         ],
       ),
     );

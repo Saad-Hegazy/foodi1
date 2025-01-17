@@ -65,6 +65,16 @@ class OffersController extends SearchMixController{
         }
     }
   }
+  getPricewithoutDiscount(itemsModel){
+    switch(myServices.sharedPreferences.getString("userType")){
+      case  "Normal User":
+          return  itemsModel.itemsPrice;
+      case  "mosque":
+          return  itemsModel.itemsPriceMosque;
+      case  "Merchant":
+          return  itemsModel.itemsPriceMerchant;
+    }
+  }
   hasDiscount(itemsModel){
     switch(myServices.sharedPreferences.getString("userType")){
       case  "Normal User":

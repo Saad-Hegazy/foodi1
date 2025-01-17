@@ -10,6 +10,9 @@ class ItemsModel {
   int? itemsActive;
   int? itemsquantityinbox;
   num? itemsPrice;
+  num? itemspricrofbox;
+  num? itemspricrofboxmerchant;
+  num? itemspricrofboxmosque;
   num? itemsPriceMerchant;
   num? itemsPriceMosque;
   num? itemsDescount;
@@ -34,6 +37,9 @@ class ItemsModel {
         this.itemsActive,
         this.itemsquantityinbox,
         this.itemsPrice,
+        this.itemspricrofbox,
+        this.itemspricrofboxmerchant,
+        this.itemspricrofboxmosque,
         this.itemsPriceMerchant,
         this.itemsPriceMosque,
         this.itemsDescount,
@@ -59,6 +65,9 @@ class ItemsModel {
     itemsActive = json['items_active'];
     itemsquantityinbox = json['items_quantityinbox'];
     itemsPrice = json['items_price'];
+    itemspricrofbox = json['items_pricrofbox'];
+    itemspricrofboxmerchant = json['items_pricrofbox_merchant'];
+    itemspricrofboxmosque = json['items_pricrofbox_mosque'];
     itemsPriceMerchant = json['items_price_merchant'];
     itemsPriceMosque = json['items_price_mosque'];
     itemsDescount = json['items_descount'];
@@ -86,6 +95,9 @@ class ItemsModel {
     data['items_active'] = itemsActive;
     data['items_quantityinbox'] = itemsquantityinbox;
     data['items_price'] = itemsPrice;
+    data['items_pricrofbox'] = itemspricrofbox;
+    data['items_pricrofbox_merchant'] = itemspricrofboxmerchant;
+    data['items_pricrofbox_mosque'] = itemspricrofboxmosque;
     data['items_price_merchant'] = itemsPriceMerchant;
     data['items_price_mosque'] = itemsPriceMosque;
     data['items_descount'] = itemsDescount;

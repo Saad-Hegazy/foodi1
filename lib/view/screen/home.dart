@@ -44,8 +44,9 @@ class HomePage extends StatelessWidget {
                       children: [
                         ImageSlider(),
                         CustomTitleHome(title: "59".tr),
-                        ListCategoriesHome(),
+                        ListCategories(),
                         CustomTitleHome(title: "60".tr),
+                        SizedBox(height: 5),
                         ListItemsHome(),
                       ],
                     )

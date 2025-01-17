@@ -97,7 +97,7 @@ class ProductDetails extends StatelessWidget {
                     // Price and Count Widgets with subtle fade-in effect
                     PriceAndCountItems(
                       onAdd: () {
-                        controller.add();
+                        controller.add(controller.getPrice(controller.itemsModel));
                       },
                       onRemove: () {
                         controller.remove();
@@ -106,6 +106,8 @@ class ProductDetails extends StatelessWidget {
                       count: controller.isbox!
                           ? "${controller.countitems ~/ controller.itemsModel!.itemsquantityinbox!.toInt()}"
                           : controller.countitems.toString(),
+                      oldprice: "${controller.getPricewithoutDiscount(controller.itemsModel).toStringAsFixed(2)}",
+                      hasDiscount: controller.hasDiscount(controller.itemsModel),
                     ),
 
                     const SizedBox(height: 10),

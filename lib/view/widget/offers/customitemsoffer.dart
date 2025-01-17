@@ -45,34 +45,29 @@ class CustomListItemsOffer extends GetView<OffersController> {
                               color: AppColor.black,
                               fontSize: 13,
                               fontWeight: FontWeight.bold)),
+
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Container(
-                            alignment: Alignment.bottomCenter,
-                            height: 22,
-                            child: Row(
-                              children: [
-                                ...List.generate(
-                                    5,
-                                        (index) => const Icon(
-                                      Icons.star,
-                                      size: 15,
-                                    ))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("${controller.getPrice(itemsModel).toStringAsFixed(2)} SAR",
-                              style: const TextStyle(
-                                  color: AppColor.primaryColor,
+                          Column(
+                            children: [
+                              Text("${controller.getPrice(itemsModel).toStringAsFixed(2)} SAR",
+                                  style: const TextStyle(
+                                      color: AppColor.primaryColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "sans")),
+                              controller.hasDiscount(itemsModel) == 1? Text("${controller.getPricewithoutDiscount(itemsModel).toStringAsFixed(2)} SAR",
+                                style: const TextStyle(
                                   fontSize: 13,
+                                  height: 0.9,
+                                  color: Colors.grey,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: "sans")),
+                                  decoration: TextDecoration.lineThrough, // Strikethrough
+                                ),
+                              ):Text(""),
+                            ],
+                          ),
                           GetBuilder<FavoriteController>(
                               builder: (controller) => IconButton(
                                   onPressed: () {
@@ -99,9 +94,9 @@ class CustomListItemsOffer extends GetView<OffersController> {
                     ]),
               ),
               if (controller.hasDiscount(itemsModel) > 0)   Positioned(
-                  top: 4,
-                  left: 4,
-                  child: Image.asset(AppImageAsset.saleOne , width: 40,))
+                  top: 10,
+                  left: 15,
+                  child: Image.asset(AppImageAsset.saleOne , width: 60,))
             ],
           ),
         ));

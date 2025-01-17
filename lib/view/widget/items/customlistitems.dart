@@ -66,13 +66,26 @@ class CustomListItems extends GetView<ItemsControllerImp> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Price
-                        Text(
-                          "${controller.getPrice(itemsModel).toStringAsFixed(2)} SAR",
-                          style: TextStyle(
-                            color: AppColor.primaryColor,
-                            fontSize: 14, // Slightly larger for emphasis
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Column(
+                          children: [
+                            Text(
+                              "${controller.getPrice(itemsModel).toStringAsFixed(2)} SAR",
+                              style: TextStyle(
+                                color: AppColor.primaryColor,
+                                fontSize: 14, // Slightly larger for emphasis
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            controller.hasDiscount(itemsModel) == 1? Text("${controller.getPricewithoutDiscount(itemsModel).toStringAsFixed(2)} SAR",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                height: 0.9,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.lineThrough, // Strikethrough
+                              ),
+                            ):Text("")
+                          ],
                         ),
                         // Favorite Icon
                         GetBuilder<FavoriteController>(

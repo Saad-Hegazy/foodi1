@@ -10,14 +10,18 @@ class PriceAndCountItems extends StatelessWidget {
   final void Function()? onAdd;
   final void Function()? onRemove;
   final String price;
+  final String oldprice;
   final String count;
+  final int hasDiscount;
 
    PriceAndCountItems(
       {Key? key,
         required this.onAdd,
         required this.onRemove,
         required this.price,
+        required this.oldprice,
         required this.count,
+        required this.hasDiscount,
       })
       : super(key: key);
 
@@ -45,10 +49,25 @@ class PriceAndCountItems extends StatelessWidget {
         ),
         const Spacer(),
         Container(
-          child: Text(
-            "$price SAR",
-            style: const TextStyle(
-                color: AppColor.primaryColor, fontSize: 30, height: 1.1),
+          child: Column(
+            children: [
+              Text(
+                "$price SAR",
+                style: const TextStyle(
+                    color: AppColor.primaryColor, fontSize: 30, height: 1.1),
+              ),
+              hasDiscount==1?
+              Text("$oldprice SAR",
+                style: const TextStyle(
+                  height: 0.9,
+                  fontSize: 20,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.lineThrough, // Strikethrough
+                ),
+              ):Text("")
+
+            ],
           ),
         )
       ],
