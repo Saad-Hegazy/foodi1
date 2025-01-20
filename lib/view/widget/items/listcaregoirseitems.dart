@@ -12,9 +12,9 @@ class ListCategoriesItems extends GetView<ItemsControllerImp> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55,
+      height: 65,
       child: ListView.separated(
-        separatorBuilder: (context, index) => const SizedBox(width: 10),
+        separatorBuilder: (context, index) => const SizedBox(width: 5),
         itemCount: controller.categories.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
@@ -43,24 +43,25 @@ class Categories extends GetView<ItemsControllerImp> {
         controller.changeCat(i!, categoriesModel.categoriesId!.toString());
       },
       child: Column(
-        children: [
-          GetBuilder<ItemsControllerImp>(
-              builder: (controller) => Container(
-                padding:const  EdgeInsets.only(right: 10, left: 10, bottom: 5),
-                decoration: controller.selectedCat == i
-                    ?const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            width: 3, color: AppColor.primaryColor)))
-                    : null,
-                child: Text(
-                  "${translateDatabase(categoriesModel.categoriesNameAr, categoriesModel.categoriesName)}",
-                  style:
-                  const TextStyle(fontSize: 20, color: AppColor.grey2),
-                ),
-              ))
-        ],
-      ),
+          children: [
+            GetBuilder<ItemsControllerImp>(
+                builder: (controller) => Container(
+                  padding:const  EdgeInsets.only(right: 5, left: 5, bottom: 0),
+                  decoration: controller.selectedCat == i
+                      ?const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              width: 3, color: AppColor.primaryColor)))
+                      : null,
+                  child: Text(
+                    "${translateDatabase(categoriesModel.categoriesNameAr, categoriesModel.categoriesName)}",
+                    style:
+                    const TextStyle(fontSize: 14, color: AppColor.grey2,),
+                    overflow: TextOverflow.ellipsis, // Handle long text
+                  ),
+                ))
+          ],
+        ),
     );
   }
 }

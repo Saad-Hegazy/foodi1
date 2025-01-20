@@ -9,24 +9,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="update UI">
+    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="update UI and adding box price function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/cart_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/cart_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/controller/items_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/items_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/offers_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/offers_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/productdetails_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/productdetails_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/model/cartmodel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/model/cartmodel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/model/itemsmodel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/model/itemsmodel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/cart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/cart.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/orders/details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/orders/details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/productdetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/productdetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/home/ImageSliderScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/home/ImageSliderScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/home/listcategorieshome.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/home/listcategorieshome.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/home/listitemshome.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/home/listitemshome.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/items/customlistitems.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/items/customlistitems.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/offers/customitemsoffer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/offers/customitemsoffer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/productdetails/priceandcount.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/productdetails/priceandcount.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/datasource/remote/items_data.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/datasource/remote/items_data.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/screen/items.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/items.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/widget/items/listcaregoirseitems.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/items/listcaregoirseitems.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,26 +61,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Flutter.main.dart.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "io.flutter.reload.alreadyRun": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/LENOVO/projects/foodi1",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Flutter.main.dart.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/LENOVO/projects/foodi1&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
@@ -228,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737055836789</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="update UI and adding box price function">
+      <option name="closed" value="true" />
+      <created>1737141525552</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1737141525552</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -256,6 +252,7 @@
     <MESSAGE value="UPDATE SIGN UP FUNCTION" />
     <MESSAGE value="update count item function" />
     <MESSAGE value="update UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="update UI" />
+    <MESSAGE value="update UI and adding box price function" />
+    <option name="LAST_COMMIT_MESSAGE" value="update UI and adding box price function" />
   </component>
 </project>
