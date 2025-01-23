@@ -1,29 +1,25 @@
-
-
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../../core/constant/color.dart';
-import '../../../core/shared/CustomTextfield.dart';
-import '../items/quantitypicker.dart';
-
+import '../items/ProductCountSelector.dart';
 class PriceAndCountItems extends StatelessWidget {
+
+  final ValueChanged<int> onCountChanged;
+  final String count;
   final void Function()? onAdd;
-  final void Function()? onRemove;
   final String price;
   final String oldprice;
-  final String count;
   final int hasDiscount;
-
    PriceAndCountItems(
       {Key? key,
         required this.onAdd,
-        required this.onRemove,
+        required this.count,
         required this.price,
         required this.oldprice,
-        required this.count,
         required this.hasDiscount,
-      })
-      : super(key: key);
+        required this.onCountChanged,
+
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,20 +27,33 @@ class PriceAndCountItems extends StatelessWidget {
       children: [
         Row(
           children: [
-            IconButton(onPressed: () {onAdd!();}, icon: const Icon(Icons.add)),
             Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.only(bottom: 2),
-                width: 50,
-                // height: 30,
-                decoration:
-                BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Text(
-                  count,
-                  style: const TextStyle(fontSize: 20, height: 1.1,color: Colors.black),
-                )
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 18),
+              child: Text("186".tr,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.primaryColor, fontSize: 24, height: 1.1),),
             ),
-            IconButton(onPressed: () {onRemove!();}, icon: const Icon(Icons.remove)),
+            Container(
+              decoration: BoxDecoration(
+                  color:Colors.white70,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(
+                    color: Colors.black,
+                  )
+              ),
+              child: ProductCountRollCircle(
+                initialCount: int.parse(count),
+                onCountChanged:onCountChanged,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+              child: IconButton(
+                  onPressed: () {onAdd!();},
+                  icon: const Icon(Icons.add_shopping_cart_outlined,color: AppColor.primaryColor,size: 30,)
+              ),
+            ),
           ],
         ),
         const Spacer(),
@@ -54,7 +63,7 @@ class PriceAndCountItems extends StatelessWidget {
               Text(
                 "$price SAR",
                 style: const TextStyle(
-                    color: AppColor.primaryColor, fontSize: 30, height: 1.1),
+                    color: AppColor.primaryColor, fontSize: 24, height: 1.1),
               ),
               hasDiscount==1?
               Text("$oldprice SAR",
@@ -66,7 +75,6 @@ class PriceAndCountItems extends StatelessWidget {
                   decoration: TextDecoration.lineThrough, // Strikethrough
                 ),
               ):Text("")
-
             ],
           ),
         )

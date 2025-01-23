@@ -15,23 +15,26 @@ class ImageSlider extends StatelessWidget {
     ImagesliderController controller = Get.put(ImagesliderController());
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      child: CarouselSlider.builder(
-              itemCount:controller.data.length,
-              itemBuilder: (context, index, realIdx) {
-            return controller.data.isEmpty?const CircularProgressIndicator():
-              CachedNetworkImage (
-                imageUrl:  "${AppLink.imageSliderUpload}/" +  controller.data[index]["ImageSlider_name"],
-                height: 100,
-                fit: BoxFit.fill,
-                placeholder: (context, url) => CircularProgressIndicator(),
-              );
-              },
-              options: CarouselOptions(
-                scrollPhysics: const BouncingScrollPhysics(),
-                autoPlay: true,
-                aspectRatio: 2,
-                viewportFraction: 1,
-              ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(14.0),
+        child: CarouselSlider.builder(
+                itemCount:controller.data.length,
+                itemBuilder: (context, index, realIdx) {
+              return controller.data.isEmpty?const CircularProgressIndicator():
+                CachedNetworkImage (
+                  imageUrl:  "${AppLink.imageSliderUpload}/" +  controller.data[index]["ImageSlider_name"],
+                  height: 100,
+                  fit: BoxFit.fill,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                );
+                },
+                options: CarouselOptions(
+                  scrollPhysics: const BouncingScrollPhysics(),
+                  autoPlay: true,
+                  aspectRatio: 2,
+                  viewportFraction: 1,
+                ),
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/constant/routes.dart';
 import '../../core/functions/handlingData.dart';
 import '../../data/datasource/remote/forgetpassword/verfycode.dart';
@@ -49,5 +49,9 @@ class VerifyCodeControllerImp extends VerifyCodeController {
 
   reSend(){
     verifyCodeForgetPasswordData.resendData(email!);
+    Get.rawSnackbar(
+        backgroundColor:AppColor.primaryColor,
+        title: "89".tr,
+        messageText:  Text("185".tr,style: TextStyle(color: Colors.white),));
   }
 }

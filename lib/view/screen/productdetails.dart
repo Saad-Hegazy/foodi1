@@ -6,6 +6,7 @@ import '../../core/constant/color.dart';
 import '../../core/constant/routes.dart';
 import '../../core/functions/translatefatabase.dart';
 import '../../core/functions/truncatetext.dart';
+import '../widget/items/ProductCountSelector.dart';
 import '../widget/productdetails/priceandcount.dart';
 import '../widget/productdetails/toppageproductdetails.dart';
 
@@ -93,25 +94,21 @@ class ProductDetails extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     // Price and Count Widgets with subtle fade-in effect
                     PriceAndCountItems(
-                      onAdd: () {
-                        controller.add(controller.getPrice(controller.itemsModel));
+                    onAdd:(){controller.addselectedCount(
+                        controller.getPrice(controller.itemsModel)
+                    );} ,
+                    onCountChanged:(int selectedCount){
+                      controller.selectedCount=selectedCount;
                       },
-                      onRemove: () {
-                        controller.remove();
-                      },
-                      price: "${controller.getPrice(controller.itemsModel).toStringAsFixed(2)}",
                       count: controller.isbox!
                           ? "${controller.countitems ~/ controller.itemsModel!.itemsquantityinbox!.toInt()}"
                           : controller.countitems.toString(),
+                      price: "${controller.getPrice(controller.itemsModel).toStringAsFixed(2)}",
                       oldprice: "${controller.getPricewithoutDiscount(controller.itemsModel).toStringAsFixed(2)}",
                       hasDiscount: controller.hasDiscount(controller.itemsModel),
                     ),
-
-                    const SizedBox(height: 10),
-
                     // Product Description with smooth text fade in and animation
                     AnimatedSwitcher(
                       duration: Duration(milliseconds: 500),
@@ -125,7 +122,6 @@ class ProductDetails extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     const SizedBox(height: 20),
                   ],
                 ),

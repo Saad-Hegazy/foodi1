@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:foodi1/core/constant/color.dart';
 import 'package:get/get.dart';
@@ -14,21 +12,16 @@ import '../data/model/itemsmodel.dart';
 abstract class ProductDetailsController extends GetxController {}
 
 class ProductDetailsControllerImp extends ProductDetailsController {
-  // CartController cartController = Get.put(CartController());
-
    ItemsModel? itemsModel;
-
   CartData cartData = CartData(Get.find());
-
   late StatusRequest statusRequest;
-
   MyServices myServices = Get.find();
-
   int countitems = 0;
   late final int itemsId;
   bool? isbox;
+   int? selectedCount;
 
-  intialData() async {
+   intialData() async {
     statusRequest = StatusRequest.loading;
     itemsModel = Get.arguments['itemsmodel'];
     isbox= true ;
@@ -121,35 +114,62 @@ class ProductDetailsControllerImp extends ProductDetailsController {
     {"name": "yallow", "id": 2, "active": '0'},
     {"name": "black", "id": 3, "active": '1'}
   ];
+   // add(num itemprice)  async{
+   //   if( isbox!){
+   //     String itemisbox = "1";
+   //     itemprice = itemprice / itemsModel!.itemsquantityinbox!;
+   //     addItems(itemsModel!.itemsId!,itemisbox ,itemprice.toString(),itemsModel!.itemsquantityinbox!);
+   //     countitems= countitems +itemsModel!.itemsquantityinbox!;
+   //   } else{
+   //     String itemisbox = "0";
+   //
+   //     addItems(itemsModel!.itemsId!,itemisbox,itemprice.toString(),1);
+   //     countitems++;
+   //   }
+   //
+   //   update();
+   // }
+   //
+   // remove() async{
+   //   if (countitems > 0) {
+   //     if( isbox!){
+   //       deleteitems(itemsModel!.itemsId!,itemsModel!.itemsquantityinbox!);
+   //       countitems = countitems -itemsModel!.itemsquantityinbox! ;
+   //     }else{
+   //       deleteitems(itemsModel!.itemsId!,1);
+   //       countitems--;
+   //     }
+   //     update();
+   //   }
+   // }
 
-  add(num itemprice)  async{
-    if( isbox!){
-      String itemisbox = "1";
-      itemprice = itemprice / itemsModel!.itemsquantityinbox!;
-      addItems(itemsModel!.itemsId!,itemisbox ,itemprice.toString(),itemsModel!.itemsquantityinbox!);
-      countitems= countitems +itemsModel!.itemsquantityinbox!;
-    } else{
-      String itemisbox = "0";
+   addselectedCount(num itemprice){
+     int count;
+     String itemisbox;
+     isbox!?count =selectedCount!*itemsModel!.itemsquantityinbox!:count=selectedCount!;
+     print(selectedCount);
+     isbox!? itemisbox= "1" : itemisbox = "1";
+     isbox!? itemprice = itemprice / itemsModel!.itemsquantityinbox! :itemprice;
+     if(count < countitems)
+     {
+      int sendcount = countitems - count;
+      print(sendcount);
+      deleteitems(itemsModel!.itemsId!, sendcount);
+      countitems =countitems -sendcount;
+      print(countitems);
 
-      addItems(itemsModel!.itemsId!,itemisbox,itemprice.toString(),1);
-      countitems++;
-    }
+     }else if(count > countitems)
+     {
+       int sendcount = count - countitems;
+       print(sendcount);
+       addItems(itemsModel!.itemsId!,itemisbox,itemprice.toString(),sendcount);
+       countitems = countitems +sendcount;
+       print(countitems);
+     }else if (count == countitems)
+       {}
+     update();
+   }
 
-    update();
-  }
-
-  remove() async{
-    if (countitems > 0) {
-      if( isbox!){
-        deleteitems(itemsModel!.itemsId!,itemsModel!.itemsquantityinbox!);
-        countitems = countitems -itemsModel!.itemsquantityinbox! ;
-      }else{
-        deleteitems(itemsModel!.itemsId!,1);
-        countitems--;
-      }
-      update();
-    }
-  }
   modifyquantity(){
     if(countitems % itemsModel!.itemsquantityinbox!.toInt()==0){
 

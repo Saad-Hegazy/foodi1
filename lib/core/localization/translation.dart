@@ -187,6 +187,8 @@ class MyTranslation extends Translations {
       "182":"WhatsApp",
       "183": "كرتونه",
       "184": "حبة",
+      "185": "إعادة إرسال رمز التحقق بنجاح",
+      "186": "الكمية",
     },
     "en": {
       "1": "Choose Language",
@@ -372,6 +374,8 @@ class MyTranslation extends Translations {
       "182": "WhatsApp",
       "183": "Box",
       "184": "one unit",
+      "185": "resend successfully verify Code",
+      "186": "count: ",
     }
   };
 }

@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
 import '../../core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/constant/routes.dart';
 import '../../core/functions/handlingData.dart';
 import '../../data/datasource/remote/auth/verfiycodesignup.dart';
+import 'package:flutter/material.dart';
+
 abstract class VerifyCodeSignUpController extends GetxController {
   checkCode();
   goToSuccessSignUp(String verfiyCodeSignUp);
@@ -45,5 +48,9 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   }
   reSend(){
     verfiyCodeSignUpData.resendData(email!);
+    Get.rawSnackbar(
+        backgroundColor:AppColor.primaryColor,
+        title: "89".tr,
+        messageText:  Text("185".tr,style: TextStyle(color: Colors.white),));
   }
 }
