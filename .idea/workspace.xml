@@ -9,17 +9,20 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="add pagination function">
-      <change afterPath="$PROJECT_DIR$/lib/view/widget/items/ProductCountSelector.dart" afterDir="false" />
+    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="add function for scroll count of product">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/auth/login_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/auth/login_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/auth/signup_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/auth/signup_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/controller/auth/verifycodesignup_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/auth/verifycodesignup_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/forgetpassword/verifycod_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/forgetpassword/verifycod_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/controller/productdetails_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/productdetails_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/localization/translation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/localization/translation.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/datasource/remote/auth/verfiycodesignup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/datasource/remote/auth/verfiycodesignup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/linkabi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/linkabi.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/screen/auth/forgetpassword/verifycode.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/auth/forgetpassword/verifycode.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/screen/productdetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/productdetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/home/ImageSliderScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/home/ImageSliderScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/widget/productdetails/priceandcount.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/productdetails/priceandcount.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/screen/auth/forgetpassword/verifycodesignup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/auth/forgetpassword/verifycodesignup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/screen/auth/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/auth/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/screen/auth/signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/auth/signup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737402079519</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="add function for scroll count of product">
+      <option name="closed" value="true" />
+      <created>1737595332240</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1737595332240</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -267,6 +278,7 @@
     <MESSAGE value="update UI" />
     <MESSAGE value="update UI and adding box price function" />
     <MESSAGE value="add pagination function" />
-    <option name="LAST_COMMIT_MESSAGE" value="add pagination function" />
+    <MESSAGE value="add function for scroll count of product" />
+    <option name="LAST_COMMIT_MESSAGE" value="add function for scroll count of product" />
   </component>
 </project>

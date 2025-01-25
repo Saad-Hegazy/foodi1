@@ -24,7 +24,7 @@ class MyTranslation extends Translations {
       "18": "البريد الالكتروني",
       "19": "كلمة المرور",
       "20": "اسم المستخدم",
-      "21": "رقم الهاتف",
+      "21": "رقم الهاتف ",
       "22": "ادخل رقم الهاتف",
       "23": "ادخل اسم المستخدم",
       "24": "انشاء حساب من خلال البريد وكلمة المرور ",
@@ -189,6 +189,7 @@ class MyTranslation extends Translations {
       "184": "حبة",
       "185": "إعادة إرسال رمز التحقق بنجاح",
       "186": "الكمية",
+      "187": "ارسال رقم التحقق على الايميل",
     },
     "en": {
       "1": "Choose Language",
@@ -376,6 +377,7 @@ class MyTranslation extends Translations {
       "184": "one unit",
       "185": "resend successfully verify Code",
       "186": "count: ",
+      "187": "send OTP on Email",
     }
   };
 }

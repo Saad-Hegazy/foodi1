@@ -148,7 +148,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
      String itemisbox;
      isbox!?count =selectedCount!*itemsModel!.itemsquantityinbox!:count=selectedCount!;
      print(selectedCount);
-     isbox!? itemisbox= "1" : itemisbox = "1";
+     isbox!? itemisbox= "1" : itemisbox = "0";
      isbox!? itemprice = itemprice / itemsModel!.itemsquantityinbox! :itemprice;
      if(count < countitems)
      {

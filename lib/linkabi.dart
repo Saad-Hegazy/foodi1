@@ -1,5 +1,5 @@
 class AppLink{
- static  const String server = "https://endpoin.shop/ecommerce";
+ static  const String server = "https://foodi1.com/foodi1backend";
  static  const String imageststatic = "$server/upload";
  //==========================Image=========================//
  static  const String imagestCategories = "$imageststatic/categories";

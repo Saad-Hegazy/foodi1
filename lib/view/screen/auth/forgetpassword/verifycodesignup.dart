@@ -34,13 +34,13 @@ class VerifyCodeSignUp extends StatelessWidget {
            CustomTextTitleAuth(text: "80".tr),
           const SizedBox(height: 10),
            CustomTextBodyAuth(
-              text:"81".tr + "  ${controller.email}"),
+              text:"81".tr + "  ${controller.phone}"),
           const SizedBox(height: 15),
           OtpTextField(
             textStyle: TextStyle(color: Colors.black),
             borderRadius: BorderRadius.circular(20),
-            fieldWidth: 50.0,
-            numberOfFields: 5,
+            fieldWidth: 42.0,
+            numberOfFields: 6,
             borderColor: AppColor.primaryColor,
             //set to true to show as box or false to show as dash
             showFieldAsBox: true,
@@ -50,22 +50,22 @@ class VerifyCodeSignUp extends StatelessWidget {
             },
             //runs when every textfield is filled
             onSubmit: (String verificationCode){
-              controller.goToSuccessSignUp(verificationCode);
-
+              controller.goToSuccessSignUp( verificationCode);
               showDialog(
                   context: context,
                   builder: (context){
                     return AlertDialog(
                       title:  Text("82".tr,style: TextStyle(color: Colors.black),),
-                      content: Text('83 $verificationCode'.tr,style: TextStyle(color: Colors.black)),
+                      content: Text("83".tr + "$verificationCode",style: TextStyle(color: Colors.black)),
                     );
                   }
               );
             }, // end onSubmit
           ), const SizedBox(height: 40),
           InkWell(onTap: (){
-            controller.reSend() ;
-          }, child:  Center(child: Text("84".tr , style: TextStyle(color: AppColor.primaryColor , fontSize: 20 ),)),)
+            controller.goToForgetPassword();
+
+          }, child:  Center(child: Text("187".tr , style: TextStyle(color: AppColor.primaryColor , fontSize: 20 ),)),)
         ]),
       ),
       )

@@ -48,7 +48,6 @@ class Login extends StatelessWidget {
                   const SizedBox(height: 15),
                   CustomTextFormAuth(
                     isNumber: false,
-
                     valid: (val) {
                       return validInput(val!, 5, 100, "email");
                     },

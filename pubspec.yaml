@@ -83,7 +83,6 @@ dependencies:
   rename: ^3.0.2
   rating_dialog: ^2.0.4
   app_settings: ^5.1.1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

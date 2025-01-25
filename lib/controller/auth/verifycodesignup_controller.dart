@@ -1,10 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import '../../core/class/statusrequest.dart';
-import '../../core/constant/color.dart';
 import '../../core/constant/routes.dart';
 import '../../core/functions/handlingData.dart';
 import '../../data/datasource/remote/auth/verfiycodesignup.dart';
-import 'package:flutter/material.dart';
 
 abstract class VerifyCodeSignUpController extends GetxController {
   checkCode();
@@ -16,6 +15,8 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
 
 
   String? email;
+  String? phone;
+  String? verificationId;
 
   StatusRequest statusRequest=StatusRequest.none;
 
@@ -23,34 +24,47 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   checkCode() {}
 
   @override
-  goToSuccessSignUp(verfiyCodeSignUp) async {
-    statusRequest = StatusRequest.loading;
-    update();
-    var response = await verfiyCodeSignUpData.postdata(email!, verfiyCodeSignUp);
-    statusRequest = handlingData(response);
-    if (StatusRequest.success == statusRequest) {
-      if (response['status'] == "success") {
-        Get.offNamed(AppRoute.successSignUp);
-      } else {
-        Get.defaultDialog(
-            title: "158".tr,
-            middleText: "172".tr);
-        statusRequest = StatusRequest.failure;
+  Future<void> goToSuccessSignUp(otp) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId!,
+        smsCode: otp,
+      );
+      // Sign in the user
+      UserCredential userCredential =
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      print("Successfully signed in: ${userCredential.user?.uid}");
+      statusRequest = StatusRequest.loading;
+      update();
+      var response = await verfiyCodeSignUpData.postdata(email!);
+      statusRequest = handlingData(response);
+      if (StatusRequest.success == statusRequest) {
+        if (response['status'] == "success") {
+          Get.offNamed(AppRoute.successSignUp);
+        } else {
+          Get.defaultDialog(
+              title: "158".tr,
+              middleText: "172".tr);
+          statusRequest = StatusRequest.failure;
+        }
       }
+      update();
+
+    } catch (e) {
+      print("Error verifying OTP: $e");
     }
-    update();
   }
+
 
   @override
   void onInit() {
     email = Get.arguments['email'];
+    phone = Get.arguments['phone'];
+    verificationId = Get.arguments['verificationId'];
     super.onInit();
   }
-  reSend(){
-    verfiyCodeSignUpData.resendData(email!);
-    Get.rawSnackbar(
-        backgroundColor:AppColor.primaryColor,
-        title: "89".tr,
-        messageText:  Text("185".tr,style: TextStyle(color: Colors.white),));
+  @override
+  goToForgetPassword() {
+    Get.toNamed(AppRoute.forgetPassword);
   }
 }

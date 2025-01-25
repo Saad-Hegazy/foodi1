@@ -66,10 +66,10 @@ class SignUp extends StatelessWidget {
                   labeltext: "18".tr,
                   // mycontroller: ,
                 ),
-                CustomTextFormAuth(
+                  CustomTextFormAuth(
                   isNumber: true,
                   valid: (val) {
-                    return validInput(val!, 9, 10, "phone");
+                    return validInput(val!, 8, 15, "phone");
                   },
                   mycontroller: controller.phone,
                   hinttext: "22".tr,

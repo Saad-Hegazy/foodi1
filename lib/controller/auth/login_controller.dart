@@ -28,12 +28,10 @@ class LoginControllerImp extends LoginController {
   bool isshowpassword = true;
   MyServices myServices=Get.find();
   StatusRequest statusRequest=StatusRequest.none ;
-
   showPassword() {
     isshowpassword = isshowpassword == true ? false : true;
     update();
   }
-
   @override
   login() async {
     if (formstate.currentState!.validate()) {
@@ -66,10 +64,7 @@ class LoginControllerImp extends LoginController {
                 FirebaseMessaging.instance.subscribeToTopic("Merchant");
                 FirebaseMessaging.instance.subscribeToTopic("users${userid}");
                 break;
-    }
-
-
-
+            }
             NotificationService notificationService =NotificationService();
             String DeviceToken =await notificationService.getDeviceToken();
             myServices.sharedPreferences.setString("DeviceToken", DeviceToken);

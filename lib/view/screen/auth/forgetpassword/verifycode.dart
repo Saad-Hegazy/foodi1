@@ -38,9 +38,9 @@ class VerfiyCode extends StatelessWidget {
           const SizedBox(height: 15),
           OtpTextField(
             textStyle: TextStyle(color: Colors.black),
-            fieldWidth: 50.0,
+            fieldWidth: 42.0,
             borderRadius: BorderRadius.circular(20),
-            numberOfFields: 5,
+            numberOfFields: 6,
             borderColor:const  Color(0xff639c1d),
             //set to true to show as box or false to show as dash
             showFieldAsBox: true,
