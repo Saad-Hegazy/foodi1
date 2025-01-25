@@ -4,11 +4,19 @@ import '../../../../linkabi.dart';
 class VerfiyCodeSignUpData{
   Crud crud;
   VerfiyCodeSignUpData(this.crud);
-  postdata(String email) async{
+  postdata(String email , String verifycode) async{
     var response = await crud.postData(AppLink.verifycodessignup,{
       "email":email ,
+      "verifycode" :verifycode,
     });
     return  response.fold((l)=>l,(r)=>r);
+  }
+
+  verifydata(String email ) async {
+    var response = await crud.postData(AppLink.verifyuserOTP, {
+      "email" : email ,
+    });
+    return response.fold((l) => l, (r) => r);
   }
 
   resendData(String email) async {

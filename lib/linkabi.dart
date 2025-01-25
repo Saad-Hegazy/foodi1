@@ -10,6 +10,7 @@ class AppLink{
  static const String notification = "$server/notification.php";
 //==========================Auth=========================//
  static  const String signUp = "$server/auth/signup.php";
+ static  const String signupemail = "$server/auth/signupemail.php";
  static const String verifycodessignup = "$server/auth/verfiycode.php";
  static const String login = "$server/auth/login.php";
  static const String resend = "$server/auth/resend.php";
@@ -17,6 +18,7 @@ class AppLink{
  static const String checkemail = "$server/forgetpassword/checkemail.php";
  static const String resetpassword = "$server/forgetpassword/resetpassword.php";
  static const String verifycodeforgetpassword = "$server/forgetpassword/verifycode.php";
+ static const String verifyuserOTP = "$server/auth/verifyuserOTP.php";
 
 
 //==========================Home=========================//

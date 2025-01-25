@@ -16,4 +16,13 @@ class SignupData{
     return  response.fold((l)=>l,(r)=>r);
   }
 
+
+  postdataverifyemail(String email) async{
+    var response = await crud.postData(AppLink.signupemail,{
+      "email":email ,
+    });
+
+    return  response.fold((l)=>l,(r)=>r);
+  }
+
 }

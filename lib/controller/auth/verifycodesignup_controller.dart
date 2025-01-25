@@ -4,7 +4,7 @@ import '../../core/class/statusrequest.dart';
 import '../../core/constant/routes.dart';
 import '../../core/functions/handlingData.dart';
 import '../../data/datasource/remote/auth/verfiycodesignup.dart';
-
+import '../../data/datasource/remote/forgetpassword/verfycode.dart';
 abstract class VerifyCodeSignUpController extends GetxController {
   checkCode();
   goToSuccessSignUp(String verfiyCodeSignUp);
@@ -12,8 +12,6 @@ abstract class VerifyCodeSignUpController extends GetxController {
 
 class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   VerfiyCodeSignUpData verfiyCodeSignUpData = VerfiyCodeSignUpData(Get.find());
-
-
   String? email;
   String? phone;
   String? verificationId;
@@ -24,35 +22,40 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   checkCode() {}
 
   @override
-  Future<void> goToSuccessSignUp(otp) async {
-    try {
+  Future<void> goToSuccessSignUp( String  otp) async {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId!,
         smsCode: otp,
       );
+      try {
+        print("otp $otp");
       // Sign in the user
-      UserCredential userCredential =
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      print("Successfully signed in: ${userCredential.user?.uid}");
-      statusRequest = StatusRequest.loading;
-      update();
-      var response = await verfiyCodeSignUpData.postdata(email!);
-      statusRequest = handlingData(response);
-      if (StatusRequest.success == statusRequest) {
-        if (response['status'] == "success") {
-          Get.offNamed(AppRoute.successSignUp);
-        } else {
-          Get.defaultDialog(
-              title: "158".tr,
-              middleText: "172".tr);
-          statusRequest = StatusRequest.failure;
-        }
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      if (userCredential.user != null) {
+        // OTP is correct, navigate to login page
+        verifyuser();
+
+      }
+      } catch (e) {
+        Get.defaultDialog(
+            title: "158".tr,
+            middleText: "172".tr);
       }
       update();
+  }
 
-    } catch (e) {
-      print("Error verifying OTP: $e");
+  @override
+  verifyuser() async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response = await verfiyCodeSignUpData.verifydata(email!);
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      if (response['status'] == "success") {
+          Get.offNamed(AppRoute.successSignUp);
+      }
     }
+    update();
   }
 
 

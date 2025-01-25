@@ -190,6 +190,8 @@ class MyTranslation extends Translations {
       "185": "إعادة إرسال رمز التحقق بنجاح",
       "186": "الكمية",
       "187": "ارسال رقم التحقق على الايميل",
+      "188": "سوف تتلقى رمز OTP في غضون ثوان",
+      "189": "لحظات",
     },
     "en": {
       "1": "Choose Language",
@@ -378,6 +380,8 @@ class MyTranslation extends Translations {
       "185": "resend successfully verify Code",
       "186": "count: ",
       "187": "send OTP on Email",
+      "188": "you will receive OTP code within seconds",
+      "189": "wait",
     }
   };
 }

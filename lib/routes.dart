@@ -6,6 +6,7 @@ import 'package:foodi1/view/screen/auth/forgetpassword/resetpassword.dart';
 import 'package:foodi1/view/screen/auth/forgetpassword/success_resetpassword.dart';
 import 'package:foodi1/view/screen/auth/forgetpassword/verifycode.dart';
 import 'package:foodi1/view/screen/auth/forgetpassword/verifycodesignup.dart';
+import 'package:foodi1/view/screen/auth/forgetpassword/verifyemailcodesignup.dart';
 import 'package:foodi1/view/screen/auth/login.dart';
 import 'package:foodi1/view/screen/auth/signup.dart';
 import 'package:foodi1/view/screen/auth/success_sinup.dart';
@@ -40,6 +41,7 @@ List<GetPage<dynamic>>?routes=[
   //OnBoarding
   GetPage(name:  AppRoute.OnBoarding, page: ()=>const OnBoarding(),),
   GetPage(name:  AppRoute.verifyCodeSignUp, page: ()=>const VerifyCodeSignUp(),),
+  GetPage(name:  AppRoute.verifyEmailCodeSignUp, page: ()=>const VerifyEmailCodeSignUp(),),
   GetPage(name:  AppRoute.homepage, page: ()=>const HomeScreen(),),
   GetPage(name:  AppRoute.items, page: ()=>const Items(),),
   GetPage(name: AppRoute.productdetails, page: () => const ProductDetails()),

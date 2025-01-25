@@ -17,7 +17,7 @@ class SignUpControllerImp extends SignUpController {
   late TextEditingController phone;
   late TextEditingController password;
   String? selectedUserType ;
-  String? verificationId ;
+  String? verification ;
   bool isshowpassword = true;
 
   MyServices myServices=Get.find();
@@ -49,7 +49,6 @@ class SignUpControllerImp extends SignUpController {
               if (response['status'] == "success") {
                 // data.addAll(response['data']);
                 requestOTP(phone.text);
-                Get.offNamed(AppRoute.verifyCodeSignUp,arguments: {"email":email.text,"phone": phone.text,"verificationId": verificationId});
               } else {
                 Get.defaultDialog(title: "158".tr , middleText: "173".tr,middleTextStyle:TextStyle(color: Colors.black)) ;
                 statusRequest = StatusRequest.failure;
@@ -60,27 +59,49 @@ class SignUpControllerImp extends SignUpController {
   }
 
   Future<void> requestOTP(String phoneNumber) async {
+    statusRequest = StatusRequest.loading;
+    update();
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) {
         // Auto verification in some cases
         print("Verification Completed: $credential");
       },
-      verificationFailed: (FirebaseAuthException e) {
+      verificationFailed: (FirebaseAuthException e) async{
         // Handle errors
         print("Verification Failed: ${e.message}");
+        var response = await signupData.postdataverifyemail(email.text);
+        print("=============================== signUpController $response ");
+        statusRequest = handlingData(response);
+        if (StatusRequest.success == statusRequest) {
+          if (response['status'] == "success") {
+            // data.addAll(response['data']);
+            Get.offNamed(AppRoute.verifyEmailCodeSignUp,arguments: {"email": email.text});
+          } else {
+            Get.defaultDialog(title: "158".tr , middleText: "173".tr,middleTextStyle:TextStyle(color: Colors.black)) ;
+            statusRequest = StatusRequest.failure;
+          }
+        }
+
+
       },
       codeSent: (String verificationId, int? resendToken) {
         // Store verification ID to use for sign-in
         print("Code Sent. Verification ID: $verificationId");
-        verificationId =verificationId;
+        verification =verificationId;
         // Save verificationId to use later
+        Get.offNamed(AppRoute.verifyCodeSignUp,arguments: {"email":email.text,"phone": phone.text,"verificationId": verification});
+
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         // Handle timeout
         print("Timeout: $verificationId");
       },
     );
+    // Get.defaultDialog(
+    //     title: "189".tr,
+    //     middleText: "188".tr);
+    // update();
   }
 
 
