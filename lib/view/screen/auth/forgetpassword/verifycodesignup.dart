@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../controller/auth/verifycodesignup_controller.dart';
 import '../../../../core/class/handlingdataview.dart';
 import '../../../../core/constant/color.dart';
+import '../../../widget/auth/countdownTimer.dart';
 import '../../../widget/auth/customtextbodyauth.dart';
 import '../../../widget/auth/customtexttitleauth.dart';
 
@@ -61,7 +62,10 @@ class VerifyCodeSignUp extends StatelessWidget {
                   }
               );
             }, // end onSubmit
-          ), const SizedBox(height: 40),
+          ),
+          const SizedBox(height: 20),
+          CountdownTimerWidget(durationInSeconds: 60,),
+          const SizedBox(height: 40),
           InkWell(onTap: (){
             controller.goToForgetPassword();
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../core/class/statusrequest.dart';
+import '../core/constant/color.dart';
 import '../core/functions/handlingData.dart';
 import '../core/services/services.dart';
 import '../data/datasource/remote/cart_data.dart';
@@ -192,6 +193,38 @@ class ItemsControllerImp extends SearchMixController {
     scrollController.dispose();
     super.dispose();
   }
+
+
+
+  addItems(int itemsid,String isbox, String itemprice,int countitembyunit) async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response = await cartData.addCart(
+      myServices.sharedPreferences.getString("id")!,
+      itemsid.toString(),
+      isbox,
+      itemprice,
+      countitembyunit,
+    );
+    print("=============================== Controller $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success") {
+        Get.rawSnackbar(
+            backgroundColor:AppColor.primaryColor,
+            title: "155".tr,
+            messageText:  Text("154".tr,style: TextStyle(color: Colors.white),));
+        // data.addAll(response['data']);
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+  }
+
+
   // addItems(int itemsid ,int isbox, String itemprice ) async {
   //   statusRequest = StatusRequest.loading;
   //   update();

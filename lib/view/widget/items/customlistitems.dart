@@ -11,8 +11,11 @@ import '../../../data/model/itemsmodel.dart';
 import '../../../linkabi.dart';
 class CustomListItems extends GetView<ItemsControllerImp> {
   final ItemsModel itemsModel;
-
-  const CustomListItems({Key? key, required this.itemsModel}) : super(key: key);
+  final void Function()? onAdd;
+  const CustomListItems({Key? key,
+    required this.itemsModel,
+    required this.onAdd,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +69,6 @@ class CustomListItems extends GetView<ItemsControllerImp> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Price
-                        Column(
-                          children: [
                             Text(
                               "${controller.getPrice(itemsModel).toStringAsFixed(2)} SAR",
                               style: TextStyle(
@@ -76,44 +77,52 @@ class CustomListItems extends GetView<ItemsControllerImp> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            controller.hasDiscount(itemsModel) == 1? Text("${controller.getPricewithoutDiscount(itemsModel).toStringAsFixed(2)} SAR",
-                              style: const TextStyle(
-                                fontSize: 12,
-                                height: 0.9,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.lineThrough, // Strikethrough
-                              ),
-                            ):Text("")
-                          ],
-                        ),
-                        // Favorite Icon
-                        GetBuilder<FavoriteController>(
-                          builder: (controller) => IconButton(
-                            onPressed: () {
-                              if (controller.isFavorite[itemsModel.itemsId] == "1") {
-                                controller.setFavorite(itemsModel.itemsId, "0");
-                                controller.removeFavorite(itemsModel.itemsId!.toString());
-                              } else {
-                                controller.setFavorite(itemsModel.itemsId, "1");
-                                controller.addFavorite(itemsModel.itemsId!.toString());
-                              }
-                            },
-                            icon: Icon(
-                              controller.isFavorite[itemsModel.itemsId] == "1"
-                                  ? Icons.favorite
-                                  : Icons.favorite_border_outlined,
-                              color: AppColor.primaryColor,
-                            ),
-                          ),
-                        ),
+                       IconButton(
+                                  onPressed: onAdd,
+                                  icon: Icon(Icons.add_shopping_cart_outlined,
+                                    color: AppColor.primaryColor,
+                                  )
+                              )
+
                       ],
                     ),
+                    controller.hasDiscount(itemsModel) == 1? Text("${controller.getPricewithoutDiscount(itemsModel).toStringAsFixed(2)} SAR",
+                      style: const TextStyle(
+                        fontSize: 12,
+                        height: 0.9,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.lineThrough, // Strikethrough
+                      ),
+                    ):Text(""),
                   ],
                 ),
               ),
             ),
-
+              Positioned(
+                top: 5,
+                right: 0,
+                  // Favorite Icon
+                  child: GetBuilder<FavoriteController>(
+                  builder: (controller) => IconButton(
+                  onPressed: () {
+                    if (controller.isFavorite[itemsModel.itemsId] == "1") {
+                      controller.setFavorite(itemsModel.itemsId, "0");
+                      controller.removeFavorite(itemsModel.itemsId!.toString());
+                    } else {
+                      controller.setFavorite(itemsModel.itemsId, "1");
+                      controller.addFavorite(itemsModel.itemsId!.toString());
+                    }
+                  },
+                  icon: Icon(
+                    controller.isFavorite[itemsModel.itemsId] == "1"
+                        ? Icons.favorite
+                        : Icons.favorite_border_outlined,
+                    color: AppColor.primaryColor,
+                  ),
+                ),
+                ),
+              ),
             // Sale Badge (only if there's a discount)
             if (controller.hasDiscount(itemsModel) > 0)
               Positioned(

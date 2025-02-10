@@ -16,7 +16,6 @@ class Items extends StatelessWidget {
   Widget build(BuildContext context) {
     ItemsControllerImp controller = Get.put(ItemsControllerImp());
     FavoriteController controllerFav = Get.put(FavoriteController());
-
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(15),
@@ -62,6 +61,14 @@ class Items extends StatelessWidget {
                     controller.data[index]['favorite'];
                     return CustomListItems(
                       itemsModel: ItemsModel.fromJson(controller.data[index]),
+                        onAdd:()async{
+                         await controller.addItems(
+                           controller.data[index]['items_id'],
+                           "0",
+                           controller.getPrice(ItemsModel.fromJson(controller.data[index])).toString(),
+                           1,
+                         );
+                        },
                     );
                   },
                 )

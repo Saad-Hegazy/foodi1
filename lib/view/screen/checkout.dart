@@ -27,7 +27,7 @@ class Checkout extends StatelessWidget {
             onPressed: () {
               controller.checkout();
             },
-            child:  Text("63".tr,
+            child:  Text("62".tr,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.white)),
           )),
       body: GetBuilder<CheckoutController>(
@@ -38,7 +38,7 @@ class Checkout extends StatelessWidget {
                   child: ListView(
                     children: [
                        Text(
-                        "63".tr,
+                        "62".tr,
                         style: TextStyle(
                             color: AppColor.primaryColor,
                             fontWeight: FontWeight.bold,
