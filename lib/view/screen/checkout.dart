@@ -115,17 +115,21 @@ class Checkout extends StatelessWidget {
                                   fontSize: 16),
                             ),
                             if(controller.dataaddress.isEmpty)
-                              InkWell(
-                                onTap:(){
+                               TextButton(
+
+                                  onPressed: (){
                                   Get.toNamed(AppRoute.addressadd);
-                                },
-                                child: Container(
+                                }, child: Container(
+                                 margin: const EdgeInsets.symmetric(horizontal: 10),
+                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                 decoration: BoxDecoration(
+                                     color: AppColor.secondColor,
+                                     borderRadius: BorderRadius.circular(20)),
                                   child:  Center(child: Text("70".tr,
                                     style: TextStyle(color: AppColor.primaryColor,fontWeight: FontWeight.bold),
                                     textAlign: TextAlign.center,
                                   )),
-                                ),
-                              ),
+                                ),),
                             const SizedBox(height: 10),
                             ...List.generate(
                               controller.dataaddress.length,

@@ -1,5 +1,5 @@
 class AppLink{
- static  const String server = "https://foodi1.com/foodi1backend";
+ static  const String server = "https://foodi1.com/backendfoodi1";
  static  const String imageststatic = "$server/upload";
  //==========================Image=========================//
  static  const String imagestCategories = "$imageststatic/categories";
@@ -36,6 +36,7 @@ class AppLink{
  static const String deletefromfavroite = "$server/favorite/deletefromfavroite.php";
  // Cart
  static const String cartview   = "$server/cart/view.php";
+ static const String cartitems   = "$server/cart/cartitems.php";
  static const String cartadd    = "$server/cart/add.php";
  static const String cartdelete = "$server/cart/delete.php";
  static const String cartgetcountitems = "$server/cart/getcountitems.php";

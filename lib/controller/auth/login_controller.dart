@@ -1,8 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:googleapis_auth/auth_io.dart' as auth;
-import 'package:http/http.dart' as http;
 import '../../core/class/statusrequest.dart';
 import '../../core/constant/routes.dart';
 import '../../core/functions/handlingData.dart';
@@ -54,15 +52,15 @@ class LoginControllerImp extends LoginController {
             switch (response['data']['users_type']){
               case "Normal User":
                 FirebaseMessaging.instance.subscribeToTopic("users");
-                FirebaseMessaging.instance.subscribeToTopic("users${userid}");
+                FirebaseMessaging.instance.subscribeToTopic("users$userid");
                 break;
               case "mosque":
                 FirebaseMessaging.instance.subscribeToTopic("mosque");
-                FirebaseMessaging.instance.subscribeToTopic("users${userid}");
+                FirebaseMessaging.instance.subscribeToTopic("users$userid");
                 break;
               case "Merchant":
                 FirebaseMessaging.instance.subscribeToTopic("Merchant");
-                FirebaseMessaging.instance.subscribeToTopic("users${userid}");
+                FirebaseMessaging.instance.subscribeToTopic("users$userid");
                 break;
             }
             NotificationService notificationService =NotificationService();

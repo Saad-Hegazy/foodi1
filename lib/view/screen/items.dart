@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/cart_controller.dart';
 import '../../controller/favorite_controller.dart';
+import '../../controller/home_controller.dart';
 import '../../controller/items_controller.dart';
 import '../../core/class/handlingdataview.dart';
+import '../../core/constant/color.dart';
 import '../../core/constant/routes.dart';
 import '../../data/model/itemsmodel.dart';
 import '../widget/customappbar.dart';
+import '../widget/home/custombottomappbarhome.dart';
+import '../widget/items/customappbaritems.dart';
 import '../widget/items/customlistitems.dart';
 import '../widget/items/listcaregoirseitems.dart';
 import 'home.dart';
@@ -14,26 +19,24 @@ class Items extends StatelessWidget {
   const Items({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    ItemsControllerImp controller = Get.put(ItemsControllerImp());
+    ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
     FavoriteController controllerFav = Get.put(FavoriteController());
+    CartController controllerCart = Get.put(CartController());
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(15),
         child: ListView(
-          controller: controller.scrollController,  // Attach the scroll controller to ListView
+          controller: controllerItems.scrollController,
           children: [
-            CustomAppBar(
-              mycontroller: controller.search!,
-              titleappbar: "55".tr,
-              onPressedSearch: () {
-                controller.onSearchItems();
-              },
-              onChanged: (val) {
-                controller.checkSearch(val);
-              },
-              onPressedIconFavorite: () {
-                Get.toNamed(AppRoute.myfavroite);
-              },
+            GetBuilder<CartController>(
+              builder: (cartController) => CustomAppBarItems(
+                mycontroller: controllerItems.search!,
+                titleappbar: "55".tr,
+                onPressedSearch: () => controllerItems.onSearchItems(),
+                onChanged: (val) => controllerItems.checkSearch(val),
+                onPressedIconCart: () => Get.toNamed(AppRoute.cart),
+                itemCount: cartController.totalcountitems.toInt(),
+              ),
             ),
             const SizedBox(height: 20),
             const ListCategoriesItems(),
@@ -47,13 +50,15 @@ class Items extends StatelessWidget {
                   itemCount: controller.data.length + 1,  // Add one for the loading indicator
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 0.7,
+                    childAspectRatio: 0.735,
                   ),
                   itemBuilder: (BuildContext context, index) {
                     if (index == controller.data.length) {
-                      // Show loading indicator if we're loading more data
+                        // Show loading indicator if we're loading more data
                       return controller.isLoading
-                          ? Center(child: CircularProgressIndicator())
+                          ? Center(child: CircularProgressIndicator(
+                        color: AppColor.primaryColor,
+                      ))
                           : SizedBox.shrink();  // Empty widget when no more data to load
                     }
                     // Handling favorite status
@@ -61,14 +66,22 @@ class Items extends StatelessWidget {
                     controller.data[index]['favorite'];
                     return CustomListItems(
                       itemsModel: ItemsModel.fromJson(controller.data[index]),
-                        onAdd:()async{
-                         await controller.addItems(
-                           controller.data[index]['items_id'],
-                           "0",
-                           controller.getPrice(ItemsModel.fromJson(controller.data[index])).toString(),
-                           1,
-                         );
-                        },
+                      onAdd:()async{
+                        if (controller.itemisadd[controller.data[index]['items_id']] == 1) {
+                          Get.snackbar("135".tr, "206".tr);
+                        } else {
+                          await controller.addItems(
+                            controller.data[index]['items_id'],
+                            "0",
+                            controller.getPrice(ItemsModel.fromJson(controller.data[index])).toString(),
+                            1,
+                          );
+                          controllerCart.view();
+                          HomeControllerImp controllerhome= Get.put(HomeControllerImp());
+                          controllerhome.refreshPage();
+                          // Get.snackbar("155".tr, "154".tr,);
+                        }
+                      },
                     );
                   },
                 )

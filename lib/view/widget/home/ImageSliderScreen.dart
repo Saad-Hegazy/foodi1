@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../controller/home_controller.dart';
 import '../../../controller/imageslider_controller.dart';
+import '../../../core/constant/color.dart';
 import '../../../linkabi.dart';
 import 'package:flutter/material.dart' hide CarouselController;
 class ImageSlider extends StatelessWidget {
@@ -12,20 +14,24 @@ class ImageSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ImagesliderController controller = Get.put(ImagesliderController());
+    HomeControllerImp controller = Get.put(HomeControllerImp());
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(14.0),
         child: CarouselSlider.builder(
-                itemCount:controller.data.length,
+                itemCount:controller.imageSlider.length,
                 itemBuilder: (context, index, realIdx) {
-              return controller.data.isEmpty?const CircularProgressIndicator():
+              return controller.imageSlider.isEmpty?const CircularProgressIndicator(
+                color: AppColor.primaryColor,
+              ):
                 CachedNetworkImage (
-                  imageUrl:  "${AppLink.imageSliderUpload}/" +  controller.data[index]["ImageSlider_name"],
+                  imageUrl:  "${AppLink.imageSliderUpload}/" +  controller.imageSlider[index]["ImageSlider_name"],
                   height: 100,
                   fit: BoxFit.fill,
-                  placeholder: (context, url) => CircularProgressIndicator(),
+                  placeholder: (context, url) => CircularProgressIndicator(
+                    color: AppColor.primaryColor,
+                  ),
                 );
                 },
                 options: CarouselOptions(

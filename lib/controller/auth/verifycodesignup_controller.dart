@@ -4,7 +4,6 @@ import '../../core/class/statusrequest.dart';
 import '../../core/constant/routes.dart';
 import '../../core/functions/handlingData.dart';
 import '../../data/datasource/remote/auth/verfiycodesignup.dart';
-import '../../data/datasource/remote/forgetpassword/verfycode.dart';
 abstract class VerifyCodeSignUpController extends GetxController {
   checkCode();
   goToSuccessSignUp(String verfiyCodeSignUp);
@@ -44,7 +43,6 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
       update();
   }
 
-  @override
   verifyuser() async {
     statusRequest = StatusRequest.loading;
     update();
@@ -66,7 +64,6 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
     verificationId = Get.arguments['verificationId'];
     super.onInit();
   }
-  @override
   goToForgetPassword() {
     Get.toNamed(AppRoute.forgetPassword);
   }

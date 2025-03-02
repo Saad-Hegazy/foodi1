@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/cart_controller.dart';
 import '../../core/class/handlingdataview.dart';
-import '../widget/cart/appbarcart.dart';
+import '../../core/constant/color.dart';
 import '../widget/cart/custom_bottom_navgationbar_cart.dart';
 import '../widget/cart/customitemscartlist.dart';
 import '../widget/cart/topcardcart.dart';
@@ -20,16 +20,17 @@ class Cart extends StatelessWidget {
                 onApplyCoupon: () {
                   controller.checkcoupon();
                 },
-                price: cartController.priceorders.toStringAsFixed(2),
+                price: cartController.getTotalPrice().toStringAsFixed(1),
                 discount: "${controller.discountcoupon}%",
-                totalprice: "${controller.getTotalPrice().toStringAsFixed(2)}")),
+                totalprice: "${controller.getTotalPrice().toStringAsFixed(1)}")),
         body: GetBuilder<CartController>(
             builder: ((controller) => HandlingDataView(
                 statusRequest: controller.statusRequest,
                 widget: ListView(
                   children: [
-                     TopAppbarCart(
-                      title: '71'.tr,
+                    AppBar(
+                      backgroundColor: AppColor.primaryColor,
+                      title:  Text('71'.tr,style: TextStyle(color: Colors.white),),
                     ),
                     const SizedBox(height: 10),
                     TopCardCart(
@@ -41,30 +42,44 @@ class Cart extends StatelessWidget {
                           ...List.generate(
                             cartController.data!.length,
                                 (index) => CustomItemsCartList(
-                                count: cartController.data![index].cartitemisbox==1?"${cartController.data![index].countitems!~/cartController.data![index].itemsquantityinbox!.toInt()}":cartController.data![index].countitems!.toString(),
-                                onAdd: () async {
-                                  await cartController
-                                      .add(cartController.data![index].itemsId!,
-                                      cartController.data![index].cartitemisbox!.toString(),
-                                    cartController.getPrice(cartController.data![index])!.toString(),
-                                      cartController.data![index].cartitemisbox==1? cartController.data![index].itemsquantityinbox!:1,
-                                  );
-                                  cartController.refreshPage();
-                                },
-                                  onRemove: () async {
-                                  await cartController.delete(
-                                      cartController.data![index].itemsId!,
-                                      cartController.data![index].cartitemisbox==1? cartController.data![index].itemsquantityinbox!:1,
-                                  );
-                                  cartController.refreshPage();
-                                },
-                                imagename:
-                                "${cartController.data?[index].itemsImage}",
-                                name: "${cartController.data?[index].itemsName}",
-                                price:
-                                "${cartController.getPrice(cartController.data![index]).toStringAsFixed(2)  } SAR",
-
-                                ),
+                              count: cartController.data![index].cartitemisbox==1?(cartController.data![index].countitems!/cartController.data![index].itemsquantityinbox!.toInt()):cartController.data![index].countitems!,
+                              onAdd: () async {
+                                await cartController
+                                    .add(
+                                  cartController.data![index].itemsId!,
+                                  cartController.data![index].cartitemisbox!.toString(),
+                                  cartController.data![index].cartitemprice.toString(),
+                                  cartController.data![index].cartitemisbox==1?cartController.data![index].cartitemcount!+cartController.data![index].itemsquantityinbox!.toInt():cartController.data![index].cartitemcount!+1,
+                                );
+                                cartController.refreshPage();
+                                Get.snackbar("155".tr, "154".tr,);
+                              },
+                               onDelet: () async {
+                                await cartController.delete(
+                                  cartController.data![index].itemsId!,
+                                );
+                                cartController.refreshPage();
+                              },
+                              onRemove:() async {
+                                await cartController
+                                    .add(
+                                  cartController.data![index].itemsId!,
+                                  cartController.data![index].cartitemisbox!.toString(),
+                                  cartController.data![index].cartitemprice.toString(),
+                                  cartController.data![index].cartitemisbox==1?cartController.data![index].cartitemcount!- cartController.data![index].itemsquantityinbox!.toInt():cartController.data![index].cartitemcount!-1,
+                                );
+                                cartController.refreshPage();
+                                Get.snackbar("155".tr, "154".tr,);
+                              },
+                              imagename:
+                              "${cartController.data?[index].itemsImage}",
+                              unit:"${cartController.data?[index].cartitemisbox==1? "192".tr :"191".tr}",
+                              name: "${cartController.data?[index].itemsName}",
+                              totalitemeprice:
+                              cartController.data![index].totalitemsPrice!.toStringAsFixed(1),
+                              price:cartController.getPrice(cartController.data![index]),
+                              cartModel: cartController.data![index],
+                            ),
                           )
                         ],
                       ),

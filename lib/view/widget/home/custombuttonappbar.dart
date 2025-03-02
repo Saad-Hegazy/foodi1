@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../core/constant/color.dart';
 
 class CustomButtonAppBar extends StatelessWidget {
@@ -21,9 +22,9 @@ class CustomButtonAppBar extends StatelessWidget {
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Icon(icondata,
             color: active == true ? AppColor.primaryColor : AppColor.grey),
-        // Text(textbutton,
-        //     style: TextStyle(
-        //         color: active == true ? AppColor.primaryColor : AppColor.grey2))
+        Text(textbutton.tr,
+            style: TextStyle(
+                color: active == true ? AppColor.primaryColor : AppColor.grey2,fontSize: 11))
       ]),
     );
   }

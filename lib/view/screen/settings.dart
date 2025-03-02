@@ -5,6 +5,7 @@ import '../../controller/settings_controller.dart';
 import '../../core/constant/color.dart';
 import '../../core/constant/imageassets.dart';
 import '../../core/constant/routes.dart';
+import '../../core/localization/changelocal.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -60,24 +61,35 @@ class Settings extends StatelessWidget {
                   trailing: const Icon(Icons.location_on_outlined),
                   title:  Text("49".tr),
                 ),
-                // ListTile(
-                //   onTap: () {},
-                //   trailing: Icon(Icons.help_outline_rounded),
-                //   title: Text("About us"),
-                // ),
                 ListTile(
                   onTap: () async{
-                    await  launch("https://wa.me/37044837");
+                    await  launch("https://foodi1.com/foodi1backend/upload/document/VAT.pdf");
                   },
-                  trailing: const Icon(Icons.message),
-                  title:  Text("182".tr),
+                  title:  Text("199".tr),
+                  trailing: const Icon(Icons.checklist_rtl),
                 ),
                 ListTile(
                   onTap: () async{
-                  await  launchUrl(Uri.parse("tel:+97337044837"));
+                    await  Get.toNamed(AppRoute.myfavroite)  ;
+                  },
+                  trailing: const Icon(Icons.favorite_border_outlined),
+                  title:  Text("195".tr),
+                ),
+                ListTile(
+                  onTap: () async{
+                  await  launchUrl(Uri.parse("tel:+966569222419"));
                   },
                   trailing: const Icon(Icons.phone_callback_outlined),
                   title:  Text("50".tr),
+                ),
+                ListTile(
+            onTap: () {
+              LocaleController controller = Get.put(LocaleController());
+              final newLang = Get.locale?.languageCode == 'ar' ? 'en' : 'ar';
+              controller.changeLang(newLang);
+                  },
+                  title:  Text("198".tr),
+                  trailing: const Icon(Icons.language),
                 ),
                 ListTile(
                   onTap: () {

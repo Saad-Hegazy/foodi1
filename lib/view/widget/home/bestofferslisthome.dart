@@ -9,27 +9,25 @@ import '../../../core/functions/truncatetext.dart';
 import '../../../data/model/itemsmodel.dart';
 import '../../../linkabi.dart';
 
-class BestSillingItemsList extends GetView<HomeControllerImp> {
-  const BestSillingItemsList({Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    // Featured Products Grid
-    return GridView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.735,
-        ),
-        itemCount:controller.items.length,
-        itemBuilder: (context, i) {
-          return ItemsHome(
-              itemsModel: ItemsModel.fromJson(controller.items[i]));
-        });
+  class BestOffersListHome extends GetView<HomeControllerImp> {
+    const BestOffersListHome({Key? key,
+    }) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+      return SizedBox(
+        height: 225,
+        child: ListView.builder(
+            itemCount: controller.items.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, i) {
+              return ItemsHome(
+                  itemsModel: ItemsModel.fromJson(controller.offers[i]));
+            }),
+      );
+    }
   }
-}
 
 class ItemsHome extends GetView<HomeControllerImp> {
 
@@ -105,8 +103,7 @@ class ItemsHome extends GetView<HomeControllerImp> {
                               controller.getPrice(itemsModel).toString(),
                               1
                           );
-                          // Get.snackbar("155".tr, "154".tr,);
-                          controller.refreshPage();
+                          Get.snackbar("155".tr, "154".tr,);
                         },
                         icon:  Icon(Icons.shopping_cart),
                         color: AppColor.primaryColor,
@@ -125,31 +122,6 @@ class ItemsHome extends GetView<HomeControllerImp> {
                 ],
               ),
             ),
-            // Positioned(
-            //   top: 5,
-            //   right: 0,
-            //   // Favorite Icon
-            //   child: GetBuilder<FavoriteController>(
-            //     builder: (controller) => IconButton(
-            //       onPressed: () {
-            //         if (controller.isFavorite[itemsModel.itemsId] == "1") {
-            //           controller.setFavorite(itemsModel.itemsId, "0");
-            //           controller.removeFavorite(itemsModel.itemsId!.toString());
-            //         } else {
-            //           controller.setFavorite(itemsModel.itemsId, "1");
-            //           controller.addFavorite(itemsModel.itemsId!.toString());
-            //         }
-            //       },
-            //       icon: Icon(
-            //         controller.isFavorite[itemsModel.itemsId] == "1"
-            //             ? Icons.favorite
-            //             : Icons.favorite_border_outlined,
-            //         color: AppColor.primaryColor,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // Sale Badge (only if there's a discount)
             if (controller.hasDiscount(itemsModel) > 0)
               Positioned(
                 top: 10,

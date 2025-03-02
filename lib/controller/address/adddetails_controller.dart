@@ -26,12 +26,8 @@ class AddAddressDetailsController extends GetxController {
     name = TextEditingController();
     city = TextEditingController();
     street = TextEditingController();
-
     lat = Get.arguments['lat'];
     long = Get.arguments['long'];
-
-    print(lat);
-    print(long);
   }
 
   addAddress() async {

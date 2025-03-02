@@ -1,7 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import '../../../controller/cart_controller.dart';
-
 class ItemQuantityPicker extends StatelessWidget {
   late  int? initialQuantity;
   Function(int)? onSelectedItemChang;

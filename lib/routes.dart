@@ -11,6 +11,7 @@ import 'package:foodi1/view/screen/auth/login.dart';
 import 'package:foodi1/view/screen/auth/signup.dart';
 import 'package:foodi1/view/screen/auth/success_sinup.dart';
 import 'package:foodi1/view/screen/cart.dart';
+import 'package:foodi1/view/widget/changelanguage.dart';
 import 'package:foodi1/view/screen/checkout.dart';
 import 'package:foodi1/view/screen/homescreen.dart';
 import 'package:foodi1/view/screen/items.dart';
@@ -29,7 +30,6 @@ import 'core/middleware/mymiddleware.dart';
 List<GetPage<dynamic>>?routes=[
   //Auth
   GetPage(name: "/", page: ()=>const Language(),middlewares: [MyMiddleWare()]),
- // GetPage(name:  "/", page: ()=>TestView(),),
   GetPage(name: AppRoute.cart, page: () => const Cart()),
   GetPage(name:  AppRoute.login, page: ()=>const Login(),),
   GetPage(name:  AppRoute.signUp, page: ()=>const SignUp() ),
@@ -40,6 +40,7 @@ List<GetPage<dynamic>>?routes=[
   GetPage(name:   AppRoute.successSignUp, page: ()=>const SuccessSignUp(),),
   //OnBoarding
   GetPage(name:  AppRoute.OnBoarding, page: ()=>const OnBoarding(),),
+  GetPage(name:  AppRoute.changeLanguage, page: ()=>const changeLanguage(),),
   GetPage(name:  AppRoute.verifyCodeSignUp, page: ()=>const VerifyCodeSignUp(),),
   GetPage(name:  AppRoute.verifyEmailCodeSignUp, page: ()=>const VerifyEmailCodeSignUp(),),
   GetPage(name:  AppRoute.homepage, page: ()=>const HomeScreen(),),
@@ -55,5 +56,4 @@ List<GetPage<dynamic>>?routes=[
   GetPage(name: AppRoute.ordersarchive, page: () => const OrdersArchiveView()),
   GetPage(name: AppRoute.ordersdetails, page: () => const OrdersDetails()),
  // GetPage(name: AppRoute.offers, page: () => const OffersView()),
-
 ];

@@ -10,9 +10,11 @@ class AppRoute {
   static const String checkEmail = "/checkemail" ;
   static const String verifyCodeSignUp = "/verifycodesignup" ;
   static const String verifyEmailCodeSignUp = "/verifyemailcodesignup" ;
+  static const String changeLanguage = "/changeLanguage" ;
   static const String homepage = "/homepage" ;
   static const String items = "/items" ;
   static const String productdetails = "/productdetails";
+  static const String editproducfromcart = "/editproducfromcart";
   static const String myfavroite = "/myfavroite";
   static const String cart = "/cart";
   // Address

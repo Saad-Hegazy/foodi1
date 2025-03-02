@@ -9,6 +9,7 @@ import '../../widget/auth/chooseUserTyp.dart';
 import '../../widget/auth/custombuttomauth.dart';
 import '../../widget/auth/customtextbodyauth.dart';
 import '../../widget/auth/customtextformauth.dart';
+import '../../widget/auth/customtextformauthmobile.dart';
 import '../../widget/auth/customtexttitleauth.dart';
 import '../../widget/auth/textsignup.dart';
 
@@ -26,7 +27,7 @@ class SignUp extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .displayLarge!
-                .copyWith(color: AppColor.grey)),
+                .copyWith(color: Colors.white)),
       ),
       body: WillPopScope(
           onWillPop: alertExitApp,
@@ -66,7 +67,7 @@ class SignUp extends StatelessWidget {
                   labeltext: "18".tr,
                   // mycontroller: ,
                 ),
-                  CustomTextFormAuth(
+                 CustomTextFormAuthMobile(
                   isNumber: true,
                   valid: (val) {
                     return validInput(val!, 8, 15, "phone");

@@ -31,8 +31,7 @@ class NotificationService{
     }
   }
 
-  Future<String> getDeviceToken()async{
-    NotificationSettings settings = await massaging.requestPermission(
+  Future<String> getDeviceToken()async{await massaging.requestPermission(
       alert: true,
       badge: true,
       sound: true,

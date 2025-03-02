@@ -36,7 +36,7 @@ android {
         release {
             keyAlias 'key'  // Alias name you used when generating the keystore
             keyPassword 'SaadHegazy2024'  // The password you chose for the key
-            storeFile file('C:/Users/LENOVO/projects/foodi1/android/release.keystore')  // Full path to the keystore file
+            storeFile file('C:/Users/LENOVO/projects/foodi1project/foodi1/android/release.keystore')  // Full path to the keystore file
             storePassword 'SaadHegazy2024'  // The password for the keystore
         }
     }

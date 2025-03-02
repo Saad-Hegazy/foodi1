@@ -1,3 +1,5 @@
+import 'itemsmodel.dart';
+
 class CartModel {
   int? countitems;
   int? cartId;
@@ -14,10 +16,12 @@ class CartModel {
   int? itemsActive;
   int? itemsquantityinbox;
   int? cartitemisbox;
+  int? cartitemcount;
   num? itemspricrofbox;
   num? itemspricrofboxmerchant;
   num? itemspricrofboxmosque;
   num? itemsPrice;
+  num? totalitemsPrice;
   num? itemsDescount;
   num? itemsPriceMerchant;
   num? itemsDescountMerchant;
@@ -43,10 +47,12 @@ class CartModel {
         this.itemsActive,
         this.itemsquantityinbox,
         this.cartitemisbox,
+        this.cartitemcount,
         this.itemspricrofbox,
         this.itemspricrofboxmerchant,
         this.itemspricrofboxmosque,
         this.itemsPrice,
+        this.totalitemsPrice,
         this.itemsDescount,
         this.itemsPriceMerchant,
         this.itemsDescountMerchant,
@@ -71,7 +77,9 @@ class CartModel {
     itemsActive = json['items_active'];
     itemsquantityinbox = json['items_quantityinbox'];
     cartitemisbox = json['cart_itemisbox'];
+    cartitemcount = json['cart_itemcount'];
     itemsPrice = json['items_price'];
+    totalitemsPrice = json['itemsprice'];
     itemspricrofbox = json['items_pricrofbox'];
     itemspricrofboxmerchant = json['items_pricrofbox_merchant'];
     itemspricrofboxmosque = json['items_pricrofbox_mosque'];
@@ -101,7 +109,9 @@ class CartModel {
     data['items_active'] = itemsActive;
     data['items_quantityinbox'] = itemsquantityinbox;
     data['cart_itemisbox'] = cartitemisbox;
+    data['cart_itemcount'] = cartitemcount;
     data['items_price'] = itemsPrice;
+    data['itemsprice']=totalitemsPrice;
     data['items_pricrofbox'] = itemspricrofbox;
     data['items_pricrofbox_merchant'] = itemspricrofboxmerchant;
     data['items_pricrofbox_mosque'] = itemspricrofboxmosque;
@@ -113,5 +123,26 @@ class CartModel {
     data['items_date'] = itemsDate;
     data['items_cat'] = itemsCat;
     return data;
+  }
+
+
+  ItemsModel toItemsModel() {
+    return ItemsModel(
+      itemsId: itemsId,
+      itemsName: itemsName,
+      itemsNameAr: itemsNameAr,
+      itemsDesc: itemsDesc,
+      itemsDescAr: itemsDescAr,
+      itemsImage: itemsImage,
+      itemsCount: itemsCount,
+      itemsActive: itemsActive,
+      itemsquantityinbox: itemsquantityinbox,
+      itemsPrice: itemsPrice,
+      itemspricrofbox: itemspricrofbox,
+      itemsDescount: itemsDescount,
+      itemsDate: itemsDate,
+      itemsCat: itemsCat,
+      // Add other matching fields as needed
+    );
   }
 }

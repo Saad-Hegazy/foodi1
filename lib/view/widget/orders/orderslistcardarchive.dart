@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../controller/orders/archive_controller.dart';
 import '../../../core/constant/color.dart';
 import 'package:flutter/material.dart';
@@ -27,23 +28,25 @@ class CardOrdersListArchive extends GetView<OrdersArchiveController> {
                   const Spacer(),
                   // Text(listdata.ordersDatetime!)
                   Text(
-                    listdata.ordersDatetime!,
-                    style: const TextStyle(
+                      DateFormat('dd-MMM-yyyy').format(
+                        DateTime.parse(listdata.ordersDatetime!,),
+                      ),
+                    style: const  TextStyle(
                         color: AppColor.primaryColor,
-                        fontWeight: FontWeight.bold),
+                        fontSize:12)
                   )
                 ],
               ),
               const Divider(),
               Text(
-                  "104".tr+" : ${controller.printOrderType(listdata.ordersType!)}"),
-              Text("105".tr + ": ${listdata.ordersPrice} \S\A\R"),
-              Text("106".tr+": ${listdata.ordersPricedelivery} \S\A\R "),
-              Text("107".tr +" : ${controller.printPaymentMethod(listdata.ordersPaymentmethod!)} "),
+                  "${"104".tr} : ${controller.printOrderType(listdata.ordersType!)}"),
+              Text("${"105".tr}: ${listdata.ordersPrice} \S\A\R"),
+              Text("${"106".tr}: ${listdata.ordersPricedelivery} \S\A\R "),
+              Text("${"107".tr} : ${controller.printPaymentMethod(listdata.ordersPaymentmethod!)} "),
               Text(
-                  "108".tr + ": ${controller.printOrderStatus(listdata.ordersStatus!)} "),
+                  "${"108".tr}: ${controller.printOrderStatus(listdata.ordersStatus!)} "),
               const Divider(),
-                  Text("109".tr+": ${listdata.ordersTotalprice!.toStringAsFixed(2)} SAR ",
+                  Text("${"109".tr}: ${listdata.ordersTotalprice!.toStringAsFixed(2)} SAR ",
                       style: const TextStyle(
                           color: AppColor.primaryColor,
                           fontWeight: FontWeight.bold)),

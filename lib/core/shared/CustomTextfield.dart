@@ -5,11 +5,10 @@ class CustomTextField extends StatelessWidget {
   final String count;
   void Function()? onEditingComplete;
    CustomTextField(
-      {Key? key,
+      {super.key,
         required this.count,
         required this.onEditingComplete,
-        required this.mycontroller,})
-      : super(key: key);
+        required this.mycontroller,});
 
   @override
   Widget build(BuildContext context) {

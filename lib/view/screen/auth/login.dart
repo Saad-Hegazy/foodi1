@@ -27,7 +27,7 @@ class Login extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .displayLarge!
-                .copyWith(color: AppColor.grey)),
+                .copyWith(color: Colors.white)),
       ),
       body: WillPopScope(
           onWillPop: alertExitApp,

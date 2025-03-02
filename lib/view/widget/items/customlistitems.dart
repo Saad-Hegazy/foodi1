@@ -24,16 +24,17 @@ class CustomListItems extends GetView<ItemsControllerImp> {
         controller.goToPageProductDetails(itemsModel);
       },
       child: Card(
-        elevation: 5, // Add shadow for depth
+        color: AppColor.backgroundcolor2,
+        elevation: 3, // Add shadow for depth
         margin: const EdgeInsets.all(8), // Margin around the card
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12), // Rounded corners
+          borderRadius: BorderRadius.circular(10), // Rounded corners
         ),
         child: Stack(
           children: [
             SingleChildScrollView ( // Make the content scrollable
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(12),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,10 +44,12 @@ class CustomListItems extends GetView<ItemsControllerImp> {
                       tag: "${itemsModel.itemsId}",
                       child: CachedNetworkImage(
                         imageUrl: "${AppLink.imagestItems}/${itemsModel.itemsImage!}",
-                        height: 100,
-                        width: 100,
+                        height: 80,
+                        width: 80,
                         fit: BoxFit.cover, // Ensure image fits within the space
-                        placeholder: (context, url) => CircularProgressIndicator(),
+                        placeholder: (context, url) => CircularProgressIndicator(
+                          color: AppColor.primaryColor,
+                        ),
                         errorWidget: (context, url, error) => Icon(Icons.error, color: Colors.red),
                       ),
                     ),
@@ -73,17 +76,16 @@ class CustomListItems extends GetView<ItemsControllerImp> {
                               "${controller.getPrice(itemsModel).toStringAsFixed(2)} SAR",
                               style: TextStyle(
                                 color: AppColor.primaryColor,
+                                height: 0.8,
                                 fontSize: 14, // Slightly larger for emphasis
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                        IconButton(
-                                  onPressed: onAdd,
-                                  icon: Icon(Icons.add_shopping_cart_outlined,
-                                    color: AppColor.primaryColor,
-                                  )
-                              )
-
+                       onPressed: onAdd,
+                       icon:  Icon(Icons.shopping_cart),
+                       color: AppColor.primaryColor,
+                       )
                       ],
                     ),
                     controller.hasDiscount(itemsModel) == 1? Text("${controller.getPricewithoutDiscount(itemsModel).toStringAsFixed(2)} SAR",
@@ -106,16 +108,16 @@ class CustomListItems extends GetView<ItemsControllerImp> {
                   child: GetBuilder<FavoriteController>(
                   builder: (controller) => IconButton(
                   onPressed: () {
-                    if (controller.isFavorite[itemsModel.itemsId] == "1") {
-                      controller.setFavorite(itemsModel.itemsId, "0");
+                    if (controller.isFavorite[itemsModel.itemsId] == 1) {
+                      controller.setFavorite(itemsModel.itemsId, 0);
                       controller.removeFavorite(itemsModel.itemsId!.toString());
                     } else {
-                      controller.setFavorite(itemsModel.itemsId, "1");
+                      controller.setFavorite(itemsModel.itemsId, 1);
                       controller.addFavorite(itemsModel.itemsId!.toString());
                     }
                   },
                   icon: Icon(
-                    controller.isFavorite[itemsModel.itemsId] == "1"
+                    controller.isFavorite[itemsModel.itemsId] == 1
                         ? Icons.favorite
                         : Icons.favorite_border_outlined,
                     color: AppColor.primaryColor,

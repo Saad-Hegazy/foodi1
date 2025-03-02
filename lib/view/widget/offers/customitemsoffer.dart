@@ -11,7 +11,7 @@ import '../../../linkabi.dart';
 class CustomListItemsOffer extends GetView<OffersController> {
   final ItemsModel itemsModel;
   // final bool active;
-   const CustomListItemsOffer({Key? key, required this.itemsModel}) : super(key: key);
+  const CustomListItemsOffer({Key? key, required this.itemsModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

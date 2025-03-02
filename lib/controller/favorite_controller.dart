@@ -1,7 +1,4 @@
-
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../core/class/statusrequest.dart';
 import '../core/functions/handlingData.dart';
 import '../core/services/services.dart';
@@ -36,9 +33,7 @@ class FavoriteController extends GetxController {
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success") {
-        Get.rawSnackbar(
-            title: "146".tr,
-            messageText:  Text("145".tr,style: TextStyle(color: Colors.white)));
+        Get.snackbar("146".tr, "145".tr,);
         // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
@@ -57,9 +52,7 @@ class FavoriteController extends GetxController {
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success") {
-        Get.rawSnackbar(
-            title: "144".tr,
-            messageText:  Text("143".tr));
+        Get.snackbar("144".tr, "143".tr,);
         // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;

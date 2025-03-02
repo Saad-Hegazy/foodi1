@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/myfavoritecontroller.dart';
 import '../../core/class/handlingdataview.dart';
+import '../../core/constant/color.dart';
 import '../widget/myfavorite/customlistfavoriteitems.dart';
 class MyFavorite extends StatelessWidget {
   const MyFavorite({Key? key}) : super(key: key);
@@ -9,17 +10,14 @@ class MyFavorite extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(MyFavoriteController());
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColor.primaryColor,
+        title:  Text('195'.tr,style: TextStyle(color: Colors.white)),
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: GetBuilder<MyFavoriteController>(
             builder: ((controller) => ListView(children: [
-              // CustomAppBar(
-              //   titleappbar: "Find Product",
-              //   onPressedSearch: () {},
-              //   onPressedIconFavorite: () {
-              //     Get.toNamed(AppRoute.myfavroite);
-              //   },
-              // ),
               const SizedBox(height: 20) ,
               HandlingDataView(
                   statusRequest: controller.statusRequest,

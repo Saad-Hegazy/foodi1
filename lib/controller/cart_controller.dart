@@ -31,23 +31,22 @@ class CartController extends GetxController {
 
   num totalcountitems = 0;
 
-  add(int itemsid,String isbox , String itemprice ,int countitembyunit ) async {
+  add(int itemsid,String isbox, String itemprice ,int countitembyunit ) async {
     statusRequest = StatusRequest.loading;
     update();
     var response;
        response = await cartData.addCart(
-          myServices.sharedPreferences.getString("id")!, itemsid.toString(),isbox ,itemprice,countitembyunit);
-
+          myServices.sharedPreferences.getString("id")!,
+          itemsid.toString(),
+          isbox,
+          itemprice,
+          countitembyunit
+       );
     print("=============================== addCartController $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success") {
-        Get.rawSnackbar(
-            backgroundColor:Colors.grey,
-            title: "155".tr,
-            messageText:  Text("154".tr,style: TextStyle(color: Colors.white),));
-        // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -69,20 +68,18 @@ class CartController extends GetxController {
     return (priceorders - priceorders * discountcoupon! / 100);
   }
 
-  delete(int itemsid ,int countitembyunit) async {
+  delete(int itemsid ) async {
     statusRequest = StatusRequest.loading;
     update();
     var response;
-      response = await cartData.deleteCart(
-          myServices.sharedPreferences.getString("id")!, itemsid.toString(),countitembyunit);
+    response = await cartData.deleteCart(
+        myServices.sharedPreferences.getString("id")!, itemsid.toString());
     print("=============================== Controller $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success" ) {
-        Get.rawSnackbar(
-            title: "155".tr,
-            messageText:  Text("157".tr));
+        Get.snackbar("155".tr, "157".tr);
         // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
@@ -91,7 +88,6 @@ class CartController extends GetxController {
     }
     update();
   }
-
 
   checkcoupon() async {
     statusRequest = StatusRequest.loading;
@@ -148,7 +144,6 @@ class CartController extends GetxController {
           data?.addAll(dataresponse.map((e) => CartModel.fromJson(e)));
           totalcountitems = dataresponsecountprice['totalcount'];
           priceorders = dataresponsecountprice['totalprice'];
-          print("priceorders $priceorders" );
         }
       } else {
         statusRequest = StatusRequest.failure;
@@ -156,6 +151,9 @@ class CartController extends GetxController {
       // End
     }
     update();
+  }
+  goToPageProductDetails(cartModel) {
+    Get.toNamed("productdetails", arguments: {"cartModel": cartModel });
   }
   getPrice(CartModel){
     switch(myServices.sharedPreferences.getString("userType")){
@@ -209,18 +207,7 @@ class CartController extends GetxController {
 
     }
   }
-  // getPrice(CartModel? CartModel ){
-  //   switch(myServices.sharedPreferences.getString("userType")){
-  //     case "Normal User":
-  //       return CartModel!.itemsPrice! - CartModel.itemsPrice! * CartModel.itemsDescount! /100;
-  //     case "mosque":
-  //       return CartModel!.itemsPriceMosque! - CartModel.itemsPriceMosque! * CartModel.itemsDescountMosque! /100;
-  //     case "Merchant":
-  //       return CartModel!.itemsPriceMerchant! - CartModel.itemsPriceMerchant! * CartModel.itemsDescountMerchant! /100;
-  //
-  //   }
-  //
-  // }
+
 
   @override
   void onInit() {

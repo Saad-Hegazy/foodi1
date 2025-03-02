@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
-import '../../../../controller/auth/verifycodesignup_controller.dart';
 import '../../../../controller/auth/verifyemailcodesignup_controller.dart';
 import '../../../../core/class/handlingdataview.dart';
 import '../../../../core/constant/color.dart';

@@ -7,58 +7,105 @@ class ProductCountRollCircle extends StatefulWidget {
   final int maxCount;
   final ValueChanged<int> onCountChanged;
 
-  ProductCountRollCircle({
+  const ProductCountRollCircle({
+    super.key,
     required this.initialCount,
-    this.minCount = 1,
-    this.maxCount = 2000,
+    this.minCount =0,
+    this.maxCount = 5000,
     required this.onCountChanged,
   });
 
   @override
-  _ProductCountRollCircleState createState() => _ProductCountRollCircleState();
+  State<ProductCountRollCircle> createState() => _ProductCountRollCircleState();
 }
 
 class _ProductCountRollCircleState extends State<ProductCountRollCircle> {
   late FixedExtentScrollController _scrollController;
+  int _currentCount = 1;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = FixedExtentScrollController(initialItem: widget.initialCount );
+    _currentCount = widget.initialCount;
+    _scrollController = FixedExtentScrollController(
+      initialItem: widget.initialCount - widget.minCount,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40, // Height of the scrollable area
-      width:  70, // Width of the scrollable area
-      child: ListWheelScrollView.useDelegate(
-        controller: _scrollController,
-        physics: FixedExtentScrollPhysics(),
-        itemExtent: 90, // Height of each number item
-        onSelectedItemChanged: (selectedCount) {
-          widget.onCountChanged(selectedCount);
-          print("selectedCount: $selectedCount");
-        },
-        childDelegate: ListWheelChildBuilderDelegate(
-          builder: (context, index) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '$index',
-                    textAlign: TextAlign.center,
+    return SizedBox(
+      height: 120,
+      width: 120,
+      child: Stack(
+        children: [
+          ListWheelScrollView.useDelegate(
+            controller: _scrollController,
+            physics: const FixedExtentScrollPhysics(),
+            itemExtent: 40,
+            diameterRatio: 1.2,
+            perspective: 0.005,
+            magnification: 1.2,
+            overAndUnderCenterOpacity: 0.99,
+            onSelectedItemChanged: (index) {
+              final newCount = index + widget.minCount;
+              setState(() => _currentCount = newCount);
+              widget.onCountChanged(newCount);
+            },
+            childDelegate: ListWheelChildBuilderDelegate(
+              builder: (context, index) {
+                final count = index + widget.minCount;
+                return Center(
+                  child: Text(
+                    '$count',
                     style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: index == widget.initialCount ? AppColor.primaryColor : Colors.black,
+                      fontSize: _currentCount == count ? 24 : 18,
+                      fontWeight: _currentCount == count
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: _currentCount == count
+                          ? AppColor.primaryColor
+                          : Colors.grey[600],
                     ),
                   ),
-                ],
-              );
-          },
-          childCount: widget.maxCount - widget.minCount + 1,
-        ),
+                );
+              },
+              childCount: widget.maxCount - widget.minCount + 1,
+            ),
+          ),
+          // Middle indicator line
+          Center(
+            child: Container(
+              height: 1,
+              decoration: BoxDecoration(
+                border: Border(
+                  // top: BorderSide(color: AppColor.primaryColor, width: 1.5),
+                  // bottom: BorderSide(color: AppColor.primaryColor, width: 1.5),
+                ),
+              ),
+            ),
+          ),
+          // Top gradient overlay
+          Positioned.fill(
+            child: IgnorePointer(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.9),
+                      Colors.transparent,
+                      Colors.transparent,
+                      Colors.white.withOpacity(0.9),
+                    ],
+                    stops: const [0.0, 0.0, 0.99, 0.0],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
