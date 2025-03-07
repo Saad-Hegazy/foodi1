@@ -63,17 +63,10 @@ class Settings extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () async{
-                    await  launch("https://foodi1.com/foodi1backend/upload/document/VAT.pdf");
+                    await  Get.toNamed(AppRoute.notifications)  ;
                   },
-                  title:  Text("199".tr),
-                  trailing: const Icon(Icons.checklist_rtl),
-                ),
-                ListTile(
-                  onTap: () async{
-                    await  Get.toNamed(AppRoute.myfavroite)  ;
-                  },
-                  trailing: const Icon(Icons.favorite_border_outlined),
-                  title:  Text("195".tr),
+                  trailing: const Icon(Icons.notifications_active_outlined),
+                  title:  Text("202".tr),
                 ),
                 ListTile(
                   onTap: () async{
@@ -90,6 +83,13 @@ class Settings extends StatelessWidget {
                   },
                   title:  Text("198".tr),
                   trailing: const Icon(Icons.language),
+                ),
+                ListTile(
+                  onTap: () async{
+                    await  launch("https://foodi1.com/foodi1backend/upload/document/VAT.pdf");
+                  },
+                  title:  Text("199".tr),
+                  trailing: const Icon(Icons.checklist_rtl),
                 ),
                 ListTile(
                   onTap: () {

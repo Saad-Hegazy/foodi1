@@ -45,20 +45,20 @@ class Cart extends StatelessWidget {
                               count: cartController.data![index].cartitemisbox==1?(cartController.data![index].countitems!/cartController.data![index].itemsquantityinbox!.toInt()):cartController.data![index].countitems!,
                               onAdd: () async {
                                 await cartController
-                                    .add(
+                                    .addfromcartpage(
                                   cartController.data![index].itemsId!,
                                   cartController.data![index].cartitemisbox!.toString(),
                                   cartController.data![index].cartitemprice.toString(),
                                   cartController.data![index].cartitemisbox==1?cartController.data![index].cartitemcount!+cartController.data![index].itemsquantityinbox!.toInt():cartController.data![index].cartitemcount!+1,
                                 );
-                                cartController.refreshPage();
+                                cartController.refreshcartPage();
                                 Get.snackbar("155".tr, "154".tr,);
                               },
                                onDelet: () async {
                                 await cartController.delete(
                                   cartController.data![index].itemsId!,
                                 );
-                                cartController.refreshPage();
+                                cartController.refreshcartPage();
                               },
                               onRemove:() async {
                                 await cartController
@@ -68,7 +68,7 @@ class Cart extends StatelessWidget {
                                   cartController.data![index].cartitemprice.toString(),
                                   cartController.data![index].cartitemisbox==1?cartController.data![index].cartitemcount!- cartController.data![index].itemsquantityinbox!.toInt():cartController.data![index].cartitemcount!-1,
                                 );
-                                cartController.refreshPage();
+                                cartController.refreshcartPage();
                                 Get.snackbar("155".tr, "154".tr,);
                               },
                               imagename:

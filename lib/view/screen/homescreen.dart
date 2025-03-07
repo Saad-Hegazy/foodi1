@@ -14,21 +14,16 @@ class HomeScreen extends StatelessWidget {
     Get.put(HomeScreenControllerImp());
     return GetBuilder<HomeScreenControllerImp>(
         builder: (controller) => Scaffold(
-          floatingActionButton: badge.Badge(
-            position: badge.BadgePosition.topEnd(top: -5, end: 12),
-            showBadge:0> 0, // Only show if count > 0
-            badgeContent: Text(
-              0.toString(),
-              style: TextStyle(color: Colors.white),
-            ),
-            child: FloatingActionButton(
+          floatingActionButton:
+          FloatingActionButton(
+            elevation: 5,
                 backgroundColor: AppColor.primaryColor,
                 onPressed: () async{
                   await  launch("https://wa.me/569222419");
                 },
-                child: const Icon(Icons.message,color:Colors.white,)),
-          ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+                child: const Icon(Icons.message,color:Colors.white,size: 26,)
+            ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           bottomNavigationBar: const CustomBottomAppBarHome(),
           body: WillPopScope(
               child: controller.listPage.elementAt(controller.currentpage),

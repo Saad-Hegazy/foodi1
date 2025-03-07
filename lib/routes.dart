@@ -11,6 +11,8 @@ import 'package:foodi1/view/screen/auth/login.dart';
 import 'package:foodi1/view/screen/auth/signup.dart';
 import 'package:foodi1/view/screen/auth/success_sinup.dart';
 import 'package:foodi1/view/screen/cart.dart';
+import 'package:foodi1/view/screen/notification.dart';
+import 'package:foodi1/view/screen/productdetailsitemmodel.dart';
 import 'package:foodi1/view/widget/changelanguage.dart';
 import 'package:foodi1/view/screen/checkout.dart';
 import 'package:foodi1/view/screen/homescreen.dart';
@@ -46,6 +48,7 @@ List<GetPage<dynamic>>?routes=[
   GetPage(name:  AppRoute.homepage, page: ()=>const HomeScreen(),),
   GetPage(name:  AppRoute.items, page: ()=>const Items(),),
   GetPage(name: AppRoute.productdetails, page: () => const ProductDetails()),
+  GetPage(name: AppRoute.productDetailsItemModel, page: () => const ProductDetailsItemModel()),
   GetPage(name: AppRoute.myfavroite, page: () => const MyFavorite()),
   //
   GetPage(name: AppRoute.addressview, page: () => const AddressView()),
@@ -55,5 +58,5 @@ List<GetPage<dynamic>>?routes=[
   GetPage(name: AppRoute.orderspending, page: () => const OrdersPending()),
   GetPage(name: AppRoute.ordersarchive, page: () => const OrdersArchiveView()),
   GetPage(name: AppRoute.ordersdetails, page: () => const OrdersDetails()),
- // GetPage(name: AppRoute.offers, page: () => const OffersView()),
+ GetPage(name: AppRoute.notifications, page: () => const NotificationView()),
 ];

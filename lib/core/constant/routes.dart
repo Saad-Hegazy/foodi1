@@ -14,9 +14,11 @@ class AppRoute {
   static const String homepage = "/homepage" ;
   static const String items = "/items" ;
   static const String productdetails = "/productdetails";
+  static const String productDetailsItemModel = "/productDetailsItemModel";
   static const String editproducfromcart = "/editproducfromcart";
   static const String myfavroite = "/myfavroite";
   static const String cart = "/cart";
+  static const String notifications = "/notifications";
   // Address
   static const String addressview = "/addressview";
   static const String addressadd  = "/addressadd";

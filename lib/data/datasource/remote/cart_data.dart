@@ -31,7 +31,11 @@ class CartData {
         AppLink.cartgetcountitems, {"usersid": usersid, "itemsid": itemsid});
     return response.fold((l) => l, (r) => r);
   }
-
+  getItemCount(String usersid,String userstype, String itemsid) async {
+    var response = await crud.postData(
+        AppLink.itemcount, {"usersid": usersid,"userstype":userstype, "itemsid": itemsid});
+    return response.fold((l) => l, (r) => r);
+  }
   viewCart(String usersid, String usersType) async {
     var response = await crud.postData(AppLink.cartview, {
       "usersid": usersid,

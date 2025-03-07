@@ -219,7 +219,7 @@ class ItemsControllerImp extends SearchMixController {
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
 
-        Get.snackbar("155".tr, "154".tr,);
+        // Get.snackbar("155".tr, "154".tr,);
       } else {
         statusRequest = StatusRequest.failure;
       }

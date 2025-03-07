@@ -30,8 +30,16 @@ class CartController extends GetxController {
   num priceorders = 0.0;
 
   num totalcountitems = 0;
+  Map isInCart = {};
 
-  add(int itemsid,String isbox, String itemprice ,int countitembyunit ) async {
+//  key => id items
+//  Value => 1 OR 0
+
+  setInCart(id, val) {
+    isInCart[id] = val;
+    update();
+  }
+    add(int itemsid,String isbox, String itemprice ,int countitembyunit ) async {
     statusRequest = StatusRequest.loading;
     update();
     var response;
@@ -42,6 +50,29 @@ class CartController extends GetxController {
           itemprice,
           countitembyunit
        );
+    print("=============================== addCartController $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success") {
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+  }
+  addfromcartpage(int itemsid,String isbox, String itemprice ,int countitembyunit ) async {
+    statusRequest = StatusRequest.none;
+    update();
+    var response;
+    response = await cartData.addCart(
+        myServices.sharedPreferences.getString("id")!,
+        itemsid.toString(),
+        isbox,
+        itemprice,
+        countitembyunit
+    );
     print("=============================== addCartController $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
@@ -88,7 +119,26 @@ class CartController extends GetxController {
     }
     update();
   }
-
+  deletefromcartoage(int itemsid ) async {
+    statusRequest = StatusRequest.none;
+    update();
+    var response;
+    response = await cartData.deleteCart(
+        myServices.sharedPreferences.getString("id")!, itemsid.toString());
+    print("=============================== Controller $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success" ) {
+        Get.snackbar("155".tr, "157".tr);
+        // data.addAll(response['data']);
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+  }
   checkcoupon() async {
     statusRequest = StatusRequest.loading;
     update();
@@ -125,7 +175,10 @@ class CartController extends GetxController {
     resetVarCart();
     view();
   }
-
+  refreshcartPage() {
+    resetVarCart();
+    viewformcartpage();
+  }
   view() async {
     statusRequest = StatusRequest.loading;
     update();
@@ -133,6 +186,32 @@ class CartController extends GetxController {
     await cartData.viewCart(myServices.sharedPreferences.getString("id")!,
         myServices.sharedPreferences.getString("userType")!);
     print("=============================== CartController $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success") {
+        if (response['datacart']['status'] == 'success') {
+          List dataresponse = response['datacart']['data'];
+          Map dataresponsecountprice = response['countprice'];
+          data?.clear();
+          data?.addAll(dataresponse.map((e) => CartModel.fromJson(e)));
+          totalcountitems = dataresponsecountprice['totalcount'];
+          priceorders = dataresponsecountprice['totalprice'];
+        }
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+  }
+  viewformcartpage() async {
+    statusRequest = StatusRequest.none;
+    update();
+    var response =
+    await cartData.viewCart(myServices.sharedPreferences.getString("id")!,
+        myServices.sharedPreferences.getString("userType")!);
+    print("=============================== viewformcartpageController $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       // Start backend

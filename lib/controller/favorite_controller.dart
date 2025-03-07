@@ -34,7 +34,6 @@ class FavoriteController extends GetxController {
       // Start backend
       if (response['status'] == "success") {
         Get.snackbar("146".tr, "145".tr,);
-        // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
       }

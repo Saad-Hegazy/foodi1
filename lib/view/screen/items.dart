@@ -50,7 +50,7 @@ class Items extends StatelessWidget {
                   itemCount: controller.data.length + 1,  // Add one for the loading indicator
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 0.735,
+                    childAspectRatio: 0.8,
                   ),
                   itemBuilder: (BuildContext context, index) {
                     if (index == controller.data.length) {
@@ -77,8 +77,8 @@ class Items extends StatelessWidget {
                             1,
                           );
                           controllerCart.view();
-                          HomeControllerImp controllerhome= Get.put(HomeControllerImp());
-                          controllerhome.refreshPage();
+                          HomeControllerImp Controller =     Get.put(HomeControllerImp());
+                          Controller.refreshPage();
                           // Get.snackbar("155".tr, "154".tr,);
                         }
                       },

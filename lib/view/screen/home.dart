@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                     controller.checkSearch(val);
                   },
                     onPressedIconCart: () => Get.toNamed(AppRoute.cart),
-                    itemCount:controller.totalcount,
+                    itemCount:controller.totalcountitems.toInt(),
                 ),
                 HandlingDataView(
                     statusRequest: controller.statusRequest,
@@ -58,7 +58,9 @@ class HomePage extends StatelessWidget {
                 // const CustomTitleHome(title: "Offer"),
                 // const ListItemsHome()
               ],
-            )));
+            )
+        )
+    );
   }
 }
 
@@ -76,7 +78,7 @@ class ListItemsSearch extends GetView<HomeControllerImp> {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              controller.goToPageProductDetails(listdatamodel[index]);
+              controller.goToPageProductDetailsItemModel(listdatamodel[index]);
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 20),

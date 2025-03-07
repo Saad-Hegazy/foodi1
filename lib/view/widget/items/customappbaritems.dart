@@ -70,7 +70,7 @@ class CustomAppBarItems extends StatelessWidget {
               onPressed: onPressedIconCart,
               icon: Icon(
                 Icons.shopping_cart,
-                size: 20,
+                size: 26,
                 color: AppColor.primaryColor,
               ),
             ),

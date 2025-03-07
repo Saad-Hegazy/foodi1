@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import '../../controller/myfavoritecontroller.dart';
 import '../../core/class/handlingdataview.dart';
 import '../../core/constant/color.dart';
+import '../../data/model/myfavorite.dart';
 import '../widget/myfavorite/customlistfavoriteitems.dart';
 class MyFavorite extends StatelessWidget {
+
   const MyFavorite({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class MyFavorite extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: GetBuilder<MyFavoriteController>(
             builder: ((controller) => ListView(children: [
-              const SizedBox(height: 20) ,
+              const SizedBox(height: 5) ,
               HandlingDataView(
                   statusRequest: controller.statusRequest,
                   widget: GridView.builder(
@@ -27,13 +29,23 @@ class MyFavorite extends StatelessWidget {
                     itemCount: controller.data.length,
                     gridDelegate:
                     const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, childAspectRatio: 0.7),
+                        crossAxisCount: 2, childAspectRatio: 0.76),
                     itemBuilder: (context, index) {
                       return  CustomListFavoriteItems(
-                        MyFavoriteitemsModel: controller.data[index],
+                        myFavoriteitemsModel: controller.data[index],
+                        // onAdd: () {
+                        //   controller.addItems(
+                        //       controller.data[index].itemsId!,
+                        //       "0",
+                        //       controller.getPrice(controller.data[index]).toString(),
+                        //       1
+                        //   );
+                        //   Get.snackbar("155".tr, "154".tr,);
+                        // },
                       );
                     },
-                  ))
+                  )
+              )
             ]))),
       ),
     );

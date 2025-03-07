@@ -214,6 +214,8 @@ class MyTranslation extends Translations {
       "209": "تاكيد الحذف",
       "210": "إلغاء",
       "211": "حذف",
+      "212": "عروض",
+      "213": "السلة",
 
     },
     "en": {
@@ -427,6 +429,8 @@ class MyTranslation extends Translations {
       "209":"Confirm Delete",
       "210":"Cancel",
       "211":"Delete",
+      "212":"Offers",
+      "213":"Cart",
 
     }
   };

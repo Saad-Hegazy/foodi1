@@ -42,7 +42,7 @@ class CustomItemsCartList extends GetView<CartController> {
         child: const Icon(Icons.delete, color: Colors.white, size: 30),
       ),
       confirmDismiss: (direction) async {
-        // // Optional: Add confirmation dialog
+        // // // Optional: Add confirmation dialog
         return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -68,7 +68,8 @@ class CustomItemsCartList extends GetView<CartController> {
       message: "Item removed from cart",
       duration: const Duration(seconds: 2),
       backgroundColor: AppColor.primaryColor,
-      ));},
+      )
+      );},
       child: InkWell(
         onTap: () {
           controller.goToPageProductDetails(cartModel);

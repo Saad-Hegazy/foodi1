@@ -17,7 +17,9 @@ class ProductDetailsControllerImp extends ProductDetailsController {
   CartData cartData = CartData(Get.find());
    late StatusRequest statusRequest;
    MyServices myServices = Get.find();
-   int countitems = 0;
+  CartController cartController = Get.put(CartController());
+
+  int countitems = 0;
    var itemsModel;
   CartModel? cartModel ;
    bool? isbox;
@@ -27,17 +29,22 @@ class ProductDetailsControllerImp extends ProductDetailsController {
 
   intialData() async {
     statusRequest = StatusRequest.loading;
-    if(previousRoute=="/cart"){
+    if(previousRoute=="/cart" ||previousRoute=="/homepage" ){
       itemsModel = Get.arguments['cartModel'];
       isbox=itemsModel.cartitemisbox==1?true:false;
       isunit=itemsModel.cartitemisbox==1?false:true;
+      countitems =itemsModel.cartitemisbox==1
+          ? (await getCountItems(itemsModel.itemsId!) ~/ itemsModel.itemsquantityinbox)
+          : await getCountItems(itemsModel.itemsId!);
+
     }else{
       itemsModel = Get.arguments['itemsmodel'];
       isbox=false;
       isunit=false;
+      countitems = await getCountItems(itemsModel!.itemsId!);
     }
     selectedCount = await getCountItems(itemsModel!.itemsId!);
-    countitems = await getCountItems(itemsModel!.itemsId!);
+    
     statusRequest = StatusRequest.success;
     update();
   }
@@ -80,6 +87,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
      statusRequest = handlingData(response);
      if (StatusRequest.success == statusRequest) {
        if (response['status'] == "success") {
+         cartController.refreshPage();
        } else {
          statusRequest = StatusRequest.failure;
        }

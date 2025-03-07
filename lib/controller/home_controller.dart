@@ -6,8 +6,12 @@ import '../core/constant/routes.dart';
 import '../core/functions/handlingData.dart';
 import '../core/services/services.dart';
 import '../data/datasource/remote/cart_data.dart';
+import '../data/datasource/remote/favorite_data.dart';
 import '../data/datasource/remote/home_data.dart';
+import '../data/model/cartmodel.dart';
 import '../data/model/itemsmodel.dart';
+import 'cart_controller.dart';
+import 'favorite_controller.dart';
 
 
 abstract class HomeController extends SearchMixController {
@@ -19,21 +23,25 @@ abstract class HomeController extends SearchMixController {
 class HomeControllerImp extends HomeController {
   MyServices myServices = Get.find();
   CartData cartData = CartData(Get.find());
-  late StatusRequest statusRequest;
+  FavoriteController favoriteController =Get.put(FavoriteController());
+  CartController cartController =Get.put(CartController());
+  List data = [];
 
+
+  late StatusRequest statusRequest;
   String? username;
   String? id;
   String? lang;
+  num totalcountitems = 0;
 
   @override
   HomeData homedata = HomeData(Get.find());
 
-  // List data = [];
   List categories = [];
   List offers = [];
   List items = [];
   List imageSlider = [];
-  int totalcount=0  ;
+
   @override
   initialData() {
     lang = myServices.sharedPreferences.getString("lang");
@@ -46,7 +54,43 @@ class HomeControllerImp extends HomeController {
     search = TextEditingController();
     getdata();
     initialData();
+    view();
     super.onInit();
+  }
+
+  view() async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response =
+    await cartData.viewCart(myServices.sharedPreferences.getString("id")!,
+        myServices.sharedPreferences.getString("userType")!);
+    print("=============================== viewController $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      if (response['status'] == "success") {
+        if (response['datacart']['status'] == 'success') {
+          List dataresponse = response['datacart']['data'];
+          data.clear();
+          data.addAll(dataresponse.map((e) => CartModel.fromJson(e)));
+          Map dataresponsecountprice = response['countprice'];
+          totalcountitems = dataresponsecountprice['totalcount'];
+        }
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+    }
+    update();
+  }
+bool checkItemInCart(ItemsModel targetItem){
+  return  data.any((item)=>item.cartItemsid==targetItem.itemsId);
+}
+  resetVarCart() {
+    totalcountitems = 0;
+  }
+
+  refreshPage() {
+    resetVarCart();
+    view();
   }
   getDescount(){
     switch(myServices.sharedPreferences.getString("userType")){
@@ -74,7 +118,6 @@ class HomeControllerImp extends HomeController {
         items.addAll(response['items']['data']);
         offers.addAll(response['offers']['data']);
         imageSlider.addAll(response['ImageSlider']['data']);
-        totalcount=await response['totalcount']['data']["count(countitems)"];
 
       } else {
         statusRequest = StatusRequest.failure;
@@ -82,18 +125,25 @@ class HomeControllerImp extends HomeController {
     }
     update();
   }
-  resetVar() {
-    categories.clear();
-    items.clear();
-    offers.clear();
-    imageSlider.clear();
-    totalcount=0;
-    }
 
-  refreshPage() {
-    resetVar();
-    getdata();
+
+  Future<int> getCountItems(int itemsid) async {
+    statusRequest = StatusRequest.loading;
+    var response = await cartData.getItemCount(
+      myServices.sharedPreferences.getString("id")!,
+      myServices.sharedPreferences.getString("userType")!,
+      itemsid.toString(),
+    );
+
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest && response['status'] == "success") {
+      return response['itemcount']["countitems"] as int;
+    } else {
+      statusRequest = StatusRequest.failure;
+      return 0; // Return 0 as fallback
+    }
   }
+
   @override
   goToItems(categories, selectedCat, categoryid) {
     Get.toNamed(AppRoute.items, arguments: {
@@ -113,12 +163,38 @@ class HomeControllerImp extends HomeController {
       itempriceforunit,
       countitembyunit,
     );
-    print("=============================== Controller $response ");
+    print("=============================== addItemsController $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success") {
-        Get.snackbar("155".tr, "154".tr,);
+        cartController.setInCart(itemsid,"1");
+        cartController.refreshPage();
+        getCountItems(itemsid);
+        refreshPage();
+        // Get.snackbar("155".tr, "154".tr,);
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+  }
+  delete(int itemsid ) async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response;
+    response = await cartData.deleteCart(
+        myServices.sharedPreferences.getString("id")!, itemsid.toString());
+    print("=============================== Controller $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success" ) {
+        cartController.refreshPage();
+        getCountItems(itemsid);
+        refreshPage();
+        // Get.snackbar("155".tr, "157".tr);
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -181,11 +257,34 @@ class HomeControllerImp extends HomeController {
         }
     }
   }
+  amountofDiscount(itemsModel){
+    switch(myServices.sharedPreferences.getString("userType")){
+      case  "Normal User":
+        if(itemsModel.itemsDescount >0){
+          return itemsModel.itemsDescount;
+        }else{
+          return 0 ;
+        }
+      case  "mosque":
+        if(itemsModel.itemsDescountMosque >0){
+          return itemsModel.itemsDescountMosque;
+        }else{
+          return 0 ;
+        }
+      case  "Merchant":
+        if(itemsModel.itemsPriceMerchant >0){
+          return itemsModel.itemsPriceMerchant;
+        }else{
+          return 0 ;
+        }
+    }
+  }
 
-
-
-  goToPageProductDetails(itemsModel) {
-    Get.toNamed("productdetails", arguments: {"itemsmodel": itemsModel});
+  goToPageProductDetails(MyFavoriteitemsModel) {
+    Get.toNamed("productdetails", arguments: {"itemsmodel": MyFavoriteitemsModel});
+  }
+  goToPageProductDetailsItemModel(itemsModel) {
+    Get.toNamed("productDetailsItemModel", arguments: {"itemsmodel": itemsModel});
   }
 }
 
@@ -196,7 +295,7 @@ class SearchMixController extends GetxController {
 
   searchData() async {
     statusRequest = StatusRequest.loading;
-    if(search!.text=="</>" || search!.text==">"||search!.text=="/"||search!.text=="/"){
+    if(search!.text=="</>" || search!.text==">"||search!.text=="/"||search!.text=="<"||search!.text=="</"||search!.text==""){
       statusRequest = StatusRequest.failure;
     }else{
       var response = await homedata.searchData(search!.text);

@@ -11,22 +11,17 @@ class ListCategories extends GetView<HomeControllerImp> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 140, // Adjust the height for the horizontal list
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal, // Enables horizontal scrolling
-        padding: const EdgeInsets.all(8.0),
-        itemCount: controller.categories.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 16.0), // Spacing between items
-            child: CategoryCard(
-              categoriesModel: CategoriesModel.fromJson(controller.categories[index]),
-              i: index,
-            ),
-          );
-        },
+    return  GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        childAspectRatio: 0.8,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
       ),
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: controller.categories.length,
+      itemBuilder: (context, index) => CategoryCard(categoriesModel: CategoriesModel.fromJson(controller.categories[index]), i: index,),
     );
   }
 }
