@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import '../../controller/myfavoritecontroller.dart';
 import '../../core/class/handlingdataview.dart';
 import '../../core/constant/color.dart';
+import '../../core/constant/routes.dart';
 import '../../data/model/myfavorite.dart';
+import '../widget/items/customappbaritems.dart';
 import '../widget/myfavorite/customlistfavoriteitems.dart';
 class MyFavorite extends StatelessWidget {
 
@@ -12,15 +14,23 @@ class MyFavorite extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(MyFavoriteController());
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColor.primaryColor,
-        title:  Text('195'.tr,style: TextStyle(color: Colors.white)),
-      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: GetBuilder<MyFavoriteController>(
             builder: ((controller) => ListView(children: [
-              const SizedBox(height: 5) ,
+              CustomAppBarItems(
+                mycontroller: controller.homeController.search!,
+                titleappbar: "58".tr,
+                onPressedSearch: () {
+                  controller.homeController.onSearchItems();
+                },
+                onChanged: (val) {
+                  controller.homeController.checkSearch(val);
+                },
+                onPressedIconCart: () => Get.toNamed(AppRoute.cart),
+                itemCount:controller.homeController.totalcountitems.toInt(),
+              ),
+              const SizedBox(height: 20),
               HandlingDataView(
                   statusRequest: controller.statusRequest,
                   widget: GridView.builder(
@@ -33,15 +43,6 @@ class MyFavorite extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return  CustomListFavoriteItems(
                         myFavoriteitemsModel: controller.data[index],
-                        // onAdd: () {
-                        //   controller.addItems(
-                        //       controller.data[index].itemsId!,
-                        //       "0",
-                        //       controller.getPrice(controller.data[index]).toString(),
-                        //       1
-                        //   );
-                        //   Get.snackbar("155".tr, "154".tr,);
-                        // },
                       );
                     },
                   )

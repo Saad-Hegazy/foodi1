@@ -14,10 +14,12 @@ import 'home_controller.dart';
 class MyFavoriteController extends GetxController {
   MyFavoriteData favoriteData = MyFavoriteData(Get.find());
   CartData cartData = CartData(Get.find());
-  List data2 = [];
+  List datacart = [];
 
   List<MyFavoriteModel> data = [];
   FavoriteController favoriteController= Get.put(FavoriteController());
+  HomeControllerImp homeController=Get.put(HomeControllerImp());
+  CartController cartController =Get.put(CartController());
 
   late StatusRequest statusRequest;
 
@@ -47,10 +49,14 @@ class MyFavoriteController extends GetxController {
     update();
 
   }
-
+  bool checkItemInFavorite(ItemsModel targetItem){
+    return  data.any((item)=>item.favoriteItemsid==targetItem.itemsId);
+  }
   deleteFromFavorite(int favroiteid){
     favoriteData.deleteData(favroiteid.toString());
-    data.removeWhere((element) => element.favoriteId == favroiteid);
+    // data.removeWhere((element) => element.favoriteId == favroiteid);
+    getData();
+    homeController.getfavoriteData();
     update();
   }
   goToPageProductDetails(MyFavoriteitemsModel) {
@@ -126,10 +132,8 @@ class MyFavoriteController extends GetxController {
       if (response['status'] == "success") {
         if (response['datacart']['status'] == 'success') {
           List dataresponse = response['datacart']['data'];
-          data2.clear();
-          data2.addAll(dataresponse.map((e) => CartModel.fromJson(e)));
-
-
+          datacart.clear();
+          datacart.addAll(dataresponse.map((e) => CartModel.fromJson(e)));
         }
       } else {
         statusRequest = StatusRequest.failure;
@@ -147,7 +151,7 @@ class MyFavoriteController extends GetxController {
 
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest && response['status'] == "success") {
-      return response['itemcount']["countitems"] as int;
+      return response['itemcount'];
     } else {
       statusRequest = StatusRequest.failure;
       return 0; // Return 0 as fallback
@@ -197,7 +201,7 @@ class MyFavoriteController extends GetxController {
     }
   }
   bool checkItemInCart(MyFavoriteModel targetItem){
-    return  data2.any((item)=>item.cartItemsid==targetItem.itemsId);
+    return  datacart.any((item)=>item.cartItemsid==targetItem.itemsId);
   }
   hasDiscount(itemsModel){
     switch(myServices.sharedPreferences.getString("userType")){

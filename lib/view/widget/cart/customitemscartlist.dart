@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/cart_controller.dart';
+import '../../../controller/home_controller.dart';
+import '../../../controller/items_controller.dart';
+import '../../../controller/myfavoritecontroller.dart';
 import '../../../core/constant/color.dart';
 import '../../../data/model/cartmodel.dart';
 import '../../../data/model/itemsmodel.dart';
@@ -43,24 +48,34 @@ class CustomItemsCartList extends GetView<CartController> {
       ),
       confirmDismiss: (direction) async {
         // // // Optional: Add confirmation dialog
-        return await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            backgroundColor: AppColor.secondColor,
-            title:  Text("209".tr),
-            content:  Text("208".tr),
-            actions: [
-              TextButton(
-                onPressed: () => Get.back(result: false),
-                child:  Text("210".tr),
-              ),
-              TextButton(
-                onPressed: onDelet,
-                child:  Text("211".tr, style: TextStyle(color: AppColor.primaryColor)),
-              ),
-            ],
-          ),
-        );
+        CartController cartController = Get.put(CartController());
+        return await cartController.delete(
+                    cartModel.itemsId!,
+                  );
+        // return await showDialog(
+        //   context: context,
+        //   builder: (context) => AlertDialog(
+        //     backgroundColor: AppColor.secondColor,
+        //     title:  Text("209".tr),
+        //     content:  Text("208".tr),
+        //     actions: [
+        //       TextButton(
+        //         onPressed: () => Get.back(),
+        //         child:  Text("210".tr),
+        //       ),
+        //       TextButton(
+        //         onPressed: ()async{
+        //           CartController cartController = Get.put(CartController());
+        //           await cartController.deleteSwap(
+        //             cartModel.itemsId!,
+        //           );
+        //
+        //         },
+        //         child:  Text("211".tr, style: TextStyle(color: AppColor.primaryColor)),
+        //       ),
+        //     ],
+        //   ),
+        // );
       },
       onDismissed: (direction) {
       onDelet; // Call your controller method

@@ -5,9 +5,16 @@ import '../core/class/statusrequest.dart';
 import '../core/functions/handlingData.dart';
 import '../core/services/services.dart';
 import '../data/datasource/remote/cart_data.dart';
+import '../data/datasource/remote/favorite_data.dart';
 import '../data/datasource/remote/items_data.dart';
+import '../data/datasource/remote/myfavorite_data.dart';
+import '../data/model/cartmodel.dart';
 import '../data/model/itemsmodel.dart';
+import '../data/model/myfavorite.dart';
+import 'cart_controller.dart';
+import 'favorite_controller.dart';
 import 'home_controller.dart';
+import 'myfavoritecontroller.dart';
 abstract class ItemsController extends GetxController {
   intialData();
   changeCat(int val, String catval);
@@ -17,12 +24,21 @@ abstract class ItemsController extends GetxController {
 
 class ItemsControllerImp extends SearchMixController {
   CartData cartData = CartData(Get.find());
+  MyFavoriteData favoriteData = MyFavoriteData(Get.find());
+  FavoriteData favoriteData2 = FavoriteData(Get.find());
+
+  CartController cartController =Get.put(CartController());
+  FavoriteController favoriteController =Get.put(FavoriteController());
+  MyFavoriteController myfavoriteController =    Get.put(MyFavoriteController());
+  HomeControllerImp homeController=Get.put(HomeControllerImp());
 
   List categories = [];
   String? catid;
   int? selectedCat;
   ItemsData itemsData = ItemsData(Get.find());
   List data = [];
+  List datacart = [];
+  List dataFavorit = [];
   Map itemisadd={};
   @override
   late StatusRequest statusRequest;
@@ -44,6 +60,8 @@ class ItemsControllerImp extends SearchMixController {
     selectedCat = Get.arguments['selectedcat'];
     catid = Get.arguments['catid'];
     getItems(catid!,page,recordsPerPage);
+    view();
+    getfavoriteData();
     scrollController.addListener(() {
           // Detect when the user scrolls to the bottom
           if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
@@ -117,7 +135,116 @@ class ItemsControllerImp extends SearchMixController {
     }
     update();
   }
+  view() async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response =
+    await cartData.viewCart(myServices.sharedPreferences.getString("id")!,
+        myServices.sharedPreferences.getString("userType")!);
+    print("=============================== viewController $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      if (response['status'] == "success") {
+        if (response['datacart']['status'] == 'success') {
+          List dataresponse = response['datacart']['data'];
+          datacart.clear();
+          datacart.addAll(dataresponse.map((e) => CartModel.fromJson(e)));
+        }
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+    }
+    update();
+  }
+  bool checkItemInCart(ItemsModel targetItem){
+    return  datacart.any((item)=>item.cartItemsid==targetItem.itemsId);
+    // return true;
+  }
 
+  Future<int> getCountItems(int itemsid) async {
+    statusRequest = StatusRequest.loading;
+    var response = await cartData.getItemCount(
+      myServices.sharedPreferences.getString("id")!,
+      myServices.sharedPreferences.getString("userType")!,
+      itemsid.toString(),
+    );
+
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest && response['status'] == "success") {
+      return response['itemcount'];
+    } else {
+      statusRequest = StatusRequest.failure;
+      return 0; // Return 0 as fallback
+    }
+  }
+  amountofDiscount(itemsModel){
+    switch(myServices.sharedPreferences.getString("userType")){
+      case  "Normal User":
+        if(itemsModel.itemsDescount >0){
+          return itemsModel.itemsDescount;
+        }else{
+          return 0 ;
+        }
+      case  "mosque":
+        if(itemsModel.itemsDescountMosque >0){
+          return itemsModel.itemsDescountMosque;
+        }else{
+          return 0 ;
+        }
+      case  "Merchant":
+        if(itemsModel.itemsPriceMerchant >0){
+          return itemsModel.itemsPriceMerchant;
+        }else{
+          return 0 ;
+        }
+    }
+  }
+  delete(int itemsid ) async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response;
+    response = await cartData.deleteCart(
+        myServices.sharedPreferences.getString("id")!, itemsid.toString());
+    print("=============================== Controller $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success" ) {
+        view();
+        cartController.refreshPage();
+        getCountItems(itemsid);
+        getItems(catid!,page,recordsPerPage);
+        // Get.snackbar("155".tr, "157".tr);
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+  }
+
+  hasDiscount(itemsModel){
+    switch(myServices.sharedPreferences.getString("userType")){
+      case  "Normal User":
+        if(itemsModel.itemsDescount >0){
+          return 1;
+        }else{
+          return 0 ;
+        }
+      case  "mosque":
+        if(itemsModel.itemsDescountMosque >0){
+          return 1;
+        }else{
+          return 0 ;
+        }
+      case  "Merchant":
+        if(itemsModel.itemsPriceMerchant >0){
+          return 1;
+        }else{
+          return 0 ;
+        }
+    }
+  }
   getPrice(itemsModel){
     switch(myServices.sharedPreferences.getString("userType")){
       case  "Normal User":
@@ -150,32 +277,13 @@ class ItemsControllerImp extends SearchMixController {
           return  itemsModel.itemsPriceMerchant!;
     }
   }
-    hasDiscount(itemsModel){
-    switch(myServices.sharedPreferences.getString("userType")){
-      case  "Normal User":
-        if(itemsModel.itemsDescount >0){
-        return 1;
-        }else{
-          return 0 ;
-        }
-      case  "mosque":
-        if(itemsModel.itemsDescountMosque >0){
-          return 1;
-        }else{
-          return 0 ;
-        }
-      case  "Merchant":
-        if(itemsModel.itemsPriceMerchant >0){
-          return 1;
-        }else{
-          return 0 ;
-        }
-    }
-    }
+
   goToPageProductDetails(itemsModel) {
     Get.toNamed("productdetails", arguments: {"itemsmodel": itemsModel});
   }
-
+  goToPageProductDetailsItemModel(itemsModel) {
+    Get.toNamed("productDetailsItemModel", arguments: {"itemsmodel": itemsModel});
+  }
 
   // Load more items when the user scrolls to the bottom
   Future<void> loadMoreData() async {
@@ -195,14 +303,80 @@ class ItemsControllerImp extends SearchMixController {
 
   }
 
+  getfavoriteData() async {
+    dataFavorit.clear();
+    statusRequest = StatusRequest.loading;
+    var response = await favoriteData
+        .getData(myServices.sharedPreferences.getString("id")!);
+    print("=============================== MyFavoriteController $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success") {
+        List responsedata = response['data'];
+        dataFavorit.addAll(responsedata.map((e) => MyFavoriteModel.fromJson(e)));
 
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+
+  }
+  bool checkItemInFavorite(ItemsModel targetItem){
+    return  dataFavorit.any((item)=>item.favoriteItemsid==targetItem.itemsId);
+  }
   @override
   void dispose() {
     scrollController.dispose();
     super.dispose();
   }
 
+  removeFavorite(String itemsid) async {
+    dataFavorit.clear();
+    statusRequest = StatusRequest.loading;
+    var response = await favoriteData2.removeFavorite(
+        myServices.sharedPreferences.getString("id")!, itemsid);
+    print("=============================== Controller $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success") {
 
+        getfavoriteData();
+
+        Get.snackbar("144".tr, "143".tr,);
+        // data.addAll(response['data']);
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+
+  }
+  addFavorite(String itemsid) async {
+    dataFavorit.clear();
+    statusRequest = StatusRequest.loading;
+    var response = await favoriteData2.addFavorite(
+        myServices.sharedPreferences.getString("id")!, itemsid);
+    print("=============================== Controller $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success") {
+        getfavoriteData();
+
+        Get.snackbar("146".tr, "145".tr,);
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+
+  }
 
   addItems(int itemsid,String isbox, String itempriceforunit,int countitembyunit) async {
     statusRequest = StatusRequest.loading;
@@ -218,7 +392,10 @@ class ItemsControllerImp extends SearchMixController {
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
-
+        view();
+      cartController.refreshPage();
+        getCountItems(itemsid);
+        getItems(catid, page, recordsPerPage);
         // Get.snackbar("155".tr, "154".tr,);
       } else {
         statusRequest = StatusRequest.failure;

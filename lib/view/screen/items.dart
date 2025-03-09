@@ -4,6 +4,7 @@ import '../../controller/cart_controller.dart';
 import '../../controller/favorite_controller.dart';
 import '../../controller/home_controller.dart';
 import '../../controller/items_controller.dart';
+import '../../controller/myfavoritecontroller.dart';
 import '../../core/class/handlingdataview.dart';
 import '../../core/constant/color.dart';
 import '../../core/constant/routes.dart';
@@ -21,7 +22,6 @@ class Items extends StatelessWidget {
   Widget build(BuildContext context) {
     ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
     FavoriteController controllerFav = Get.put(FavoriteController());
-    CartController controllerCart = Get.put(CartController());
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(15),
@@ -50,7 +50,7 @@ class Items extends StatelessWidget {
                   itemCount: controller.data.length + 1,  // Add one for the loading indicator
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 0.8,
+                    childAspectRatio: 0.75,
                   ),
                   itemBuilder: (BuildContext context, index) {
                     if (index == controller.data.length) {
@@ -66,22 +66,6 @@ class Items extends StatelessWidget {
                     controller.data[index]['favorite'];
                     return CustomListItems(
                       itemsModel: ItemsModel.fromJson(controller.data[index]),
-                      onAdd:()async{
-                        if (controller.itemisadd[controller.data[index]['items_id']] == 1) {
-                          Get.snackbar("135".tr, "206".tr);
-                        } else {
-                          await controller.addItems(
-                            controller.data[index]['items_id'],
-                            "0",
-                            controller.getPrice(ItemsModel.fromJson(controller.data[index])).toString(),
-                            1,
-                          );
-                          controllerCart.view();
-                          HomeControllerImp Controller =     Get.put(HomeControllerImp());
-                          Controller.refreshPage();
-                          // Get.snackbar("155".tr, "154".tr,);
-                        }
-                      },
                     );
                   },
                 )

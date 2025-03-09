@@ -192,6 +192,7 @@ class ProductDetailsItemModel extends StatelessWidget {
                   controller.addselectedCount(
                       controller.getPrice(controller.itemsModel));
                 }
+
               },
             ),
           ),

@@ -86,7 +86,7 @@ class Settings extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () async{
-                    await  launch("https://foodi1.com/foodi1backend/upload/document/VAT.pdf");
+                    await  launch("https://foodi1.com/backendfoodi1/upload/document/VAT.pdf");
                   },
                   title:  Text("199".tr),
                   trailing: const Icon(Icons.checklist_rtl),

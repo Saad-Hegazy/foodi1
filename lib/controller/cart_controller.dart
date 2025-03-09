@@ -7,6 +7,9 @@ import '../core/services/services.dart';
 import '../data/datasource/remote/cart_data.dart';
 import '../data/model/cartmodel.dart';
 import '../data/model/couponmodel.dart';
+import 'home_controller.dart';
+import 'items_controller.dart';
+import 'myfavoritecontroller.dart';
 
 class CartController extends GetxController {
   TextEditingController? controllercoupon;
@@ -110,6 +113,14 @@ class CartController extends GetxController {
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success" ) {
+        refreshcartPage();
+        HomeControllerImp homeController=Get.put(HomeControllerImp());
+        homeController.refreshPage();
+        MyFavoriteController myFavoriteController=Get.put(MyFavoriteController());
+        myFavoriteController.getData();
+        ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
+        controllerItems.getItems(controllerItems.catid, controllerItems.page, controllerItems.recordsPerPage);
+
         Get.snackbar("155".tr, "157".tr);
         // data.addAll(response['data']);
       } else {
@@ -119,6 +130,7 @@ class CartController extends GetxController {
     }
     update();
   }
+
   deletefromcartoage(int itemsid ) async {
     statusRequest = StatusRequest.none;
     update();

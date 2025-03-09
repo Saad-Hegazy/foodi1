@@ -32,13 +32,16 @@ class AddAddressController extends GetxController {
   CameraPosition? kGooglePlex;
 
   getCurrentLocation() async {
-    postion = await Geolocator.getCurrentPosition();
-    kGooglePlex = CameraPosition(
-      target: LatLng(postion!.latitude, postion!.longitude),
-      zoom: 14.4746,
-    );
-    addMarkers(LatLng(postion!.latitude, postion!.longitude));
-    statusRequest = StatusRequest.none;
+
+      postion = await Geolocator.getCurrentPosition();
+      kGooglePlex = CameraPosition(
+        target: LatLng(postion!.latitude, postion!.longitude),
+        zoom: 14.4746,
+      );
+      addMarkers(LatLng(postion!.latitude, postion!.longitude));
+      statusRequest = StatusRequest.none;
+
+
     update();
   }
 

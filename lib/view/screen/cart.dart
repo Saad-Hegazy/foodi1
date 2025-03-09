@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/cart_controller.dart';
+import '../../controller/home_controller.dart';
+import '../../controller/items_controller.dart';
+import '../../controller/myfavoritecontroller.dart';
 import '../../core/class/handlingdataview.dart';
 import '../../core/constant/color.dart';
+import '../widget/cart/buttoncart.dart';
 import '../widget/cart/custom_bottom_navgationbar_cart.dart';
 import '../widget/cart/customitemscartlist.dart';
 import '../widget/cart/topcardcart.dart';
@@ -14,15 +18,21 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     CartController cartController = Get.put(CartController());
     return Scaffold(
+        // BottomNavgationBarCart(
+        // controllercoupon: controller.controllercoupon!,
+        // onApplyCoupon: () {
+        //   controller.checkcoupon();
+        // },
+        // price: cartController.getTotalPrice().toStringAsFixed(1),
+        // discount: "${controller.discountcoupon}%",
+        // totalprice: "${controller.getTotalPrice().toStringAsFixed(1)}")
         bottomNavigationBar: GetBuilder<CartController>(
-            builder: (controller) => BottomNavgationBarCart(
-                controllercoupon: controller.controllercoupon!,
-                onApplyCoupon: () {
-                  controller.checkcoupon();
-                },
-                price: cartController.getTotalPrice().toStringAsFixed(1),
-                discount: "${controller.discountcoupon}%",
-                totalprice: "${controller.getTotalPrice().toStringAsFixed(1)}")),
+            builder: (controller) => CustomButtonCart(
+      textbutton: "132".tr,
+      onPressed: () {
+        controller.goToPageCheckout() ;
+      },
+    )),
         body: GetBuilder<CartController>(
             builder: ((controller) => HandlingDataView(
                 statusRequest: controller.statusRequest,
@@ -52,6 +62,12 @@ class Cart extends StatelessWidget {
                                   cartController.data![index].cartitemisbox==1?cartController.data![index].cartitemcount!+cartController.data![index].itemsquantityinbox!.toInt():cartController.data![index].cartitemcount!+1,
                                 );
                                 cartController.refreshcartPage();
+                                HomeControllerImp homeController=Get.put(HomeControllerImp());
+                                homeController.refreshPage();
+                                MyFavoriteController myFavoriteController=Get.put(MyFavoriteController());
+                                myFavoriteController.getData();
+                                ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
+                                controllerItems.getItems(controllerItems.catid, controllerItems.page, controllerItems.recordsPerPage);
                                 Get.snackbar("155".tr, "154".tr,);
                               },
                                onDelet: () async {
@@ -59,6 +75,12 @@ class Cart extends StatelessWidget {
                                   cartController.data![index].itemsId!,
                                 );
                                 cartController.refreshcartPage();
+                                HomeControllerImp homeController=Get.put(HomeControllerImp());
+                                homeController.refreshPage();
+                                MyFavoriteController myFavoriteController=Get.put(MyFavoriteController());
+                                myFavoriteController.getData();
+                                ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
+                                controllerItems.getItems(controllerItems.catid, controllerItems.page, controllerItems.recordsPerPage);
                               },
                               onRemove:() async {
                                 await cartController
@@ -69,19 +91,34 @@ class Cart extends StatelessWidget {
                                   cartController.data![index].cartitemisbox==1?cartController.data![index].cartitemcount!- cartController.data![index].itemsquantityinbox!.toInt():cartController.data![index].cartitemcount!-1,
                                 );
                                 cartController.refreshcartPage();
+                                HomeControllerImp homeController=Get.put(HomeControllerImp());
+                                homeController.refreshPage();
+                                MyFavoriteController myFavoriteController=Get.put(MyFavoriteController());
+                                myFavoriteController.getData();
+                                ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
+                                controllerItems.getItems(controllerItems.catid, controllerItems.page, controllerItems.recordsPerPage);
                                 Get.snackbar("155".tr, "154".tr,);
                               },
                               imagename:
                               "${cartController.data?[index].itemsImage}",
-                              unit:"${cartController.data?[index].cartitemisbox==1? "192".tr :"191".tr}",
+                              unit:cartController.data?[index].cartitemisbox==1? "192".tr :"191".tr,
                               name: "${cartController.data?[index].itemsName}",
                               totalitemeprice:
                               cartController.data![index].totalitemsPrice!.toStringAsFixed(1),
                               price:cartController.getPrice(cartController.data![index]),
                               cartModel: cartController.data![index],
                             ),
-                          )
+                          ),
+                          BottomNavgationBarCart(
+                              controllercoupon: controller.controllercoupon!,
+                              onApplyCoupon: () {
+                                controller.checkcoupon();
+                              },
+                              price: cartController.getTotalPrice().toStringAsFixed(1),
+                              discount: "${controller.discountcoupon}%",
+                              totalprice: "${controller.getTotalPrice().toStringAsFixed(1)}")
                         ],
+
                       ),
                     )
                   ],

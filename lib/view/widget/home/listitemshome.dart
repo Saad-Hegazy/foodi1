@@ -62,8 +62,8 @@ class ItemsHome extends GetView<HomeControllerImp> {
                     tag: "${itemsModel.itemsId}",
                     child: CachedNetworkImage(
                       imageUrl: "${AppLink.imagestItems}/${itemsModel.itemsImage!}",
-                      height: 80,
-                      width: 80,
+                      height: 90,
+                      width: 90,
                       fit: BoxFit.cover, // Ensure image fits within the space
                       placeholder: (context, url) => CircularProgressIndicator(
                         color: AppColor.primaryColor,
@@ -100,92 +100,102 @@ class ItemsHome extends GetView<HomeControllerImp> {
                     children: [
                       // Price
                       controller.checkItemInCart(itemsModel)?
-                      Row(
-                        children: [
-                          // Decrement button
-                          FutureBuilder<int>(
-                            future: controller.getCountItems(itemsModel.itemsId!),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return
-                                  snapshot.data! < 2
-                                      ? IconButton(
-                                    onPressed: () async {
-                                      await controller.delete(itemsModel.itemsId!);
-                                      controller.cartController.refreshPage();
-
-                                      controller.update();
-                                    },
-                                    icon: const Icon(Icons.delete, color:AppColor.primaryColor,),
-                                  )
-                                      : IconButton(
-                                    onPressed: () async {
-                                      final currentCount = await controller.getCountItems(itemsModel.itemsId!);
-                                      await controller.addItems(
-                                        itemsModel.itemsId!,
-                                        "0",
-                                        controller.getPrice(itemsModel).toString(),
-                                        currentCount - 1,
-                                      );
-                                      controller.cartController.refreshPage();
-
-                                      controller.update();
-                                    },
-                                    icon: const Icon(Icons.remove_circle_outline, color:AppColor.primaryColor,),
-                                  );
-                              } else {
-                                return  SizedBox();
-                              }
-                            },
-                          ),
-                          // Display count
-                          FutureBuilder<int>(
-                            future: controller.getCountItems(itemsModel.itemsId!),
-                            builder: (context, snapshot) {
-                              return Text(snapshot.hasData ? snapshot.data!.toString() : "");
-                            },
-                          ),
-                          // Increment button
-                          FutureBuilder<int>(
-                            future: controller.getCountItems(itemsModel.itemsId!),
-                            builder: (context, snapshot) {
-                              if(snapshot.hasData){
-                                return
-                                  IconButton(
-                                    onPressed: () async {
-                                      final currentCount = await controller.getCountItems(itemsModel.itemsId!);
-                                      await controller.addItems(
-                                        itemsModel.itemsId!,
-                                        "0",
-                                        controller.getPrice(itemsModel).toString(),
-                                        currentCount + 1,
-                                      );
-                                      controller.cartController.refreshPage();
-
-                                      controller.update();
-                                    },
-                                    icon: const Icon(Icons.add_circle_outline, color:AppColor.primaryColor,),
-                                  );
-                              }else{
-                                return TextButton.icon(
-                                  onPressed: (){
-                                    controller.addItems(
-                                        itemsModel.itemsId!,
-                                        "0",
-                                        controller.getPrice(itemsModel).toString(),
-                                        1
+                      Flexible(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min, // Use minimal space
+                          children: [
+                            // Decrement button
+                            FutureBuilder(
+                              future: controller.getCountItems(itemsModel.itemsId!),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return
+                                    snapshot.data! < 2
+                                        ? IconButton(
+                                      onPressed: () async {
+                                        await controller.delete(itemsModel.itemsId!);
+                                        controller.cartController.refreshPage();
+                        
+                                        controller.update();
+                                      },
+                                      icon: const Icon(Icons.delete, color:AppColor.primaryColor,),
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(),
+                                    )
+                                        : IconButton(
+                                      onPressed: () async {
+                                        final currentCount = await controller.getCountItems(itemsModel.itemsId!);
+                                        await controller.addItems(
+                                          itemsModel.itemsId!,
+                                          "0",
+                                          controller.getPrice(itemsModel).toString(),
+                                          currentCount - 1,
+                                        );
+                                        controller.cartController.refreshPage();
+                        
+                                        controller.update();
+                                      },
+                                      icon: const Icon(Icons.remove_circle_outline, color:AppColor.primaryColor,),
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(),
                                     );
-                                    controller.cartController.refreshPage();
+                                } else {
+                                  return  SizedBox();
+                                }
+                              },
+                            ),
+                            // Display count
+                            FutureBuilder(
+                              future: controller.getCountItems(itemsModel.itemsId!),
+                              builder: (context, snapshot) {
+                                return Text(snapshot.hasData ? snapshot.data!.toString() : "");
+                              },
+                            ),
+                            // Increment button
+                            FutureBuilder(
+                              future: controller.getCountItems(itemsModel.itemsId!),
+                              builder: (context, snapshot) {
+                                if(snapshot.hasData){
+                                  return
+                                    IconButton(
+                                      onPressed: () async {
+                                        final currentCount = await controller.getCountItems(itemsModel.itemsId!);
+                                        await controller.addItems(
+                                          itemsModel.itemsId!,
+                                          "0",
+                                          controller.getPrice(itemsModel).toString(),
+                                          currentCount + 1,
+                                        );
+                                        controller.cartController.refreshPage();
+                        
+                                        controller.update();
+                                      },
+                                      icon: const Icon(Icons.add_circle_outline, color:AppColor.primaryColor,),
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(),
+                                    );
+                                }else{
+                                  return TextButton.icon(
+                                    onPressed: (){
+                                      controller.addItems(
+                                          itemsModel.itemsId!,
+                                          "0",
+                                          controller.getPrice(itemsModel).toString(),
+                                          1
+                                      );
+                                      controller.cartController.refreshPage();
+                        
+                                    },
+                                    label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,)),
+                                    icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor),
 
-                                  },
-                                  label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,)),
-                                  icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor),
-                                );
-                              }
-                              // return Text(snapshot.hasData ? snapshot.data!.toString() : "0");
-                            },
-                          ),
-                        ],
+                                  );
+                                }
+                                // return Text(snapshot.hasData ? snapshot.data!.toString() : "0");
+                              },
+                            ),
+                          ],
+                        ),
                       )
                           :
                       TextButton.icon(
@@ -212,23 +222,18 @@ class ItemsHome extends GetView<HomeControllerImp> {
               right: 0,
               // Favorite Icon
               child: IconButton(
-                  onPressed: () {
-                    if (controller.favoriteController.isFavorite[itemsModel.itemsId] == "1") {
-                      controller.favoriteController.setFavorite(itemsModel.itemsId, "0");
-                      controller.favoriteController.removeFavorite(itemsModel.itemsId!.toString());
-                    } else {
-                      controller.favoriteController.setFavorite(itemsModel.itemsId, "1");
-                      controller.favoriteController.addFavorite(itemsModel.itemsId!.toString());
-                    }
-                    controller.refreshPage();
-                  },
-                  icon: Icon(
-                    controller.favoriteController.isFavorite[itemsModel.itemsId] == "1"
-                        ? Icons.favorite
-                        : Icons.favorite_border_outlined,
-                    color: AppColor.primaryColor,
-                  ),
+                onPressed: () {
+                  controller.checkItemInFavorite(itemsModel)
+                      ? controller.removeFavorite(itemsModel.itemsId!.toString())
+                      : controller.addFavorite(itemsModel.itemsId!.toString());
+                },
+                icon: Icon(
+                  controller.checkItemInFavorite(itemsModel)
+                      ? Icons.favorite
+                      : Icons.favorite_border_outlined,
+                  color: AppColor.primaryColor,
                 ),
+              ),
             ),
             // Sale Badge (only if there's a discount)
             if (controller.hasDiscount(itemsModel) > 0)

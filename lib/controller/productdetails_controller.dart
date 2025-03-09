@@ -10,6 +10,7 @@ import '../data/model/cartmodel.dart';
 import '../data/model/itemsmodel.dart';
 import '../linkabi.dart';
 import 'cart_controller.dart';
+import 'home_controller.dart';
 abstract class ProductDetailsController extends GetxController {}
 
 class ProductDetailsControllerImp extends ProductDetailsController {
@@ -18,6 +19,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
    late StatusRequest statusRequest;
    MyServices myServices = Get.find();
   CartController cartController = Get.put(CartController());
+  HomeControllerImp homeController=Get.put(HomeControllerImp());
 
   int countitems = 0;
    var itemsModel;
@@ -33,10 +35,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
       itemsModel = Get.arguments['cartModel'];
       isbox=itemsModel.cartitemisbox==1?true:false;
       isunit=itemsModel.cartitemisbox==1?false:true;
-      countitems =itemsModel.cartitemisbox==1
-          ? (await getCountItems(itemsModel.itemsId!) ~/ itemsModel.itemsquantityinbox)
-          : await getCountItems(itemsModel.itemsId!);
-
+      countitems =await getCountItems(itemsModel.itemsId!);
     }else{
       itemsModel = Get.arguments['itemsmodel'];
       isbox=false;
@@ -48,24 +47,41 @@ class ProductDetailsControllerImp extends ProductDetailsController {
     statusRequest = StatusRequest.success;
     update();
   }
-
   getCountItems(int itemsid) async {
     statusRequest = StatusRequest.loading;
-    var response = await cartData.getCountCart(
-        myServices.sharedPreferences.getString("id")!, itemsid.toString());
-    print("=============================== getCountItemsProductDetailsController $response ");
+    var response = await cartData.getItemCount(
+      myServices.sharedPreferences.getString("id")!,
+      myServices.sharedPreferences.getString("userType")!,
+      itemsid.toString(),
+
+    );
+
     statusRequest = handlingData(response);
-    if (StatusRequest.success == statusRequest) {
-      // Start backend
-      if (response['status'] == "success") {
-        return  response['data'];
-        }
-      } else {
-        statusRequest = StatusRequest.failure;
-      }
-      // End
-    update();
+    if (StatusRequest.success == statusRequest && response['status'] == "success") {
+
+      return response['itemcount'];
+    } else {
+      statusRequest = StatusRequest.failure;
+      return 0; // Return 0 as fallback
+    }
   }
+  // getCountItems(int itemsid) async {
+  //   statusRequest = StatusRequest.loading;
+  //   var response = await cartData.getCountCart(
+  //       myServices.sharedPreferences.getString("id")!, itemsid.toString());
+  //   print("=============================== getCountItemsProductDetailsController $response ");
+  //   statusRequest = handlingData(response);
+  //   if (StatusRequest.success == statusRequest) {
+  //     // Start backend
+  //     if (response['status'] == "success") {
+  //       return  response['data'];
+  //       }
+  //     } else {
+  //       statusRequest = StatusRequest.failure;
+  //     }
+  //     // End
+  //   update();
+  // }
 
    isBox(bool type) {
     isbox = type;
@@ -87,7 +103,10 @@ class ProductDetailsControllerImp extends ProductDetailsController {
      statusRequest = handlingData(response);
      if (StatusRequest.success == statusRequest) {
        if (response['status'] == "success") {
+         countitems = await getCountItems(itemsModel!.itemsId!);
          cartController.refreshPage();
+         homeController.refreshPage();
+
        } else {
          statusRequest = StatusRequest.failure;
        }

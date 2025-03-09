@@ -125,12 +125,12 @@ class BottomNavgationBarCart extends GetView<CartController> {
               ]),
             ),
             const SizedBox(height: 10),
-            CustomButtonCart(
-              textbutton: "132".tr,
-              onPressed: () {
-                controller.goToPageCheckout() ;
-              },
-            )
+            // CustomButtonCart(
+            //   textbutton: "132".tr,
+            //   onPressed: () {
+            //     controller.goToPageCheckout() ;
+            //   },
+            // )
           ],
         ));
   }

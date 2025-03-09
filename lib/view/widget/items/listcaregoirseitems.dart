@@ -12,7 +12,7 @@ class ListCategoriesItems extends GetView<ItemsControllerImp> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 56,
+      height: 46,
       child: ListView.separated(
         separatorBuilder: (context, index) => const SizedBox(width: 8),
         itemCount: controller.categories.length,
@@ -32,6 +32,7 @@ class ListCategoriesItems extends GetView<ItemsControllerImp> {
 class Categories extends GetView<ItemsControllerImp> {
   final CategoriesModel categoriesModel;
   final int? i;
+
   const Categories({Key? key, required this.categoriesModel, required this.i})
       : super(key: key);
 
@@ -39,29 +40,37 @@ class Categories extends GetView<ItemsControllerImp> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // controller.goToItems(controller.categories, i!);
         controller.changeCat(i!, categoriesModel.categoriesId!.toString());
       },
-      child: Column(
-          children: [
-            GetBuilder<ItemsControllerImp>(
-                builder: (controller) => Container(
-                  padding:const  EdgeInsets.only(right: 5, left: 5,top: 0, bottom: 0),
-                  decoration: controller.selectedCat == i
-                      ?const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                              width:3, color: AppColor.primaryColor)))
-                      : null,
-                  child: Text(
-                    "${translateDatabase(categoriesModel.categoriesNameAr, categoriesModel.categoriesName)}",
-                    style:
-                    const TextStyle(fontSize: 14, color: AppColor.grey2,),
-                    overflow: TextOverflow.ellipsis, // Handle long text
-                  ),
-                ))
-          ],
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        alignment: Alignment.center,
+        child: GetBuilder<ItemsControllerImp>(
+          builder: (controller) => Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            decoration: controller.selectedCat == i
+                ? const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  width: 3,
+                  color: AppColor.primaryColor,
+                ),
+              ),
+            )
+                : null,
+            child: Text(
+              "${translateDatabase(categoriesModel.categoriesNameAr, categoriesModel.categoriesName)}",
+              style: const TextStyle(
+                fontSize: 14,
+                color: AppColor.grey2,
+                height: 1.0, // Fixes text vertical spacing
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ),
+      ),
     );
   }
 }

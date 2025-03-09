@@ -39,6 +39,8 @@ class FavoriteController extends GetxController {
       }
       // End
     }
+    update();
+
   }
 
   removeFavorite(String itemsid) async {
@@ -51,6 +53,7 @@ class FavoriteController extends GetxController {
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success") {
+
         Get.snackbar("144".tr, "143".tr,);
         // data.addAll(response['data']);
       } else {
@@ -58,5 +61,8 @@ class FavoriteController extends GetxController {
       }
       // End
     }
+    update();
+
   }
+
 }

@@ -94,7 +94,7 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                           Row(
                             children: [
                               // Decrement button
-                              FutureBuilder<int>(
+                              FutureBuilder(
                                 future: controller.getCountItems(myFavoriteitemsModel.itemsId!),
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
@@ -104,6 +104,9 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                                         onPressed: () async {
                                           await controller.delete(myFavoriteitemsModel.itemsId!);
                                           controller.update();
+                                          controller.cartController.refreshPage();
+                                          controller.homeController.refreshPage();
+                                          controller.homeController.getfavoriteData();
                                         },
                                         icon: const Icon(Icons.delete, color:AppColor.primaryColor,),
                                       )
@@ -116,6 +119,8 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                                             controller.getPrice(myFavoriteitemsModel).toString(),
                                             currentCount - 1,
                                           );
+                                          controller.cartController.refreshPage();
+                                          controller.homeController.refreshPage();
                                           controller.update();
                                         },
                                         icon: const Icon(Icons.remove_circle_outline, color:AppColor.primaryColor,),
@@ -147,6 +152,9 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                                             controller.getPrice(myFavoriteitemsModel).toString(),
                                             currentCount + 1,
                                           );
+                                          controller.cartController.refreshPage();
+                                          controller.homeController.refreshPage();
+
                                           controller.update();
                                         },
                                         icon: const Icon(Icons.add_circle_outline, color:AppColor.primaryColor,),
@@ -159,7 +167,12 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                                             "0",
                                             controller.getPrice(myFavoriteitemsModel).toString(),
                                             1
-                                        );},
+                                        );
+                                        controller.cartController.refreshPage();
+                                        controller.homeController.refreshPage();
+                                        controller.update();
+
+                                      },
                                       label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,)),
                                       icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor),
                                     );
@@ -177,7 +190,10 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                                   "0",
                                   controller.getPrice(myFavoriteitemsModel).toString(),
                                   1
-                              );},
+                              );
+                              controller.cartController.refreshPage();
+                              controller.homeController.refreshPage();
+                              },
                             label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,height: 0.8),),
                             icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor,),
                           )
@@ -193,7 +209,6 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                 child:
                 IconButton(
                           onPressed: () {
-                            controller.favoriteController.setFavorite(myFavoriteitemsModel.itemsId, "0");
                             controller.deleteFromFavorite(myFavoriteitemsModel.favoriteId!) ;
                           },
                           icon: const Icon(

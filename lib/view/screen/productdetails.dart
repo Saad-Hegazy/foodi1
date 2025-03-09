@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/cart_controller.dart';
+import '../../controller/home_controller.dart';
 import '../../controller/productdetails_controller.dart';
 import '../../core/class/handlingdataview.dart';
 import '../../core/constant/color.dart';
@@ -188,7 +189,9 @@ class ProductDetails extends StatelessWidget {
                       "155".tr,"207".tr);
                 }else{
                   controller.addselectedCount(
-                      controller.getPrice(controller.itemsModel));
+                      controller.getPrice(controller.itemsModel)
+                  );
+                  controller.cartController.refreshPage();
                 }
               },
             ),

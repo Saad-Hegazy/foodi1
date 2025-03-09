@@ -110,7 +110,7 @@ class ItemsHome extends GetView<HomeControllerImp> {
                   Row(
                     children: [
                       // Decrement button
-                      FutureBuilder<int>(
+                      FutureBuilder(
                         future: controller.getCountItems(itemsModel.itemsId!),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
@@ -146,14 +146,14 @@ class ItemsHome extends GetView<HomeControllerImp> {
                         },
                       ),
                       // Display count
-                      FutureBuilder<int>(
+                      FutureBuilder(
                         future: controller.getCountItems(itemsModel.itemsId!),
                         builder: (context, snapshot) {
                           return Text(snapshot.hasData ? snapshot.data!.toString() : "");
                         },
                       ),
                       // Increment button
-                      FutureBuilder<int>(
+                      FutureBuilder(
                         future: controller.getCountItems(itemsModel.itemsId!),
                         builder: (context, snapshot) {
                           if(snapshot.hasData){
@@ -218,17 +218,12 @@ class ItemsHome extends GetView<HomeControllerImp> {
               // Favorite Icon
               child: IconButton(
                 onPressed: () {
-                  if (controller.favoriteController.isFavorite[itemsModel.itemsId] == "1") {
-                    controller.favoriteController.setFavorite(itemsModel.itemsId, "0");
-                    controller.favoriteController.removeFavorite(itemsModel.itemsId!.toString());
-                  } else {
-                    controller.favoriteController.setFavorite(itemsModel.itemsId, "1");
-                    controller.favoriteController.addFavorite(itemsModel.itemsId!.toString());
-                  }
-                  controller.refreshPage();
+                  controller.checkItemInFavorite(itemsModel)
+                      ? controller.removeFavorite(itemsModel.itemsId!.toString())
+                      : controller.addFavorite(itemsModel.itemsId!.toString());
                 },
                 icon: Icon(
-                  controller.favoriteController.isFavorite[itemsModel.itemsId] == "1"
+                  controller.checkItemInFavorite(itemsModel)
                       ? Icons.favorite
                       : Icons.favorite_border_outlined,
                   color: AppColor.primaryColor,

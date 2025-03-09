@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
             elevation: 5,
                 backgroundColor: AppColor.primaryColor,
                 onPressed: () async{
-                  await  launch("https://wa.me/569222419");
+                  await  launch("https://wa.me/+966569222419");
                 },
                 child: const Icon(Icons.message,color:Colors.white,size: 26,)
             ),

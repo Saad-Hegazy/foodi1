@@ -26,11 +26,12 @@ class CartData {
     return response.fold((l) => l, (r) => r);
   }
 
-  getCountCart(String usersid, String itemsid) async {
-    var response = await crud.postData(
-        AppLink.cartgetcountitems, {"usersid": usersid, "itemsid": itemsid});
-    return response.fold((l) => l, (r) => r);
-  }
+  // getCountCart(String usersid, String itemsid) async {
+  //   var response = await crud.postData(
+  //       AppLink.cartgetcountitems, {"usersid": usersid, "itemsid": itemsid});
+  //   return response.fold((l) => l, (r) => r);
+  // }
+
   getItemCount(String usersid,String userstype, String itemsid) async {
     var response = await crud.postData(
         AppLink.itemcount, {"usersid": usersid,"userstype":userstype, "itemsid": itemsid});
