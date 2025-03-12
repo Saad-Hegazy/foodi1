@@ -35,7 +35,7 @@ class VerfiyCode extends StatelessWidget {
           const SizedBox(height: 10),
            CustomTextBodyAuth(
               text:
-              "87".tr+" ${controller.email}"),
+              "${"87".tr} ${controller.email}"),
           const SizedBox(height: 15),
           OtpTextField(
             textStyle: TextStyle(color: Colors.black),

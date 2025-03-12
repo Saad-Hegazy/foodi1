@@ -26,25 +26,23 @@ class AddressView extends StatelessWidget {
         body: GetBuilder<AddressViewController>(
           builder: (controller) => HandlingDataView(
             statusRequest: controller.statusRequest,
-            widget: Container(
-              child: ListView.builder(
-                itemCount: controller.data.length,
-                itemBuilder: (context, i) {
-                  return CardAddress(
-                    addressModel: controller.data[i],
-                      onDelete:(){Get.defaultDialog(
-                          title: "158".tr,
-                          middleText: "180".tr,
-                          onCancel: (){},
-                          onWillPop:null,
-                          onConfirm:(){
-                            controller.deleteAddress(controller.data[i].addressId!);
-                            Get.back();
-                          }
-                      );}
-                  );
-                },
-              ),
+            widget: ListView.builder(
+              itemCount: controller.data.length,
+              itemBuilder: (context, i) {
+                return CardAddress(
+                  addressModel: controller.data[i],
+                    onDelete:(){Get.defaultDialog(
+                        title: "158".tr,
+                        middleText: "180".tr,
+                        onCancel: (){},
+                        onWillPop:null,
+                        onConfirm:(){
+                          controller.deleteAddress(controller.data[i].addressId!);
+                          Get.back();
+                        }
+                    );}
+                );
+              },
             ),
           ),
         ));

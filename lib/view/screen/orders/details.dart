@@ -4,6 +4,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../controller/orders/details_controller.dart';
 import '../../../core/class/handlingdataview.dart';
 import '../../../core/constant/color.dart';
+import '../../../core/functions/translatefatabase.dart';
+import '../../../core/functions/truncatetext.dart';
 
 class OrdersDetails extends StatelessWidget {
   const OrdersDetails({super.key});
@@ -47,18 +49,24 @@ Get.put(OrdersDetailsController());
                                         color: AppColor.primaryColor,
                                         fontWeight: FontWeight.bold)),
                               ]),
-                              // TableRow(children: [
-                              //   Text("Macbook m1", textAlign: TextAlign.center),
-                              //   Text("2", textAlign: TextAlign.center),
-                              //   Text("1200", textAlign: TextAlign.center),
-                              // ]),
                               ...List.generate(
                                   controller.data.length,
                                       (index) => TableRow(children: [
-                                    Text("${controller.data[index].itemsName}",
-                                        textAlign: TextAlign.center),
+                                        Text(
+                                          translateDatabase(
+                                            truncateProductName(controller.data[index].itemsNameAr.toString()),
+                                            truncateProductName(controller.data[index].itemsName.toString()),
+                                          ),
+                                          style: TextStyle(
+                                            color: AppColor.black,
+                                            fontSize: 14, // Adjust font size for readability
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                          overflow: TextOverflow.ellipsis, // Handle long text
+                                        ),
                                     Text("${controller.data[index].countitems}", textAlign: TextAlign.center),
-                                    Text("${controller.data[index].cartitemprice!.toStringAsFixed(2)}",
+                                    Text(controller.data[index].cartitemprice!.toStringAsFixed(2),
                                         textAlign: TextAlign.center),
                                   ]))
                             ],
@@ -77,15 +85,14 @@ Get.put(OrdersDetailsController());
                     ),
                   ),
                   if (controller.ordersModel.ordersType == 0)    Card(
-                    child: Container(
-                        child: ListTile(
-                          title:  Text("77".tr,
-                              style: TextStyle(
-                                  color: AppColor.primaryColor,
-                                  fontWeight: FontWeight.bold)),
-                          subtitle: Text(
-                              "${controller.ordersModel.addressCity} ${controller.ordersModel.addressStreet}"),
-                        )),
+                    child: ListTile(
+                      title:  Text("77".tr,
+                          style: TextStyle(
+                              color: AppColor.primaryColor,
+                              fontWeight: FontWeight.bold)),
+                      subtitle: Text(
+                          "${controller.ordersModel.addressCity} ${controller.ordersModel.addressStreet}"),
+                    ),
                   ),
                   if (controller.ordersModel.ordersType == 0)    Card(
                     child: Container(

@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/home_controller.dart';
-import '../../core/class/handlingdataview.dart';
 import '../../core/constant/routes.dart';
-import '../../data/model/categoriesmodel.dart';
-import '../widget/category/customcategorycard.dart';
 import '../widget/offers/offers.dart';
-import '../widget/home/bestofferslisthome.dart';
-import '../widget/home/customtitlehome.dart';
 import '../widget/items/customappbaritems.dart';
 class OffersView extends StatelessWidget {
   const OffersView({super.key});

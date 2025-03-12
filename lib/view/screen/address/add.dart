@@ -40,17 +40,15 @@ class AddressAdd extends StatelessWidget {
                           ),
                           Positioned(
                             bottom: 10,
-                            child: Container(
-                              child: MaterialButton(
-                                minWidth: 200,
-                                onPressed: () {
-                                  controllerpage.goToPageAddDetailsAddress();
-                                },
-                                color: AppColor.primaryColor,
-                                textColor: Colors.white,
-                                child:
-                                 Text("102".tr, style: TextStyle(fontSize: 18)),
-                              ),
+                            child: MaterialButton(
+                              minWidth: 200,
+                              onPressed: () {
+                                controllerpage.goToPageAddDetailsAddress();
+                              },
+                              color: AppColor.primaryColor,
+                              textColor: Colors.white,
+                              child:
+                               Text("102".tr, style: TextStyle(fontSize: 18)),
                             ),
                           )
                         ],

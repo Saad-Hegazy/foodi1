@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/cart_controller.dart';
-import '../../controller/favorite_controller.dart';
-import '../../controller/home_controller.dart';
 import '../../controller/items_controller.dart';
-import '../../controller/myfavoritecontroller.dart';
-import '../../core/class/handlingdataview.dart';
 import '../../core/constant/color.dart';
 import '../../core/constant/routes.dart';
 import '../../data/model/itemsmodel.dart';
-import '../widget/customappbar.dart';
-import '../widget/home/custombottomappbarhome.dart';
 import '../widget/items/customappbaritems.dart';
 import '../widget/items/customlistitems.dart';
 import '../widget/items/listcaregoirseitems.dart';
@@ -21,7 +15,6 @@ class Items extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
-    FavoriteController controllerFav = Get.put(FavoriteController());
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(15),
@@ -41,16 +34,14 @@ class Items extends StatelessWidget {
             const SizedBox(height: 20),
             const ListCategoriesItems(),
             GetBuilder<ItemsControllerImp>(
-              builder: (controller) => HandlingDataView(
-                statusRequest: controller.statusRequest,
-                widget: !controller.isSearch
+              builder: (controller) => !controller.isSearch
                     ? GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: controller.data.length + 1,  // Add one for the loading indicator
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 0.75,
+                    childAspectRatio: 0.9,
                   ),
                   itemBuilder: (BuildContext context, index) {
                     if (index == controller.data.length) {
@@ -61,16 +52,12 @@ class Items extends StatelessWidget {
                       ))
                           : SizedBox.shrink();  // Empty widget when no more data to load
                     }
-                    // Handling favorite status
-                    controllerFav.isFavorite[controller.data[index]['items_id']] =
-                    controller.data[index]['favorite'];
                     return CustomListItems(
                       itemsModel: ItemsModel.fromJson(controller.data[index]),
                     );
                   },
                 )
                     : ListItemsSearch(listdatamodel: controller.listdata),
-              ),
             ),
           ],
         ),

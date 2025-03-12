@@ -1,22 +1,18 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/cart_controller.dart';
-import '../../../controller/home_controller.dart';
-import '../../../controller/items_controller.dart';
-import '../../../controller/myfavoritecontroller.dart';
 import '../../../core/constant/color.dart';
+import '../../../core/functions/translatefatabase.dart';
+import '../../../core/functions/truncatetext.dart';
 import '../../../data/model/cartmodel.dart';
-import '../../../data/model/itemsmodel.dart';
 import '../../../linkabi.dart';
 class CustomItemsCartList extends GetView<CartController> {
   final CartModel cartModel;
   final String name;
+  final String namear;
   final String totalitemeprice;
-  final num price;
-  final num count;
+  final String price;
   final String imagename;
   final String unit;
   final void Function()? onAdd;
@@ -25,9 +21,9 @@ class CustomItemsCartList extends GetView<CartController> {
   const CustomItemsCartList({Key? key,
     required this.cartModel,
     required this.name,
+    required this.namear,
     required this.totalitemeprice,
     required this.price,
-    required this.count,
     required this.imagename,
     required this.unit,
     required this.onAdd,
@@ -79,12 +75,13 @@ class CustomItemsCartList extends GetView<CartController> {
       },
       onDismissed: (direction) {
       onDelet; // Call your controller method
-      Get.showSnackbar(GetSnackBar(
-      message: "Item removed from cart",
-      duration: const Duration(seconds: 2),
-      backgroundColor: AppColor.primaryColor,
-      )
-      );},
+      // Get.showSnackbar(GetSnackBar(
+      // message: "Item removed from cart",
+      // duration: const Duration(seconds: 2),
+      // backgroundColor: AppColor.primaryColor,
+      // )
+      // );
+      },
       child: InkWell(
         onTap: () {
           controller.goToPageProductDetails(cartModel);
@@ -118,7 +115,10 @@ class CustomItemsCartList extends GetView<CartController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        name,
+                        translateDatabase(
+                          truncateProductName(namear),
+                          truncateProductName(name),
+                        ),
                         style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 4),
@@ -136,7 +136,7 @@ class CustomItemsCartList extends GetView<CartController> {
                   children: [
                     // Price
                     Text(
-                      "$totalitemeprice" + " SAR",
+                      "$totalitemeprice SAR",
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.bold, color:AppColor.primaryColor),
                     ),
@@ -144,24 +144,79 @@ class CustomItemsCartList extends GetView<CartController> {
                     // Quantity Picker
                     Row(
                       children: [
-                        count<2? IconButton(
-                            onPressed: onDelet,
-                              icon: const Icon(Icons.delete,  color:AppColor.primaryColor),
-                              iconSize: 20,
-                            )
-                            : IconButton(
-                          onPressed: onRemove,
-                          icon: const Icon(Icons.remove_circle_outline,  color:AppColor.primaryColor),
-                          iconSize: 20,
+                        // Decrement button
+                        FutureBuilder(
+                          future: controller.getCountItems(cartModel.cartItemsid!),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return
+                                snapshot.data! < 2
+                                    ? IconButton(
+                                  onPressed: () async {
+                                    await controller.delete(cartModel.cartItemsid!);
+                                    controller.update();
+                                  },
+                                  icon: const Icon(Icons.delete, color:AppColor.primaryColor),
+                                )
+                                    : IconButton(
+                                  onPressed: () async {
+                                    final currentCount = await controller.getCountItems(cartModel.cartItemsid!);
+                                    await controller.remove(
+                                      cartModel.cartItemsid!,
+                                      "0",
+                                      controller.getPrice(cartModel).toString(),
+                                      currentCount - 1,
+                                    );
+                                    controller.update();
+                                  },
+                                  icon: const Icon(Icons.remove_circle_outline, color:AppColor.primaryColor),
+                                );
+                            } else {
+                              return  SizedBox();
+                            }
+                          },
                         ),
-                        Text(
-                          count.toStringAsFixed(0),
-                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        // Display count
+                        FutureBuilder(
+                          future: controller.getCountItems(cartModel.cartItemsid!),
+                          builder: (context, snapshot) {
+                            return Text(snapshot.hasData ? snapshot.data!.toString() : "");
+                          },
                         ),
-                        IconButton(
-                          onPressed: onAdd,
-                          icon: const Icon(Icons.add_circle_outline,color:AppColor.primaryColor),
-                          iconSize: 20,
+                        // Increment button
+                        FutureBuilder(
+                          future: controller.getCountItems(cartModel.cartItemsid!),
+                          builder: (context, snapshot) {
+                            if(snapshot.hasData){
+                              return
+                                IconButton(
+                                  onPressed: () async {
+                                    final currentCount = await controller.getCountItems(cartModel.cartItemsid!);
+                                    await controller.add(
+                                      cartModel.cartItemsid!,
+                                      "0",
+                                      controller.getPrice(cartModel).toString(),
+                                      currentCount + 1,
+                                    );
+                                    controller.update();
+                                  },
+                                  icon: const Icon(Icons.add_circle_outline, color:AppColor.primaryColor),
+                                );
+                            }else{
+                              return TextButton.icon(
+                                onPressed: (){
+                                  controller.add(
+                                      cartModel.cartItemsid!,
+                                      "0",
+                                      controller.getPrice(cartModel).toString(),
+                                      1
+                                  );
+                                },
+                                label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,fontSize: 16)),
+                                icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor,size: 25,),
+                              );
+                            }
+                          },
                         ),
                       ],
                     ),

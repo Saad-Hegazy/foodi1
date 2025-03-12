@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../core/class/statusrequest.dart';
-import '../core/functions/handlingData.dart';
-import '../core/services/services.dart';
-import '../data/datasource/remote/cart_data.dart';
-import '../data/model/cartmodel.dart';
 import '../view/screen/cart.dart';
 import '../view/screen/home.dart';
 import '../view/screen/myfavorite.dart';
-import '../view/screen/notification.dart';
 import '../view/screen/offers.dart';
 import '../view/screen/settings.dart';
 import 'cart_controller.dart';

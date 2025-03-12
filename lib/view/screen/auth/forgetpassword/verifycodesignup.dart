@@ -35,7 +35,7 @@ class VerifyCodeSignUp extends StatelessWidget {
            CustomTextTitleAuth(text: "80".tr),
           const SizedBox(height: 10),
            CustomTextBodyAuth(
-              text:"81".tr + "  ${controller.phone}"),
+              text:"${"81".tr}  ${controller.phone}"),
           const SizedBox(height: 15),
           OtpTextField(
             textStyle: TextStyle(color: Colors.black),
@@ -57,7 +57,7 @@ class VerifyCodeSignUp extends StatelessWidget {
                   builder: (context){
                     return AlertDialog(
                       title:  Text("82".tr,style: TextStyle(color: Colors.black),),
-                      content: Text("83".tr + "$verificationCode",style: TextStyle(color: Colors.black)),
+                      content: Text("${"83".tr}$verificationCode",style: TextStyle(color: Colors.black)),
                     );
                   }
               );

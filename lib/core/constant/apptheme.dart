@@ -50,6 +50,14 @@ ThemeData themeEnglish = ThemeData(
   );
 
 ThemeData themeArabic = ThemeData(
+  primaryColor: AppColor.primaryColor,
+  inputDecorationTheme:InputDecorationTheme(
+      focusColor: AppColor.primaryColor
+  ),
+  focusColor:AppColor.primaryColor,
+  scaffoldBackgroundColor:AppColor.backgroundcolor,
+  floatingActionButtonTheme:
+  const FloatingActionButtonThemeData(backgroundColor: AppColor.primaryColor),
   appBarTheme:  AppBarTheme(
     centerTitle: true,
     elevation: 0,
@@ -62,11 +70,6 @@ ThemeData themeArabic = ThemeData(
     ),
     backgroundColor: AppColor.thirdColor,
   ),
-  primaryColor: AppColor.primaryColor,
-  inputDecorationTheme:InputDecorationTheme(
-      focusColor: AppColor.primaryColor
-  ),
-  focusColor:AppColor.primaryColor,
   fontFamily: GoogleFonts.cairo().fontFamily, // Use Cairo font
   textTheme: TextTheme(
     displayLarge: GoogleFonts.cairo(

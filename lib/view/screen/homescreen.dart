@@ -4,9 +4,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../controller/homescreen_controller.dart';
 import '../../core/constant/color.dart';
-import '../../core/constant/routes.dart';
 import '../widget/home/custombottomappbarhome.dart';
-import 'package:badges/badges.dart' as badge;
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override

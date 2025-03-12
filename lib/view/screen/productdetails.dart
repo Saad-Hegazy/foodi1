@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controller/cart_controller.dart';
-import '../../controller/home_controller.dart';
 import '../../controller/productdetails_controller.dart';
 import '../../core/class/handlingdataview.dart';
 import '../../core/constant/color.dart';

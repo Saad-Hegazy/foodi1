@@ -2,15 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../core/class/statusrequest.dart';
-import '../core/constant/routes.dart';
 import '../core/functions/handlingData.dart';
 import '../core/services/services.dart';
 import '../data/datasource/remote/cart_data.dart';
 import '../data/model/cartmodel.dart';
-import '../data/model/itemsmodel.dart';
 import '../linkabi.dart';
 import 'cart_controller.dart';
 import 'home_controller.dart';
+import 'myfavoritecontroller.dart';
 abstract class ProductDetailsItemModelController extends GetxController {}
 
 class ProductDetailsControllerItemModelImp extends ProductDetailsItemModelController {
@@ -20,6 +19,8 @@ class ProductDetailsControllerItemModelImp extends ProductDetailsItemModelContro
   MyServices myServices = Get.find();
   CartController cartController = Get.put(CartController());
   HomeControllerImp homeController=Get.put(HomeControllerImp());
+  // ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
+  MyFavoriteController myFavoriteController= Get.put(MyFavoriteController());
 
   int countitems = 0;
   var itemsModel;
@@ -36,7 +37,6 @@ class ProductDetailsControllerItemModelImp extends ProductDetailsItemModelContro
     isunit=false;
     countitems = await getCountItems(itemsModel!.itemsId!);
     selectedCount = await getCountItems(itemsModel!.itemsId!);
-
     statusRequest = StatusRequest.success;
     update();
   }
@@ -59,23 +59,6 @@ class ProductDetailsControllerItemModelImp extends ProductDetailsItemModelContro
       return 0; // Return 0 as fallback
     }
   }
-  // getCountItems(int itemsid) async {
-  //   statusRequest = StatusRequest.loading;
-  //   var response = await cartData.getCountCart(
-  //       myServices.sharedPreferences.getString("id")!, itemsid.toString());
-  //   print("=============================== getCountItemsProductDetailsController $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-  //     if (response['status'] == "success") {
-  //       return  response['data'];
-  //     }
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   // End
-  //   update();
-  // }
 
   isBox(bool type) {
     isbox = type;
@@ -100,6 +83,8 @@ class ProductDetailsControllerItemModelImp extends ProductDetailsItemModelContro
         countitems = await getCountItems(itemsModel!.itemsId!);
         cartController.refreshPage();
         homeController.refreshPage();
+        myFavoriteController.getData();
+        // controllerItems.view();
       } else {
         statusRequest = StatusRequest.failure;
       }

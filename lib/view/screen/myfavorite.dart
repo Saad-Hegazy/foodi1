@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/myfavoritecontroller.dart';
-import '../../core/class/handlingdataview.dart';
-import '../../core/constant/color.dart';
 import '../../core/constant/routes.dart';
-import '../../data/model/myfavorite.dart';
 import '../widget/items/customappbaritems.dart';
 import '../widget/myfavorite/customlistfavoriteitems.dart';
 class MyFavorite extends StatelessWidget {
@@ -28,25 +25,22 @@ class MyFavorite extends StatelessWidget {
                   controller.homeController.checkSearch(val);
                 },
                 onPressedIconCart: () => Get.toNamed(AppRoute.cart),
-                itemCount:controller.homeController.totalcountitems.toInt(),
+                itemCount:controller.totalcountitems.toInt(),
               ),
               const SizedBox(height: 20),
-              HandlingDataView(
-                  statusRequest: controller.statusRequest,
-                  widget: GridView.builder(
+            GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.data.length,
                     gridDelegate:
                     const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, childAspectRatio: 0.76),
+                        crossAxisCount: 2, childAspectRatio: 0.9),
                     itemBuilder: (context, index) {
                       return  CustomListFavoriteItems(
                         myFavoriteitemsModel: controller.data[index],
                       );
                     },
                   )
-              )
             ]))),
       ),
     );

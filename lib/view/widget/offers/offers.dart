@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controller/favorite_controller.dart';
 import '../../../controller/home_controller.dart';
 import '../../../core/constant/color.dart';
-import '../../../core/constant/imageassets.dart';
 import '../../../core/functions/translatefatabase.dart';
 import '../../../core/functions/truncatetext.dart';
 import '../../../data/model/itemsmodel.dart';
@@ -22,9 +20,9 @@ class BestOffersList extends GetView<HomeControllerImp> {
         physics: NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.735,
+          childAspectRatio: 0.9,
         ),
-        itemCount:controller.items.length,
+        itemCount:controller.offers.length,
         itemBuilder: (context, i) {
           return ItemsHome(
               itemsModel: ItemsModel.fromJson(controller.offers[i]));
@@ -46,14 +44,14 @@ class ItemsHome extends GetView<HomeControllerImp> {
       child: Card(
         color: AppColor.backgroundcolor2,
         elevation: 3, // Add shadow for depth
-        margin: const EdgeInsets.all(8), // Margin around the card
+        // margin: const EdgeInsets.all(8), // Margin around the card
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), // Rounded corners
         ),
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.fromLTRB(0, 5, 10, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,7 +64,9 @@ class ItemsHome extends GetView<HomeControllerImp> {
                       height: 80,
                       width: 80,
                       fit: BoxFit.cover, // Ensure image fits within the space
-                      placeholder: (context, url) => CircularProgressIndicator(),
+                      placeholder: (context, url) => CircularProgressIndicator(
+                        color: AppColor.primaryColor,
+                      ),
                       errorWidget: (context, url, error) => Icon(Icons.error, color: Colors.red),
                     ),
                   ),
@@ -77,27 +77,27 @@ class ItemsHome extends GetView<HomeControllerImp> {
                       truncateProductName(itemsModel.itemsName.toString()),
                     ),
                     style: TextStyle(
-                      color: AppColor.black,
-                      fontSize: 12, // Adjust font size for readability
-                      fontWeight: FontWeight.bold,
+                        height: 1,
+                        color: AppColor.black,
+                        fontSize: 12, // Adjust font size for readability
+                        fontWeight: FontWeight.bold
                     ),
                     textAlign: TextAlign.start,
-                    overflow: TextOverflow.ellipsis, // Handle long text
+                    overflow: TextOverflow.ellipsis,// Handle long text
                   ),
-                  // Price and Favorite Icon
+                  // Price
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       // Price
                       Text(
                         "${controller.getPrice(itemsModel).toStringAsFixed(1)} SAR",
                         style: TextStyle(
                           color: AppColor.primaryColor,
-                          fontSize: 12, // Slightly larger for emphasis
-                          fontWeight: FontWeight.bold,
+                          fontSize: 14, // Slightly larger for emphasis
+                          // fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(width: 5,),
                       controller.hasDiscount(itemsModel) == 1? Text("${controller.getPricewithoutDiscount(itemsModel).toStringAsFixed(1)}",
                         style: const TextStyle(
                           fontSize: 12,
@@ -105,7 +105,7 @@ class ItemsHome extends GetView<HomeControllerImp> {
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.lineThrough, // Strikethrough
                         ),
-                      ):Text(""),
+                      ):SizedBox(),
                     ],
                   ),
                   controller.checkItemInCart(itemsModel)?
@@ -216,7 +216,7 @@ class ItemsHome extends GetView<HomeControllerImp> {
             ),
             Positioned(
               top: 10,
-              right: 0,
+              right: 5,
               // Favorite Icon
               child: IconButton(
                 onPressed: () {
@@ -234,10 +234,10 @@ class ItemsHome extends GetView<HomeControllerImp> {
             ),
             if (controller.hasDiscount(itemsModel) > 0)
               Positioned(
-                top: 15,
-                left: 8,
+                top:22,
+                left: 13,
                 child:Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                   decoration: BoxDecoration(
                     color: AppColor.secondaryColor,
                     borderRadius: BorderRadius.circular(5),

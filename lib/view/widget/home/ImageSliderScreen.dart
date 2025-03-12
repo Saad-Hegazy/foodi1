@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/home_controller.dart';
-import '../../../controller/imageslider_controller.dart';
 import '../../../core/constant/color.dart';
 import '../../../linkabi.dart';
 import 'package:flutter/material.dart' hide CarouselController;

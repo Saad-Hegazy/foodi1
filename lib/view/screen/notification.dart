@@ -13,7 +13,7 @@ Get.put(NotificationController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.primaryColor,
-        title:  Text('54'.tr,style: TextStyle(color: Colors.white)),
+        title:  Text('202'.tr,style: TextStyle(color: Colors.white)),
       ),
       body: GetBuilder<NotificationController>(
             builder: (controller) => HandlingDataView(
@@ -23,27 +23,25 @@ Get.put(NotificationController());
                     child: ListView(children: [
                       ...List.generate(
                           controller.data.length,
-                              (index) => Container(
-                            child: Stack(
-                              children: [
-                                   ListTile(
-                                    title: Text(controller.data[index]
-                                    ['notification_title']  +"                                  "+ DateFormat('dd-MMM-yyyy').format(
-                                      DateTime.parse(controller.data[index]['notification_datetime']),
-                                    ),style: const TextStyle(
-                                        color: AppColor.primaryColor,
-                                        fontWeight: FontWeight.bold
+                              (index) => Stack(
+                                children: [
+                                     ListTile(
+                                      title: Text(controller.data[index]
+                                      ['notification_title']  +"                                  "+ DateFormat('dd-MMM-yyyy').format(
+                                        DateTime.parse(controller.data[index]['notification_datetime']),
+                                      ),style: const TextStyle(
+                                          color: AppColor.primaryColor,
+                                          fontWeight: FontWeight.bold
+                                      ),
+                                      ),
+                                      subtitle: Text(controller.data[index]
+                                      ['notification_body']),
                                     ),
-                                    ),
-                                    subtitle: Text(controller.data[index]
-                                    ['notification_body']),
-                                  ),
 
 
 
-                              ],
-                            ),
-                          ))
+                                ],
+                              ))
                     ]))),
       ),
     );

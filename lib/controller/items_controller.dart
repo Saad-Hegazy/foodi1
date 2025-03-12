@@ -7,12 +7,10 @@ import '../core/services/services.dart';
 import '../data/datasource/remote/cart_data.dart';
 import '../data/datasource/remote/favorite_data.dart';
 import '../data/datasource/remote/items_data.dart';
-import '../data/datasource/remote/myfavorite_data.dart';
 import '../data/model/cartmodel.dart';
 import '../data/model/itemsmodel.dart';
 import '../data/model/myfavorite.dart';
 import 'cart_controller.dart';
-import 'favorite_controller.dart';
 import 'home_controller.dart';
 import 'myfavoritecontroller.dart';
 abstract class ItemsController extends GetxController {
@@ -24,11 +22,9 @@ abstract class ItemsController extends GetxController {
 
 class ItemsControllerImp extends SearchMixController {
   CartData cartData = CartData(Get.find());
-  MyFavoriteData favoriteData = MyFavoriteData(Get.find());
-  FavoriteData favoriteData2 = FavoriteData(Get.find());
+  FavoriteData favoriteData = FavoriteData(Get.find());
 
   CartController cartController =Get.put(CartController());
-  FavoriteController favoriteController =Get.put(FavoriteController());
   MyFavoriteController myfavoriteController =    Get.put(MyFavoriteController());
   HomeControllerImp homeController=Get.put(HomeControllerImp());
 
@@ -56,20 +52,20 @@ class ItemsControllerImp extends SearchMixController {
     super.onInit();
   }
   intialData() {
-    categories = Get.arguments['categories'];
-    selectedCat = Get.arguments['selectedcat'];
-    catid = Get.arguments['catid'];
-    getItems(catid!,page,recordsPerPage);
+    categories = Get.arguments?['categories']; // Optional, can be null
+    selectedCat = Get.arguments!['selectedcat']; // Required, non-null
+    catid = Get.arguments!['catid']; // Required, non-null
+    getItems(catid, page, recordsPerPage); // catid is non-null here
     view();
     getfavoriteData();
     scrollController.addListener(() {
-          // Detect when the user scrolls to the bottom
-          if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-            if (!isLoading) {
-              loadMoreData();
-            }
-          }
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        if (!isLoading) {
+          loadMoreData();
         }
+      }
+    }
     );
   }
   setItem(id, val) {
@@ -214,7 +210,7 @@ class ItemsControllerImp extends SearchMixController {
         cartController.refreshPage();
         getCountItems(itemsid);
         getItems(catid!,page,recordsPerPage);
-        // Get.snackbar("155".tr, "157".tr);
+        Get.snackbar("155".tr, "157".tr);
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -336,7 +332,7 @@ class ItemsControllerImp extends SearchMixController {
   removeFavorite(String itemsid) async {
     dataFavorit.clear();
     statusRequest = StatusRequest.loading;
-    var response = await favoriteData2.removeFavorite(
+    var response = await favoriteData.removeFavorite(
         myServices.sharedPreferences.getString("id")!, itemsid);
     print("=============================== Controller $response ");
     statusRequest = handlingData(response);
@@ -359,7 +355,7 @@ class ItemsControllerImp extends SearchMixController {
   addFavorite(String itemsid) async {
     dataFavorit.clear();
     statusRequest = StatusRequest.loading;
-    var response = await favoriteData2.addFavorite(
+    var response = await favoriteData.addFavorite(
         myServices.sharedPreferences.getString("id")!, itemsid);
     print("=============================== Controller $response ");
     statusRequest = handlingData(response);
@@ -396,7 +392,33 @@ class ItemsControllerImp extends SearchMixController {
       cartController.refreshPage();
         getCountItems(itemsid);
         getItems(catid, page, recordsPerPage);
-        // Get.snackbar("155".tr, "154".tr,);
+        Get.snackbar("155".tr, "154".tr,);
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+    }
+    update();
+  }
+  removeItems(int itemsid,String isbox, String itempriceforunit,int countitembyunit) async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response = await cartData.addCart(
+      myServices.sharedPreferences.getString("id")!,
+      itemsid.toString(),
+      isbox,
+      itempriceforunit,
+      countitembyunit,
+    );
+    print("=============================== Controller $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      if (response['status'] == "success") {
+        view();
+        cartController.refreshPage();
+        getCountItems(itemsid);
+        getItems(catid, page, recordsPerPage);
+        Get.snackbar("155".tr, "157".tr);
+
       } else {
         statusRequest = StatusRequest.failure;
       }

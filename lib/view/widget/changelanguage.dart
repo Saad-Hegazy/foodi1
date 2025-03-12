@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/constant/routes.dart';
 import '../../core/localization/changelocal.dart';
 import 'language/custombuttomlang.dart';
 

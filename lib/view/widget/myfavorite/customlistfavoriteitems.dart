@@ -1,17 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
-
 import '../../../controller/myfavoritecontroller.dart';
-import '../../../controller/productDetailsItemModel_controller.dart';
 import '../../../core/constant/color.dart';
-import '../../../core/constant/imageassets.dart';
 import '../../../core/functions/translatefatabase.dart';
 import '../../../core/functions/truncatetext.dart';
 import '../../../data/model/myfavorite.dart';
 import '../../../linkabi.dart';
-import '../../screen/productdetailsitemmodel.dart';
 
 class CustomListFavoriteItems extends GetView<MyFavoriteController> {
   final  MyFavoriteModel myFavoriteitemsModel;
@@ -28,14 +23,14 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
         child: Card(
           color: AppColor.backgroundcolor2,
           elevation: 3, // Add shadow for depth
-          margin: const EdgeInsets.all(8), // Margin around the card
+          // margin: const EdgeInsets.all(8), // Margin around the card
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10), // Rounded corners
           ),
           child: Stack(
             children: [
                 Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.fromLTRB(0, 5, 10, 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,11 +54,12 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                           truncateProductName(myFavoriteitemsModel.itemsName.toString()),
                         ),
                         style: TextStyle(
+                          height: 0.7,
                           color: AppColor.black,
-                          fontSize: 14, // Adjust font size for readability
-                          fontWeight: FontWeight.bold,
+                          fontSize: 12, // Adjust font size for readability
+                          // fontWeight: FontWeight.bold,
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.start,
                         overflow: TextOverflow.ellipsis, // Handle long text
                       ),
                       // Price
@@ -71,7 +67,7 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                         "${controller.getPrice(myFavoriteitemsModel).toStringAsFixed(1)} SAR",
                         style: TextStyle(
                             color: AppColor.primaryColor,
-                            height: 0.8,
+                            height: 2,
                             fontSize: 14, // Slightly larger for emphasis
                             fontWeight: FontWeight.bold
                         ),
@@ -87,7 +83,7 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                         ),
                       ):SizedBox(),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           // Price
                           controller.checkItemInCart(myFavoriteitemsModel)?
@@ -194,8 +190,8 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                               controller.cartController.refreshPage();
                               controller.homeController.refreshPage();
                               },
-                            label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,height: 0.8),),
-                            icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor,),
+                            label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,fontSize: 16)),
+                            icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor,size: 25,),
                           )
                         ],
                       ),
@@ -204,12 +200,12 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                   ),
                 ),
               Positioned(
-                top: 5,
-                right: 0,
+                  top: 10,
+                  right: 5,
                 child:
                 IconButton(
                           onPressed: () {
-                            controller.deleteFromFavorite(myFavoriteitemsModel.favoriteId!) ;
+                            controller.deleteFromFavorite(myFavoriteitemsModel.itemsId!) ;
                           },
                           icon: const Icon(
                             Icons.delete_outline_outlined,
@@ -220,10 +216,10 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
               // Sale Badge (only if there's a discount)
               if (controller.hasDiscount(myFavoriteitemsModel) > 0)
                 Positioned(
-                  top: 15,
-                  left: 8,
+                  top:22,
+                  left: 13,
                   child:Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                     decoration: BoxDecoration(
                       color: AppColor.secondaryColor,
                       borderRadius: BorderRadius.circular(5),

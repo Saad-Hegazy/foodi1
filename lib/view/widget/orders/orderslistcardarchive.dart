@@ -22,7 +22,7 @@ class CardOrdersListArchive extends GetView<OrdersArchiveController> {
             children: [
               Row(
                 children: [
-                  Text("103".tr+": #${listdata.ordersId}",
+                  Text("${"103".tr}: #${listdata.ordersId}",
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold)),
                   const Spacer(),
@@ -40,8 +40,8 @@ class CardOrdersListArchive extends GetView<OrdersArchiveController> {
               const Divider(),
               Text(
                   "${"104".tr} : ${controller.printOrderType(listdata.ordersType!)}"),
-              Text("${"105".tr}: ${listdata.ordersPrice} \S\A\R"),
-              Text("${"106".tr}: ${listdata.ordersPricedelivery} \S\A\R "),
+              Text("${"105".tr}: ${listdata.ordersPrice} SAR"),
+              Text("${"106".tr}: ${listdata.ordersPricedelivery} SAR "),
               Text("${"107".tr} : ${controller.printPaymentMethod(listdata.ordersPaymentmethod!)} "),
               Text(
                   "${"108".tr}: ${controller.printOrderStatus(listdata.ordersStatus!)} "),

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controller/cart_controller.dart';
 import '../../controller/productDetailsItemModel_controller.dart';
-import '../../controller/productdetails_controller.dart';
 import '../../core/class/handlingdataview.dart';
 import '../../core/constant/color.dart';
 import '../../core/functions/translatefatabase.dart';
 import '../widget/productdetails/priceandcount.dart';
-import '../widget/productdetails/toppageproductdetails.dart';
 import '../widget/productdetails/topproductpagedetailsitemmodel.dart';
 
 class ProductDetailsItemModel extends StatelessWidget {
@@ -191,6 +188,7 @@ class ProductDetailsItemModel extends StatelessWidget {
                 }else{
                   controller.addselectedCount(
                       controller.getPrice(controller.itemsModel));
+
                 }
 
               },

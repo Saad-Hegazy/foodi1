@@ -8,46 +8,38 @@ import '../core/services/services.dart';
 import '../data/datasource/remote/cart_data.dart';
 import '../data/datasource/remote/favorite_data.dart';
 import '../data/datasource/remote/home_data.dart';
-import '../data/datasource/remote/myfavorite_data.dart';
 import '../data/model/cartmodel.dart';
 import '../data/model/itemsmodel.dart';
 import '../data/model/myfavorite.dart';
 import 'cart_controller.dart';
-import 'favorite_controller.dart';
 
 
 abstract class HomeController extends SearchMixController {
   initialData();
   getdata();
-  goToItems(List categories, int selectedCat, String categoryid);
+  void goToItems(List<dynamic>? categories, int selectedCat, String categoryid);
 }
 
 class HomeControllerImp extends HomeController {
   MyServices myServices = Get.find();
   CartData cartData = CartData(Get.find());
-  MyFavoriteData favoriteData = MyFavoriteData(Get.find());
-  FavoriteData favoriteData2 = FavoriteData(Get.find());
+  FavoriteData favoriteData = FavoriteData(Get.find());
+  @override
+  HomeData homedata = HomeData(Get.find());
 
-  FavoriteController favoriteController =Get.put(FavoriteController());
   CartController cartController =Get.put(CartController());
+
   List data = [];
   List dataFavorit = [];
-
-
+  List categories = [];
+  List offers = [];
+  List items = [];
+  List imageSlider = [];
   late StatusRequest statusRequest;
   String? username;
   String? id;
   String? lang;
   num totalcountitems = 0;
-
-  @override
-  HomeData homedata = HomeData(Get.find());
-
-  List categories = [];
-  List offers = [];
-  List items = [];
-  List imageSlider = [];
-
   @override
   initialData() {
     lang = myServices.sharedPreferences.getString("lang");
@@ -111,6 +103,10 @@ bool checkItemInCart(ItemsModel targetItem){
   }
   @override
   getdata() async {
+    categories.clear();
+    items.clear();
+    offers.clear();
+    imageSlider.clear();
     statusRequest = StatusRequest.loading;
     var response = await homedata.getData(
         getDescount(),
@@ -122,9 +118,9 @@ bool checkItemInCart(ItemsModel targetItem){
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
         categories.addAll(response['categories']['data']);
-        items.addAll(response['items']['data']);
         offers.addAll(response['offers']['data']);
         imageSlider.addAll(response['ImageSlider']['data']);
+        items.addAll(response['items']['data']);
 
       } else {
         statusRequest = StatusRequest.failure;
@@ -133,23 +129,6 @@ bool checkItemInCart(ItemsModel targetItem){
     update();
   }
 
-  // Future getCountItems(int itemsid) async {
-  //   statusRequest = StatusRequest.loading;
-  //   var response = await cartData.getCountCart(
-  //       myServices.sharedPreferences.getString("id")!, itemsid.toString());
-  //   print("=============================== getCountItemsProductDetailsController $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-  //     if (response['status'] == "success") {
-  //       return  response['data'];
-  //     }
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   // End
-  //   update();
-  // }
   Future<int> getCountItems(int itemsid) async {
     statusRequest = StatusRequest.loading;
     var response = await cartData.getItemCount(
@@ -167,11 +146,11 @@ bool checkItemInCart(ItemsModel targetItem){
   }
 
   @override
-  goToItems(categories, selectedCat, categoryid) {
+  goToItems(List<dynamic>? categories, int selectedCat, String categoryid) {
     Get.toNamed(AppRoute.items, arguments: {
-      "categories": categories,
+      if (categories != null) "categories": categories,
       "selectedcat": selectedCat,
-      "catid": categoryid
+      "catid": categoryid,
     });
   }
 
@@ -190,17 +169,42 @@ bool checkItemInCart(ItemsModel targetItem){
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success") {
-        cartController.setInCart(itemsid,"1");
         cartController.refreshPage();
         getCountItems(itemsid);
         refreshPage();
-        // Get.snackbar("155".tr, "154".tr,);
+        Get.snackbar("155".tr, "154".tr,);
       } else {
         statusRequest = StatusRequest.failure;
       }
       // End
     }
     update();
+  }
+  removeItems(int itemsid,String isbox ,String itempriceforunit,int countitembyunit) async {
+  statusRequest = StatusRequest.loading;
+  update();
+  var response = await cartData.addCart(
+  myServices.sharedPreferences.getString("id")!,
+  itemsid.toString(),
+  isbox,
+  itempriceforunit,
+  countitembyunit,
+  );
+  print("=============================== addItemsController $response ");
+  statusRequest = handlingData(response);
+  if (StatusRequest.success == statusRequest) {
+  // Start backend
+  if (response['status'] == "success") {
+  cartController.refreshPage();
+  getCountItems(itemsid);
+  refreshPage();
+  Get.snackbar("155".tr, "157".tr);
+  } else {
+  statusRequest = StatusRequest.failure;
+  }
+  // End
+  }
+  update();
   }
   delete(int itemsid ) async {
     statusRequest = StatusRequest.loading;
@@ -216,7 +220,7 @@ bool checkItemInCart(ItemsModel targetItem){
         cartController.refreshPage();
         getCountItems(itemsid);
         refreshPage();
-        // Get.snackbar("155".tr, "157".tr);
+        Get.snackbar("155".tr, "157".tr);
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -236,7 +240,7 @@ bool checkItemInCart(ItemsModel targetItem){
       if (response['status'] == "success") {
         List responsedata = response['data'];
         dataFavorit.addAll(responsedata.map((e) => MyFavoriteModel.fromJson(e)));
-
+        // getdata();
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -253,7 +257,7 @@ bool checkItemInCart(ItemsModel targetItem){
   removeFavorite(String itemsid) async {
     dataFavorit.clear();
     statusRequest = StatusRequest.loading;
-    var response = await favoriteData2.removeFavorite(
+    var response = await favoriteData.removeFavorite(
         myServices.sharedPreferences.getString("id")!, itemsid);
     print("=============================== Controller $response ");
     statusRequest = handlingData(response);
@@ -276,7 +280,7 @@ bool checkItemInCart(ItemsModel targetItem){
   addFavorite(String itemsid) async {
     dataFavorit.clear();
     statusRequest = StatusRequest.loading;
-    var response = await favoriteData2.addFavorite(
+    var response = await favoriteData.addFavorite(
         myServices.sharedPreferences.getString("id")!, itemsid);
     print("=============================== Controller $response ");
     statusRequest = handlingData(response);

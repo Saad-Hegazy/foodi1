@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/cart_controller.dart';
@@ -23,7 +24,7 @@ class BottomNavgationBarCart extends GetView<CartController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColor.backgroundcolor2,
+        color: AppColor.backgroundcolor2,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -40,19 +41,19 @@ class BottomNavgationBarCart extends GetView<CartController> {
                             controller: controllercoupon,
                             decoration:  InputDecoration(
                               isDense: true,
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 10),
-                                hintText: "125".tr,
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 10),
+                              hintText: "125".tr,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: AppColor.primaryColor
+                                    color: AppColor.primaryColor
                                 ),),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: AppColor.primaryColor),
                               ),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: AppColor.primaryColor),
-                                ),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(color: AppColor.primaryColor),
+                              ),
                             ),
                           )),
                       const SizedBox(width: 5),
@@ -125,12 +126,6 @@ class BottomNavgationBarCart extends GetView<CartController> {
               ]),
             ),
             const SizedBox(height: 10),
-            // CustomButtonCart(
-            //   textbutton: "132".tr,
-            //   onPressed: () {
-            //     controller.goToPageCheckout() ;
-            //   },
-            // )
           ],
         ));
   }

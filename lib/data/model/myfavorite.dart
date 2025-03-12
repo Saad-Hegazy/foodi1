@@ -10,7 +10,11 @@ class MyFavoriteModel {
   String? itemsImage;
   int? itemsCount;
   int? itemsActive;
+  int? itemsquantityinbox;
   num? itemsPrice;
+  num? itemspricrofbox;
+  num? itemspricrofboxmerchant;
+  num? itemspricrofboxmosque;
   num? itemsDescount;
   String? itemsDate;
   int? itemsCat;
@@ -28,7 +32,11 @@ class MyFavoriteModel {
         this.itemsImage,
         this.itemsCount,
         this.itemsActive,
+        this.itemsquantityinbox,
         this.itemsPrice,
+        this.itemspricrofbox,
+        this.itemspricrofboxmerchant,
+        this.itemspricrofboxmosque,
         this.itemsDescount,
         this.itemsDate,
         this.itemsCat,
@@ -46,7 +54,11 @@ class MyFavoriteModel {
     itemsImage = json['items_image'];
     itemsCount = json['items_count'];
     itemsActive = json['items_active'];
+    itemsquantityinbox = json['items_quantityinbox'];
     itemsPrice = json['items_price'];
+    itemspricrofbox = json['items_pricrofbox'];
+    itemspricrofboxmerchant = json['items_pricrofbox_merchant'];
+    itemspricrofboxmosque = json['items_pricrofbox_mosque'];
     itemsDescount = json['items_descount'];
     itemsDate = json['items_date'];
     itemsCat = json['items_cat'];
@@ -66,7 +78,11 @@ class MyFavoriteModel {
     data['items_image'] = itemsImage;
     data['items_count'] = itemsCount;
     data['items_active'] = itemsActive;
+    data['items_quantityinbox'] = itemsquantityinbox;
     data['items_price'] = itemsPrice;
+    data['items_pricrofbox'] = itemspricrofbox;
+    data['items_pricrofbox_merchant'] = itemspricrofboxmerchant;
+    data['items_pricrofbox_mosque'] = itemspricrofboxmosque;
     data['items_descount'] = itemsDescount;
     data['items_date'] = itemsDate;
     data['items_cat'] = itemsCat;

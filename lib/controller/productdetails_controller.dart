@@ -2,12 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../core/class/statusrequest.dart';
-import '../core/constant/routes.dart';
 import '../core/functions/handlingData.dart';
 import '../core/services/services.dart';
 import '../data/datasource/remote/cart_data.dart';
 import '../data/model/cartmodel.dart';
-import '../data/model/itemsmodel.dart';
 import '../linkabi.dart';
 import 'cart_controller.dart';
 import 'home_controller.dart';
@@ -20,6 +18,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
    MyServices myServices = Get.find();
   CartController cartController = Get.put(CartController());
   HomeControllerImp homeController=Get.put(HomeControllerImp());
+  // ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
 
   int countitems = 0;
    var itemsModel;
@@ -106,6 +105,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
          countitems = await getCountItems(itemsModel!.itemsId!);
          cartController.refreshPage();
          homeController.refreshPage();
+         // controllerItems.view();
 
        } else {
          statusRequest = StatusRequest.failure;

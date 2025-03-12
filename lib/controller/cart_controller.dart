@@ -8,8 +8,6 @@ import '../data/datasource/remote/cart_data.dart';
 import '../data/model/cartmodel.dart';
 import '../data/model/couponmodel.dart';
 import 'home_controller.dart';
-import 'items_controller.dart';
-import 'myfavoritecontroller.dart';
 
 class CartController extends GetxController {
   TextEditingController? controllercoupon;
@@ -33,15 +31,8 @@ class CartController extends GetxController {
   num priceorders = 0.0;
 
   num totalcountitems = 0;
-  Map isInCart = {};
 
-//  key => id items
-//  Value => 1 OR 0
 
-  setInCart(id, val) {
-    isInCart[id] = val;
-    update();
-  }
     add(int itemsid,String isbox, String itemprice ,int countitembyunit ) async {
     statusRequest = StatusRequest.loading;
     update();
@@ -58,6 +49,37 @@ class CartController extends GetxController {
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success") {
+        Get.snackbar("155".tr, "154".tr,);
+        refreshcartPage();
+        HomeControllerImp homeController=Get.put(HomeControllerImp());
+        homeController.refreshPage();
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
+    update();
+  }
+  remove(int itemsid,String isbox, String itemprice ,int countitembyunit ) async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response;
+    response = await cartData.addCart(
+        myServices.sharedPreferences.getString("id")!,
+        itemsid.toString(),
+        isbox,
+        itemprice,
+        countitembyunit
+    );
+    print("=============================== addCartController $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success") {
+        Get.snackbar("155".tr, "157".tr);
+        refreshcartPage();
+        HomeControllerImp homeController=Get.put(HomeControllerImp());
+        homeController.refreshPage();
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -81,6 +103,10 @@ class CartController extends GetxController {
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success") {
+        Get.snackbar("155".tr, "154".tr,);
+
+        refreshcartPage();
+
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -113,16 +139,10 @@ class CartController extends GetxController {
     if (StatusRequest.success == statusRequest) {
       // Start backend
       if (response['status'] == "success" ) {
+        Get.snackbar("155".tr, "157".tr);
         refreshcartPage();
         HomeControllerImp homeController=Get.put(HomeControllerImp());
         homeController.refreshPage();
-        MyFavoriteController myFavoriteController=Get.put(MyFavoriteController());
-        myFavoriteController.getData();
-        ItemsControllerImp controllerItems = Get.put(ItemsControllerImp());
-        controllerItems.getItems(controllerItems.catid, controllerItems.page, controllerItems.recordsPerPage);
-
-        Get.snackbar("155".tr, "157".tr);
-        // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -143,7 +163,6 @@ class CartController extends GetxController {
       // Start backend
       if (response['status'] == "success" ) {
         Get.snackbar("155".tr, "157".tr);
-        // data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -190,6 +209,23 @@ class CartController extends GetxController {
   refreshcartPage() {
     resetVarCart();
     viewformcartpage();
+    getTotalPrice();
+  }
+  Future<int> getCountItems(int itemsid) async {
+    statusRequest = StatusRequest.loading;
+    var response = await cartData.getItemCount(
+      myServices.sharedPreferences.getString("id")!,
+      myServices.sharedPreferences.getString("userType")!,
+      itemsid.toString(),
+    );
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest && response['status'] == "success") {
+      print("=============================== getCountItemsController $response ");
+      return response['itemcount'];
+    } else {
+      statusRequest = StatusRequest.failure;
+      return 0; // Return 0 as fallback
+    }
   }
   view() async {
     statusRequest = StatusRequest.loading;

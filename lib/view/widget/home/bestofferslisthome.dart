@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/home_controller.dart';
 import '../../../core/constant/color.dart';
-import '../../../core/constant/imageassets.dart';
 import '../../../core/functions/translatefatabase.dart';
 import '../../../core/functions/truncatetext.dart';
 import '../../../data/model/itemsmodel.dart';
@@ -20,7 +18,7 @@ import '../../../linkabi.dart';
       return SizedBox(
         height: 216,
         child: ListView.builder(
-            itemCount: controller.items.length,
+            itemCount: controller.offers.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, i) {
               return ItemsHome(
@@ -128,7 +126,7 @@ class ItemsHome extends GetView<HomeControllerImp> {
                                 : IconButton(
                               onPressed: () async {
                                 final currentCount = await controller.getCountItems(itemsModel.itemsId!);
-                                await controller.addItems(
+                                await controller.removeItems(
                                   itemsModel.itemsId!,
                                   "0",
                                   controller.getPrice(itemsModel).toString(),

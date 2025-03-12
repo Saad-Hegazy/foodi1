@@ -36,7 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: ^4.6.6
 # DateTime
-  jiffy: ^6.3.2
   intl: 0.19.0
   http: ^1.2.2
 # Images

@@ -1,29 +1,26 @@
 import 'package:get/get.dart';
-
 import '../core/class/statusrequest.dart';
 import '../core/functions/handlingData.dart';
 import '../core/services/services.dart';
 import '../data/datasource/remote/cart_data.dart';
-import '../data/datasource/remote/myfavorite_data.dart';
+import '../data/datasource/remote/favorite_data.dart';
 import '../data/model/cartmodel.dart';
-import '../data/model/itemsmodel.dart';
 import '../data/model/myfavorite.dart';
 import 'cart_controller.dart';
-import 'favorite_controller.dart';
 import 'home_controller.dart';
 class MyFavoriteController extends GetxController {
-  MyFavoriteData favoriteData = MyFavoriteData(Get.find());
+  FavoriteData favoriteData = FavoriteData(Get.find());
   CartData cartData = CartData(Get.find());
   List datacart = [];
 
   List<MyFavoriteModel> data = [];
-  FavoriteController favoriteController= Get.put(FavoriteController());
   HomeControllerImp homeController=Get.put(HomeControllerImp());
   CartController cartController =Get.put(CartController());
 
   late StatusRequest statusRequest;
 
   MyServices myServices = Get.find();
+  num totalcountitems = 0;
 
 //  key => id items
 //  Value => 1 OR 0
@@ -40,7 +37,7 @@ class MyFavoriteController extends GetxController {
       if (response['status'] == "success") {
         List responsedata = response['data'];
         data.addAll(responsedata.map((e) => MyFavoriteModel.fromJson(e)));
-        view();
+        // view();
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -49,14 +46,29 @@ class MyFavoriteController extends GetxController {
     update();
 
   }
-  bool checkItemInFavorite(ItemsModel targetItem){
-    return  data.any((item)=>item.favoriteItemsid==targetItem.itemsId);
+  bool checkItemInFavorite(MyFavoriteModel targetItem){
+    return  data.any((item)=>item.favoriteItemsid==targetItem.favoriteItemsid);
   }
-  deleteFromFavorite(int favroiteid){
-    favoriteData.deleteData(favroiteid.toString());
-    // data.removeWhere((element) => element.favoriteId == favroiteid);
-    getData();
-    homeController.getfavoriteData();
+  bool checkItemInCart(MyFavoriteModel targetItem){
+    return  datacart.any((item)=>item.cartItemsid==targetItem.favoriteItemsid);
+  }
+  deleteFromFavorite(int favroiteid)async{
+    data.clear();
+    statusRequest = StatusRequest.loading;
+    var response = await favoriteData.deleteData(favroiteid.toString());
+    print("=============================== deleteFromFavoriteController $response ");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      // Start backend
+      if (response['status'] == "success") {
+        homeController.getfavoriteData();
+        getData();
+        Get.snackbar("144".tr, "143".tr,);
+      } else {
+        statusRequest = StatusRequest.failure;
+      }
+      // End
+    }
     update();
   }
   goToPageProductDetails(MyFavoriteitemsModel) {
@@ -98,12 +110,12 @@ class MyFavoriteController extends GetxController {
       itempriceforunit,
       countitembyunit,
     );
-    print("=============================== Controller $response ");
+    print("=============================== addItemsController $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == "success") {
         view();
-        // Get.snackbar("155".tr, "154".tr,);
+        Get.snackbar("155".tr, "154".tr,);
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -134,6 +146,8 @@ class MyFavoriteController extends GetxController {
           List dataresponse = response['datacart']['data'];
           datacart.clear();
           datacart.addAll(dataresponse.map((e) => CartModel.fromJson(e)));
+          Map dataresponsecountprice = response['countprice'];
+          totalcountitems = dataresponsecountprice['totalcount'];
         }
       } else {
         statusRequest = StatusRequest.failure;
@@ -170,7 +184,7 @@ class MyFavoriteController extends GetxController {
       if (response['status'] == "success" ) {
         getCountItems(itemsid);
         getData();
-        // Get.snackbar("155".tr, "157".tr);
+        Get.snackbar("155".tr, "157".tr);
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -200,9 +214,7 @@ class MyFavoriteController extends GetxController {
         }
     }
   }
-  bool checkItemInCart(MyFavoriteModel targetItem){
-    return  datacart.any((item)=>item.cartItemsid==targetItem.itemsId);
-  }
+
   hasDiscount(itemsModel){
     switch(myServices.sharedPreferences.getString("userType")){
       case  "Normal User":

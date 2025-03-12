@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:foodi1/core/constant/color.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -32,7 +34,29 @@ class AddAddressController extends GetxController {
   CameraPosition? kGooglePlex;
 
   getCurrentLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      showLocationServiceDialog();
+      return;
+    }
 
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission != LocationPermission.whileInUse &&
+          permission != LocationPermission.always) {
+        showLocationPermissionDialog();
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      showPermanentDenialDialog();
+      return;
+    }
+
+    // If we get here, permissions are granted
+    try {
       postion = await Geolocator.getCurrentPosition();
       kGooglePlex = CameraPosition(
         target: LatLng(postion!.latitude, postion!.longitude),
@@ -40,9 +64,70 @@ class AddAddressController extends GetxController {
       );
       addMarkers(LatLng(postion!.latitude, postion!.longitude));
       statusRequest = StatusRequest.none;
-
-
+    } catch (e) {
+      statusRequest = StatusRequest.serverfailure;
+    }
     update();
+  }
+
+  void showLocationServiceDialog() {
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: AppColor.secondColor,
+        title: Text('Location Services Disabled'),
+        content: Text('Please enable location services to use this feature'),
+        actions: [
+          TextButton(
+            onPressed: () => Geolocator.openLocationSettings(),
+            child: Text('Open Settings'),
+          ),
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showLocationPermissionDialog() {
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: AppColor.secondColor,
+        title: Text('Location Permission Required'),
+        content: Text('This app needs location permissions to work properly'),
+        actions: [
+          TextButton(
+            onPressed: () => Geolocator.openAppSettings(),
+            child: Text('Open Settings'),
+          ),
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showPermanentDenialDialog() {
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: AppColor.secondColor,
+        title: Text('Permission Permanently Denied'),
+        content: Text('Please enable location permissions in app settings'),
+        actions: [
+          TextButton(
+            onPressed: () => Geolocator.openAppSettings(),
+            child: Text('App Settings'),
+          ),
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text('Cancel'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

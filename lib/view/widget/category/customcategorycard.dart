@@ -1,15 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controller/favorite_controller.dart';
 import '../../../controller/home_controller.dart';
-import '../../../controller/offers_controller.dart';
-import '../../../core/constant/color.dart';
-import '../../../core/constant/imageassets.dart';
 import '../../../core/functions/translatefatabase.dart';
-import '../../../core/functions/truncatetext.dart';
 import '../../../data/model/categoriesmodel.dart';
-import '../../../data/model/itemsmodel.dart';
 import '../../../linkabi.dart';
 
 class CategoryCard extends GetView<HomeControllerImp> {
