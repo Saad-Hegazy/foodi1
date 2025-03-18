@@ -75,8 +75,7 @@ class TopProductPageDetails extends GetView<ProductDetailsControllerImp> {
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: AppColor.primaryColor),
                 onPressed: () {
-                  controller.refreshcart();
-
+                  Get.back();
                 }
               ),
             ),

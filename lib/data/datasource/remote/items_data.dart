@@ -4,10 +4,9 @@ import '../../../linkabi.dart';
 class ItemsData {
   Crud crud;
   ItemsData(this.crud);
-  getData(String  id, String userid , String page , String recordsPerPage) async {
+  getData(String  id,  String page , String recordsPerPage) async {
     var response = await crud.postData(AppLink.items, {
       "id" : id,
-      "usersid" : userid,
       "page":page,
       "recordsPerPage":recordsPerPage,
     });

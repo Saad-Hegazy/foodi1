@@ -5,21 +5,12 @@ import '../view/screen/home.dart';
 import '../view/screen/myfavorite.dart';
 import '../view/screen/offers.dart';
 import '../view/screen/settings.dart';
-import 'cart_controller.dart';
-import 'home_controller.dart';
-import 'myfavoritecontroller.dart';
-
 abstract class HomeScreenController extends GetxController{
   changepage(int currentpage);
 }
-
 class  HomeScreenControllerImp extends HomeScreenController{
-  MyFavoriteController myFavoritecontroller=Get.put(MyFavoriteController());
-  HomeControllerImp homeController= Get.put(HomeControllerImp());
-  CartController cartController = Get.put(CartController());
-
-
   int currentpage = 0;
+
   List<Widget> listPage = [
     const HomePage(),
     const OffersView(),
@@ -27,6 +18,7 @@ class  HomeScreenControllerImp extends HomeScreenController{
     const Cart() ,
     const Settings()
   ];
+
   List bottomappbar = [
     {"title": "201", "icon": Icons.home_outlined},
     {"title": "212", "icon":Icons.local_offer_outlined },
@@ -34,17 +26,9 @@ class  HomeScreenControllerImp extends HomeScreenController{
     {"title": "213", "icon": Icons.shopping_cart_outlined},
     {"title": "204", "icon": Icons.settings_outlined}
   ];
+
   @override
   changepage(int i) {
-    if(i==0){
-      homeController.refreshPage();
-    }else if(i==1){
-      homeController.refreshPage();
-    }else if(i==2){
-      myFavoritecontroller.getData();
-    } else if(i==3){
-      cartController.refreshPage();
-    }
     currentpage=i;
     update();
   }

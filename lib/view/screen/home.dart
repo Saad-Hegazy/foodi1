@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/cartlocal_controller.dart';
 import '../../controller/home_controller.dart';
 import '../../core/constant/routes.dart';
 import '../../data/model/itemsmodel.dart';
@@ -15,24 +16,28 @@ class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final cartControllerLocal = Get.find<CartControllerLocal>();
     Get.put(HomeControllerImp());
     return GetBuilder<HomeControllerImp>(
         builder: (controller) => Container(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: ListView(
               children: [
-                 CustomAppBarItems(
-                  mycontroller: controller.search!,
-                  titleappbar: "58".tr,
-                  onPressedSearch: () {
-                    controller.onSearchItems();
-                  },
-                  onChanged: (val) {
-                    controller.checkSearch(val);
-                  },
-                    onPressedIconCart: () => Get.toNamed(AppRoute.cart),
-                    itemCount:controller.totalcountitems.toInt(),
-                ),
+                 Obx((){
+                   return CustomAppBarItems(
+                     mycontroller: controller.search!,
+                     titleappbar: "58".tr,
+                     onPressedSearch: () {
+                       controller.onSearchItems();
+                     },
+                     onChanged: (val) {
+                       controller.checkSearch(val);
+                     },
+                     onPressedIconCart: () => Get.toNamed(AppRoute.cart),
+                     itemCount:cartControllerLocal.cartItems.length,
+                   );
+                    }
+                 ),
                 !controller.isSearch
                         ?  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +73,7 @@ class ListItemsSearch extends GetView<HomeControllerImp> {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              controller.goToPageProductDetailsItemModel(listdatamodel[index]);
+              controller.goToPageProductDetails(listdatamodel[index]);
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 20),

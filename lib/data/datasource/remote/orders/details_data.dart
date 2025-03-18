@@ -4,8 +4,8 @@ import '../../../../linkabi.dart';
 class OrdersDetailsData {
   Crud crud;
   OrdersDetailsData(this.crud);
-  getData(String id,String usersType) async {
-    var response = await crud.postData(AppLink.ordersdetails, {"id": id ,"userstype" :usersType});
+  getData(String id) async {
+    var response = await crud.postData(AppLink.ordersdetails, {"id": id });
     return response.fold((l) => l, (r) => r);
   }
 }

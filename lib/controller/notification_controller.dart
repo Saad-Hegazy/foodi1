@@ -5,10 +5,12 @@ import '../core/services/services.dart';
 import '../data/datasource/remote/orders/notification_data.dart';
 
 class NotificationController extends GetxController {
-  NotificationData notificationData = NotificationData(Get.find());
-  List data = [];
-  late StatusRequest statusRequest;
+
   MyServices myServices = Get.find();
+  NotificationData notificationData = NotificationData(Get.find());
+  late StatusRequest statusRequest;
+  List data = [];
+
   getData() async {
     statusRequest = StatusRequest.loading;
     var response = await notificationData
@@ -16,13 +18,11 @@ class NotificationController extends GetxController {
     print("=============================== NotificationController $response ");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
-      // Start backend
       if (response['status'] == "success") {
         data.addAll(response['data']);
       } else {
         statusRequest = StatusRequest.failure;
       }
-      // End
     }
     update();
   }

@@ -1,40 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controller/cart_controller.dart';
+import '../../../controller/cartlocal_controller.dart';
 import '../../../core/constant/color.dart';
 import '../../../core/functions/translatefatabase.dart';
 import '../../../core/functions/truncatetext.dart';
-import '../../../data/model/cartmodel.dart';
+import '../../../data/model/crtitem.dart';
 import '../../../linkabi.dart';
-class CustomItemsCartList extends GetView<CartController> {
-  final CartModel cartModel;
-  final String name;
-  final String namear;
-  final String totalitemeprice;
-  final String price;
-  final String imagename;
-  final String unit;
-  final void Function()? onAdd;
-  final void Function()? onRemove;
-  final void Function()? onDelet;
-  const CustomItemsCartList({Key? key,
-    required this.cartModel,
-    required this.name,
-    required this.namear,
-    required this.totalitemeprice,
-    required this.price,
-    required this.imagename,
-    required this.unit,
-    required this.onAdd,
-    required this.onRemove,
-    required this.onDelet,
+class CustomItemsCartList extends GetView<CartControllerLocal> {
+  final CartItem cartItemModel;
+  const CustomItemsCartList({
+    Key? key,
+    required this.cartItemModel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cartControllerLocal = Get.find<CartControllerLocal>();
     return Dismissible(
-      key: Key(cartModel.itemsId.toString()),
+      key: Key(cartItemModel.item.itemsId.toString()),
       direction: DismissDirection.endToStart,
       background: Container(
         alignment: Alignment.centerRight,
@@ -42,49 +26,12 @@ class CustomItemsCartList extends GetView<CartController> {
         padding: const EdgeInsets.only(right: 20),
         child: const Icon(Icons.delete, color: Colors.white, size: 30),
       ),
-      confirmDismiss: (direction) async {
-        // // // Optional: Add confirmation dialog
-        CartController cartController = Get.put(CartController());
-        return await cartController.delete(
-                    cartModel.itemsId!,
-                  );
-        // return await showDialog(
-        //   context: context,
-        //   builder: (context) => AlertDialog(
-        //     backgroundColor: AppColor.secondColor,
-        //     title:  Text("209".tr),
-        //     content:  Text("208".tr),
-        //     actions: [
-        //       TextButton(
-        //         onPressed: () => Get.back(),
-        //         child:  Text("210".tr),
-        //       ),
-        //       TextButton(
-        //         onPressed: ()async{
-        //           CartController cartController = Get.put(CartController());
-        //           await cartController.deleteSwap(
-        //             cartModel.itemsId!,
-        //           );
-        //
-        //         },
-        //         child:  Text("211".tr, style: TextStyle(color: AppColor.primaryColor)),
-        //       ),
-        //     ],
-        //   ),
-        // );
-      },
       onDismissed: (direction) {
-      onDelet; // Call your controller method
-      // Get.showSnackbar(GetSnackBar(
-      // message: "Item removed from cart",
-      // duration: const Duration(seconds: 2),
-      // backgroundColor: AppColor.primaryColor,
-      // )
-      // );
+        cartControllerLocal.deleteFromCart(cartItemModel.item.itemsId!);
       },
       child: InkWell(
         onTap: () {
-          controller.goToPageProductDetails(cartModel);
+          cartControllerLocal.goToPageProductDetails(cartItemModel.item);
         },
         child: Card(
           color: AppColor.backgroundcolor2,
@@ -98,128 +45,123 @@ class CustomItemsCartList extends GetView<CartController> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Product Image
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: CachedNetworkImage(
-                    imageUrl: "${AppLink.imagestItems}/$imagename",
+                    imageUrl:
+                    "${AppLink.imagestItems}/${cartItemModel.item.itemsImage}",
                     height: 50,
                     width: 50,
                     fit: BoxFit.cover,
                   ),
                 ),
                 const SizedBox(width: 12),
-                // Product Details
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         translateDatabase(
-                          truncateProductName(namear),
-                          truncateProductName(name),
+                          truncateProductName(cartItemModel.item.itemsNameAr!),
+                          truncateProductName(cartItemModel.item.itemsName!),
                         ),
-                        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        "$price ${"190".tr} $unit",
-                        style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                        "${cartItemModel.unit == 0 ? cartItemModel.item.itemPrice?.toStringAsFixed(2) : cartItemModel.item.itemPriceBox?.toStringAsFixed(2)} ${"190".tr} ${cartItemModel.unit==0?"184".tr:"183".tr}",
+                        style: TextStyle(
+                            fontSize: 12, color: Colors.grey.shade600),
                       ),
                     ],
                   ),
                 ),
-
-                // Price & Quantity Control
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    // Price
                     Text(
-                      "$totalitemeprice SAR",
+                      "${cartItemModel.itemTotalPrice?.toStringAsFixed(2)} SAR",
                       style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold, color:AppColor.primaryColor),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: AppColor.primaryColor),
                     ),
                     const SizedBox(height: 8),
-                    // Quantity Picker
-                    Row(
-                      children: [
-                        // Decrement button
-                        FutureBuilder(
-                          future: controller.getCountItems(cartModel.cartItemsid!),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return
-                                snapshot.data! < 2
-                                    ? IconButton(
-                                  onPressed: () async {
-                                    await controller.delete(cartModel.cartItemsid!);
-                                    controller.update();
-                                  },
-                                  icon: const Icon(Icons.delete, color:AppColor.primaryColor),
-                                )
-                                    : IconButton(
-                                  onPressed: () async {
-                                    final currentCount = await controller.getCountItems(cartModel.cartItemsid!);
-                                    await controller.remove(
-                                      cartModel.cartItemsid!,
-                                      "0",
-                                      controller.getPrice(cartModel).toString(),
-                                      currentCount - 1,
-                                    );
-                                    controller.update();
-                                  },
-                                  icon: const Icon(Icons.remove_circle_outline, color:AppColor.primaryColor),
-                                );
-                            } else {
-                              return  SizedBox();
-                            }
-                          },
+                    // Reactive cart controls remain inside Obx
+                    Obx(() {
+                      final existingIndex =
+                      cartControllerLocal.cartItems.indexWhere((item) =>
+                      item.item.itemsId == cartItemModel.item.itemsId);
+                      final isInCart = existingIndex != -1;
+
+                      return isInCart
+                          ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              if (cartControllerLocal
+                                  .cartItems[existingIndex].quantity <
+                                  2) {
+                                cartControllerLocal.deleteFromCart(
+                                    cartItemModel.item.itemsId!);
+                              } else {
+                                cartControllerLocal.removeFromCart(
+                                    cartItemModel.item, 1,
+                                    cartControllerLocal.cartItems[existingIndex].unit==0?0:1);
+                              }
+                            },
+                            icon: Icon(
+                              cartControllerLocal.cartItems[existingIndex]
+                                  .quantity <
+                                  2
+                                  ? Icons.delete
+                                  : Icons.remove_circle_outline,
+                              color: AppColor.primaryColor,
+                            ),
+                          ),
+                          Text(
+                            "${cartControllerLocal.cartItems[existingIndex].quantity}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppColor.primaryColor,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              cartControllerLocal.addToCart(
+                                  cartItemModel.item, 1,
+                                  cartControllerLocal.cartItems[existingIndex].unit==0?0:1);
+                            },
+                            icon: Icon(
+                              Icons.add_circle_outline,
+                              color: AppColor.primaryColor,
+                            ),
+                          ),
+                        ],
+                      )
+                          : TextButton.icon(
+                        onPressed: () {
+                          cartControllerLocal.addToCart(
+                              cartItemModel.item, 1,
+                              cartControllerLocal.cartItems[existingIndex].unit==0?0:1);
+                        },
+                        label: Text(
+                          "100".tr,
+                          style: TextStyle(
+                            color: AppColor.primaryColor,
+                            fontSize: 16,
+                          ),
                         ),
-                        // Display count
-                        FutureBuilder(
-                          future: controller.getCountItems(cartModel.cartItemsid!),
-                          builder: (context, snapshot) {
-                            return Text(snapshot.hasData ? snapshot.data!.toString() : "");
-                          },
+                        icon: Icon(
+                          Icons.shopping_cart,
+                          color: AppColor.primaryColor,
+                          size: 25,
                         ),
-                        // Increment button
-                        FutureBuilder(
-                          future: controller.getCountItems(cartModel.cartItemsid!),
-                          builder: (context, snapshot) {
-                            if(snapshot.hasData){
-                              return
-                                IconButton(
-                                  onPressed: () async {
-                                    final currentCount = await controller.getCountItems(cartModel.cartItemsid!);
-                                    await controller.add(
-                                      cartModel.cartItemsid!,
-                                      "0",
-                                      controller.getPrice(cartModel).toString(),
-                                      currentCount + 1,
-                                    );
-                                    controller.update();
-                                  },
-                                  icon: const Icon(Icons.add_circle_outline, color:AppColor.primaryColor),
-                                );
-                            }else{
-                              return TextButton.icon(
-                                onPressed: (){
-                                  controller.add(
-                                      cartModel.cartItemsid!,
-                                      "0",
-                                      controller.getPrice(cartModel).toString(),
-                                      1
-                                  );
-                                },
-                                label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,fontSize: 16)),
-                                icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor,size: 25,),
-                              );
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                      );
+                    }),
                   ],
                 ),
               ],

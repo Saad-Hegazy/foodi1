@@ -1,12 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controller/cart_controller.dart';
+import '../../../controller/cartlocal_controller.dart';
 import '../../../core/constant/color.dart';
-import 'buttoncart.dart';
 import 'custombuttoncoupon.dart';
 
-class BottomNavgationBarCart extends GetView<CartController> {
+class BottomNavgationBarCart extends GetView<CartControllerLocal> {
   final String price;
   final String discount;
   final String totalprice;
@@ -28,9 +26,9 @@ class BottomNavgationBarCart extends GetView<CartController> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            GetBuilder<CartController>(
+            GetBuilder<CartControllerLocal>(
                 builder: (controller) =>
-                controller.couponname == null ?
+                controller.couponname == "" ?
                 Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(children: [
@@ -64,7 +62,7 @@ class BottomNavgationBarCart extends GetView<CartController> {
                             onPressed: onApplyCoupon,
                           ))
                     ]))
-                    : Container(child: Text("127".tr+" ${controller.couponname!}" , style: const TextStyle(color: Colors.black , fontWeight: FontWeight.bold),))
+                    : Container(child: Text("127".tr+" ${controller.couponname}" , style: const TextStyle(color: Colors.black , fontWeight: FontWeight.bold),))
             ),
             Container(
               margin: const EdgeInsets.all(10),

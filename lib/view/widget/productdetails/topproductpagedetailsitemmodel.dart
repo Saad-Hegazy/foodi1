@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controller/productDetailsItemModel_controller.dart';
+import '../../../controller/productdetails_controller.dart';
 import '../../../core/constant/color.dart';
 import '../../../linkabi.dart';
 
 
-class TopProductPageDetailsItemModel extends GetView<ProductDetailsControllerItemModelImp> {
+class TopProductPageDetailsItemModel extends GetView<ProductDetailsControllerImp> {
   const TopProductPageDetailsItemModel({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -75,8 +75,7 @@ class TopProductPageDetailsItemModel extends GetView<ProductDetailsControllerIte
               child: IconButton(
                   icon: Icon(Icons.arrow_back, color: AppColor.primaryColor),
                   onPressed: () {
-                    controller.refreshcart();
-
+                    Get.back();
                   }
               ),
             ),

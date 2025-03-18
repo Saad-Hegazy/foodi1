@@ -1,24 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controller/myfavoritecontroller.dart';
+import '../../../controller/cartlocal_controller.dart';
+import '../../../controller/favorite_controller.dart';
 import '../../../core/constant/color.dart';
 import '../../../core/functions/translatefatabase.dart';
 import '../../../core/functions/truncatetext.dart';
-import '../../../data/model/myfavorite.dart';
+import '../../../data/model/itemsmodel.dart';
 import '../../../linkabi.dart';
 
-class CustomListFavoriteItems extends GetView<MyFavoriteController> {
-  final  MyFavoriteModel myFavoriteitemsModel;
-
+class CustomListFavoriteItems extends GetView<FavoriteController> {
+  final ItemsModel itemsModel;
   const CustomListFavoriteItems({Key? key,
-    required this.myFavoriteitemsModel})
+    required this.itemsModel})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final cartControllerLocal = Get.find<CartControllerLocal>();
+    final favoriteController = Get.find<FavoriteController>();
     return InkWell(
         onTap: () {
-         controller.goToPageProductDetailsItemModel(myFavoriteitemsModel);
+         controller.goToPageProductDetails(itemsModel);
         },
         child: Card(
           color: AppColor.backgroundcolor2,
@@ -30,15 +32,15 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
           child: Stack(
             children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 5, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(12, 5, 12, 0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Hero(
-                        tag: "${myFavoriteitemsModel.itemsId}",
+                        tag: "${itemsModel.itemsId}",
                         child: CachedNetworkImage(
-                          imageUrl: "${AppLink.imagestItems}/${myFavoriteitemsModel.itemsImage!}",
+                          imageUrl: "${AppLink.imagestItems}/${itemsModel.itemsImage!}",
                           height: 80,
                           width: 80,
                           fit: BoxFit.cover, // Ensure image fits within the space
@@ -50,8 +52,8 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                       ),
                       Text(
                         translateDatabase(
-                          truncateProductName(myFavoriteitemsModel.itemsNameAr.toString()),
-                          truncateProductName(myFavoriteitemsModel.itemsName.toString()),
+                          truncateProductName(itemsModel.itemsNameAr.toString()),
+                          truncateProductName(itemsModel.itemsName.toString()),
                         ),
                         style: TextStyle(
                           height: 0.7,
@@ -63,8 +65,7 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                         overflow: TextOverflow.ellipsis, // Handle long text
                       ),
                       // Price
-                      Text(
-                        "${controller.getPrice(myFavoriteitemsModel).toStringAsFixed(1)} SAR",
+                       Text( "${itemsModel.itemPrice!.toStringAsFixed(1)} SAR",
                         style: TextStyle(
                             color: AppColor.primaryColor,
                             height: 2,
@@ -73,7 +74,7 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                         ),
                       ),
                       // Price and Favorite Icon
-                      controller.hasDiscount(myFavoriteitemsModel) == 1? Text("${controller.getPricewithoutDiscount(myFavoriteitemsModel).toStringAsFixed(2)} SAR",
+                      itemsModel.amountofDiscount > 0? Text("${itemsModel.pricewithoutDiscount.toStringAsFixed(1)} SAR",
                         style: const TextStyle(
                           fontSize: 14, // Slightly larger for emphasis
                           fontWeight: FontWeight.bold,
@@ -82,119 +83,70 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                           decoration: TextDecoration.lineThrough, // Strikethrough
                         ),
                       ):SizedBox(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          // Price
-                          controller.checkItemInCart(myFavoriteitemsModel)?
-                          Row(
-                            children: [
-                              // Decrement button
-                              FutureBuilder(
-                                future: controller.getCountItems(myFavoriteitemsModel.itemsId!),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return
-                                      snapshot.data! < 2
-                                          ? IconButton(
-                                        onPressed: () async {
-                                          await controller.delete(myFavoriteitemsModel.itemsId!);
-                                          controller.update();
-                                          controller.cartController.refreshPage();
-                                          controller.homeController.refreshPage();
-                                          controller.homeController.getfavoriteData();
-                                        },
-                                        icon: const Icon(Icons.delete, color:AppColor.primaryColor,),
-                                      )
-                                          : IconButton(
-                                        onPressed: () async {
-                                          final currentCount = await controller.getCountItems(myFavoriteitemsModel.itemsId!);
-                                          await controller.addItems(
-                                            myFavoriteitemsModel.itemsId!,
-                                            "0",
-                                            controller.getPrice(myFavoriteitemsModel).toString(),
-                                            currentCount - 1,
-                                          );
-                                          controller.cartController.refreshPage();
-                                          controller.homeController.refreshPage();
-                                          controller.update();
-                                        },
-                                        icon: const Icon(Icons.remove_circle_outline, color:AppColor.primaryColor,),
-                                      );
-                                  } else {
-                                    return  SizedBox();
-                                  }
-                                },
-                              ),
-                              // Display count
-                              FutureBuilder<int>(
-                                future: controller.getCountItems(myFavoriteitemsModel.itemsId!),
-                                builder: (context, snapshot) {
-                                  return Text(snapshot.hasData ? snapshot.data!.toString() : "");
-                                },
-                              ),
-                              // Increment button
-                              FutureBuilder<int>(
-                                future: controller.getCountItems(myFavoriteitemsModel.itemsId!),
-                                builder: (context, snapshot) {
-                                  if(snapshot.hasData){
-                                    return
-                                      IconButton(
-                                        onPressed: () async {
-                                          final currentCount = await controller.getCountItems(myFavoriteitemsModel.itemsId!);
-                                          await controller.addItems(
-                                            myFavoriteitemsModel.itemsId!,
-                                            "0",
-                                            controller.getPrice(myFavoriteitemsModel).toString(),
-                                            currentCount + 1,
-                                          );
-                                          controller.cartController.refreshPage();
-                                          controller.homeController.refreshPage();
-
-                                          controller.update();
-                                        },
-                                        icon: const Icon(Icons.add_circle_outline, color:AppColor.primaryColor,),
-                                      );
-                                  }else{
-                                    return TextButton.icon(
-                                      onPressed: (){
-                                        controller.addItems(
-                                            myFavoriteitemsModel.itemsId!,
-                                            "0",
-                                            controller.getPrice(myFavoriteitemsModel).toString(),
-                                            1
-                                        );
-                                        controller.cartController.refreshPage();
-                                        controller.homeController.refreshPage();
-                                        controller.update();
-
-                                      },
-                                      label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,)),
-                                      icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor),
-                                    );
-                                  }
-                                  // return Text(snapshot.hasData ? snapshot.data!.toString() : "0");
-                                },
-                              ),
-                            ],
-                          )
-                              :
-                          TextButton.icon(
-                            onPressed: (){
-                              controller.addItems(
-                                  myFavoriteitemsModel.itemsId!,
-                                  "0",
-                                  controller.getPrice(myFavoriteitemsModel).toString(),
-                                  1
-                              );
-                              controller.cartController.refreshPage();
-                              controller.homeController.refreshPage();
-                              },
-                            label: Text("100".tr,style:TextStyle(color:AppColor.primaryColor,fontSize: 16)),
-                            icon:Icon(Icons.shopping_cart,color: AppColor.primaryColor,size: 25,),
-                          )
-                        ],
+                  // Reactive cart controls
+                  Obx(() {
+                    final existingIndex = cartControllerLocal.cartItems.indexWhere(
+                            (item) => item.item.itemsId == itemsModel.itemsId
+                    );
+                    final isInCart = existingIndex != -1;
+                    return isInCart ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Delete/Decrement button
+                        IconButton(
+                          onPressed: () {
+                            if (cartControllerLocal.cartItems[existingIndex].quantity < 2) {
+                              cartControllerLocal.deleteFromCart(itemsModel.itemsId!);
+                            } else {
+                              cartControllerLocal.removeFromCart(itemsModel, 1, 0);
+                            }
+                          },
+                          icon: Icon(
+                            cartControllerLocal.cartItems[existingIndex].quantity < 2
+                                ? Icons.delete
+                                : Icons.remove_circle_outline,
+                            color: AppColor.primaryColor,
+                          ),
+                        ),
+                        // Quantity display
+                        Text(
+                          "${cartControllerLocal.cartItems[existingIndex].quantity}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppColor.primaryColor,
+                          ),
+                        ),
+                        // Increment button
+                        IconButton(
+                          onPressed: () {
+                            cartControllerLocal.addToCart(itemsModel, 1, 0);
+                          },
+                          icon: Icon(
+                            Icons.add_circle_outline,
+                            color: AppColor.primaryColor,
+                          ),
+                        ),
+                      ],
+                    ) : TextButton.icon(
+                      onPressed: () {
+                        cartControllerLocal.addToCart(itemsModel, 1, 0);
+                      },
+                      label: Text(
+                        "100".tr,
+                        style: TextStyle(
+                          color: AppColor.primaryColor,
+                          fontSize: 16,
+                        ),
                       ),
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: AppColor.primaryColor,
+                        size: 25,
+                      ),
+                    );
+                  }
+                  ),
 
                     ],
                   ),
@@ -204,17 +156,17 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                   right: 5,
                 child:
                 IconButton(
-                          onPressed: () {
-                            controller.deleteFromFavorite(myFavoriteitemsModel.itemsId!) ;
-                          },
-                          icon: const Icon(
-                            Icons.delete_outline_outlined,
-                            color: AppColor.primaryColor,
-                          )
+                  icon: Obx(() => Icon(
+                    favoriteController.isFavorite(itemsModel)
+                        ? Icons.delete_outline_outlined
+                        : Icons.delete_outline_outlined,
+                    color: AppColor.primaryColor,
+                  )
+                    ),
+                  onPressed: () => favoriteController.toggleFavorite(itemsModel),
                 )
-                ),
-              // Sale Badge (only if there's a discount)
-              if (controller.hasDiscount(myFavoriteitemsModel) > 0)
+              ),
+              if (itemsModel.amountofDiscount > 0)
                 Positioned(
                   top:22,
                   left: 13,
@@ -225,7 +177,7 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
-                      "${controller.amountofDiscount(myFavoriteitemsModel)}% OFF",
+                      "${itemsModel.amountofDiscount}% OFF",
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w700,
@@ -233,8 +185,7 @@ class CustomListFavoriteItems extends GetView<MyFavoriteController> {
                       ),
                     ),
                   ),
-                ),
-            ],
+                ),],
           ),
         ),
     );

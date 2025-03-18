@@ -19,17 +19,6 @@ class Checkout extends StatelessWidget {
         backgroundColor: AppColor.primaryColor,
         title:  Text('61'.tr,style: TextStyle(color: Colors.white),),
       ),
-      bottomNavigationBar: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: MaterialButton(
-            color: AppColor.primaryColor,
-            textColor: Colors.white,
-            onPressed: () {
-              controller.checkout();
-            },
-            child:  Text("62".tr,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.white)),
-          )),
       body: GetBuilder<CheckoutController>(
           builder: (controller) => HandlingDataView(
               statusRequest: controller.statusRequest,
@@ -116,7 +105,6 @@ class Checkout extends StatelessWidget {
                             ),
                             if(controller.dataaddress.isEmpty)
                                TextButton(
-
                                   onPressed: (){
                                   Get.toNamed(AppRoute.addressadd);
                                 }, child: Container(
@@ -154,7 +142,21 @@ class Checkout extends StatelessWidget {
                           ],
                         )
                     ],
-                  )))),
+                  )
+              )
+          )
+      ),
+      bottomNavigationBar: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: MaterialButton(
+            color: AppColor.primaryColor,
+            textColor: Colors.white,
+            onPressed: () {
+              controller.checkout();
+            },
+            child:  Text("62".tr,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.white)),
+          )),
     );
   }
 }

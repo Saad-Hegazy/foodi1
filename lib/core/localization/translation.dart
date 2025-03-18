@@ -132,7 +132,7 @@ class MyTranslation extends Translations {
       "127":"رمز القسيمة",
       "128":"سعر",
       "129":"تخفيض",
-      "130":"شحن",
+      "130":"توصيل",
       "131":"السعر الإجمالي",
       "132":"طلب",
       "133":"الرجاء تشغيل خدمه تحديد الموقع",
@@ -216,7 +216,7 @@ class MyTranslation extends Translations {
       "211": "حذف",
       "212": "عروض",
       "213": "السلة",
-
+      "214":"اجمالي السعر",
     },
     "en": {
       "1": "Choose Language",
@@ -401,7 +401,7 @@ class MyTranslation extends Translations {
       "181": "are you sure from deleting this order",
       "182": "WhatsApp",
       "183": "Box",
-      "184": "one unit",
+      "184": "unit",
       "185": "resend successfully verify Code",
       "186": "Count: ",
       "187": "send OTP on Email",
@@ -431,6 +431,7 @@ class MyTranslation extends Translations {
       "211":"Delete",
       "212":"Offers",
       "213":"Cart",
+      "214":"Total Price",
 
     }
   };

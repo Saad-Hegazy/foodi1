@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/home_controller.dart';
+import '../../../core/constant/color.dart';
 import '../../../core/functions/translatefatabase.dart';
 import '../../../data/model/categoriesmodel.dart';
 import '../../../linkabi.dart';
@@ -57,9 +58,14 @@ class CategoryCard extends GetView<HomeControllerImp> {
             children: [
               // Background Image
               Positioned.fill(
-                child: CachedNetworkImage(
+                child:CachedNetworkImage(
                   imageUrl: "${AppLink.imagestCategories}/${categoriesModel.categoriesImage}",
-                  fit: BoxFit.cover,
+                  fit: BoxFit.cover,// Ensure image fits within the space
+                  alignment : Alignment. center,
+                  placeholder: (context, url) => CircularProgressIndicator(
+                    color: AppColor.primaryColor,
+                  ),
+                  errorWidget: (context, url, error) => Icon(Icons.error, color: Colors.red),
                 ),
               ),
               // Category Name Overlay

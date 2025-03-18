@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+import '../../core/services/services.dart';
 
 class ItemsModel {
   int? itemsId;
@@ -53,6 +55,7 @@ class ItemsModel {
         this.categoriesImage,
         this.categoriesDatetime,
         this.favorite});
+  MyServices myServices = Get.find();
 
   ItemsModel.fromJson(Map<dynamic, dynamic> json) {
     itemsId = json['items_id'];
@@ -111,5 +114,98 @@ class ItemsModel {
     data['categories_image'] = categoriesImage;
     data['categories_datetime'] = categoriesDatetime;
     return data;
+  }
+
+  num? get itemPrice{
+    switch(myServices.sharedPreferences.getString("userType")){
+      case  "Normal User":
+            if(itemsDescount!>0){
+              return itemsPrice!- itemsPrice! * itemsDescount!/100;
+            }else{
+              return  itemsPrice!;
+            }
+      case  "mosque":
+        if(itemsDescountMosque!>0){
+          return itemsPriceMosque!- itemsPriceMosque! * itemsDescountMosque!/100;
+        }else{
+          return  itemsPriceMosque!;
+        }
+      case  "Merchant":
+        if(itemsDescountMerchant!>0){
+          return itemsPriceMerchant!- itemsPriceMerchant! * itemsDescountMerchant!/100;
+        }else{
+          return  itemsPriceMerchant!;
+        }
+    }
+    return 0;
+  }
+
+  num? get itemPriceBox{
+    switch(myServices.sharedPreferences.getString("userType")){
+      case  "Normal User":
+        if(itemsDescount!>0){
+          return itemspricrofbox! - itemspricrofbox! * itemsDescount!/100;
+        }else{
+          return  itemspricrofbox!;
+        }
+      case  "mosque":
+        if(itemsDescountMosque!>0){
+          return itemspricrofboxmosque! - itemspricrofboxmosque! * itemsDescountMosque!/100;
+        }else{
+          return  itemspricrofboxmosque!;
+        }
+      case  "Merchant":
+        if(itemsDescountMerchant!>0){
+          return itemspricrofboxmerchant! - itemspricrofboxmerchant! * itemsDescountMerchant!/100;
+        }else{
+          return  itemspricrofboxmerchant!;
+        }
+    }
+    return 0;
+  }
+
+  get amountofDiscount{
+    switch(myServices.sharedPreferences.getString("userType")){
+      case  "Normal User":
+        if(itemsDescount! >0){
+          return itemsDescount;
+        }else{
+          return 0 ;
+        }
+      case  "mosque":
+        if(itemsDescountMosque! >0){
+          return itemsDescountMosque;
+        }else{
+          return 0 ;
+        }
+      case  "Merchant":
+        if(itemsPriceMerchant! >0){
+          return itemsPriceMerchant;
+        }else{
+          return 0 ;
+        }
+    }
+  }
+
+  get pricewithoutDiscount{
+    switch(myServices.sharedPreferences.getString("userType")){
+      case  "Normal User":
+        return  itemsPrice!;
+      case  "mosque":
+        return  itemsPriceMosque!;
+      case  "Merchant":
+        return  itemsPriceMerchant!;
+    }
+  }
+
+  get priceBoxwithoutDiscount{
+    switch(myServices.sharedPreferences.getString("userType")){
+      case  "Normal User":
+        return  itemsPrice! * itemsquantityinbox!;
+      case  "mosque":
+        return  itemsPriceMosque!* itemsquantityinbox!;
+      case  "Merchant":
+        return  itemsPriceMerchant!* itemsquantityinbox!;
+    }
   }
 }
