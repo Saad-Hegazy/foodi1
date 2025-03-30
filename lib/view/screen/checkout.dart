@@ -138,7 +138,21 @@ class Checkout extends StatelessWidget {
                                         ? true
                                         : false),
                               ),
-                            )
+                            ),
+                            TextButton(
+                              onPressed: (){
+                                Get.toNamed(AppRoute.addressadd);
+                              }, child: Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 10),
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                              decoration: BoxDecoration(
+                                  color: AppColor.secondColor,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child:  Center(child: Text("221".tr,
+                                style: TextStyle(color: AppColor.primaryColor,fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              )),
+                            ),),
                           ],
                         )
                     ],

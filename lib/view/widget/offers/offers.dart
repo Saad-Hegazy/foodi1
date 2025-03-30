@@ -44,16 +44,9 @@ class ItemsHome extends GetView<HomeControllerImp> {
     final existingIndex = cartControllerLocal.cartItems.indexWhere(
             (item) => item.item.itemsId == itemsModel.itemsId);
     return InkWell(
-      onTap: () {
-        controller.goToPageProductDetails(itemsModel,);
-        },
+      onTap: () => controller.goToPageProductDetails(itemsModel),
       child: Card(
-        color: AppColor.backgroundcolor2,
-        elevation: 3, // Add shadow for depth
-        // margin: const EdgeInsets.all(8), // Margin around the card
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), // Rounded corners
-        ),
+        // ... existing Card properties ...
         child: Stack(
           children: [
             Padding(
@@ -62,17 +55,20 @@ class ItemsHome extends GetView<HomeControllerImp> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Hero(
-                    tag: "${itemsModel.itemsId}-UniqueKey",
-                    child: CachedNetworkImage(
-                      imageUrl: "${AppLink.imagestItems}/${itemsModel.itemsImage!}",
-                      height: 80,
-                      width: 80,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error, color: Colors.red),
+                  // Flexible image section
+                  Expanded(
+                    child: Hero(
+                      tag: "${itemsModel.itemsId}-UniqueKey",
+                      child: CachedNetworkImage(
+                        imageUrl: "${AppLink.imagestItems}/${itemsModel.itemsImage!}",
+                        width: 80,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.red),
+                      ),
                     ),
                   ),
+                  // Product name with line limit
                   Text(
                     translateDatabase(
                       truncateProductName(itemsModel.itemsNameAr.toString()),
@@ -84,6 +80,7 @@ class ItemsHome extends GetView<HomeControllerImp> {
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(

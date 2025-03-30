@@ -74,8 +74,8 @@ class AddAddressController extends GetxController {
     Get.dialog(
       AlertDialog(
         backgroundColor: AppColor.secondColor,
-        title: Text('Location Services Disabled'),
-        content: Text('Please enable location services to use this feature'),
+        title: Text('215'.tr),
+        content: Text('216'.tr),
         actions: [
           TextButton(
             onPressed: () => Geolocator.openLocationSettings(),
@@ -94,8 +94,8 @@ class AddAddressController extends GetxController {
     Get.dialog(
       AlertDialog(
         backgroundColor: AppColor.secondColor,
-        title: Text('Location Permission Required'),
-        content: Text('This app needs location permissions to work properly'),
+        title: Text('217'.tr),
+        content: Text('218'.tr),
         actions: [
           TextButton(
             onPressed: () => Geolocator.openAppSettings(),
@@ -114,8 +114,8 @@ class AddAddressController extends GetxController {
     Get.dialog(
       AlertDialog(
         backgroundColor: AppColor.secondColor,
-        title: Text('Permission Permanently Denied'),
-        content: Text('Please enable location permissions in app settings'),
+        title: Text('219'.tr),
+        content: Text('220'.tr),
         actions: [
           TextButton(
             onPressed: () => Geolocator.openAppSettings(),

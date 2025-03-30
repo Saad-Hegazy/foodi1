@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../firebase_options.dart';
@@ -28,4 +29,8 @@ initialServices()async{
   notificationService.requestNotificationPermattion();
   notificationService.getDeviceToken();
   FcmService.firbaseInit();
+  await Geolocator.isLocationServiceEnabled();
+  await Geolocator.checkPermission();
+
+
 }

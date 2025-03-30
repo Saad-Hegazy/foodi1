@@ -217,6 +217,13 @@ class MyTranslation extends Translations {
       "212": "عروض",
       "213": "السلة",
       "214":"اجمالي السعر",
+      "215":"خدمة الموقع معطلة",
+      "216":"يرجى تمكين خدمة الموقع ",
+      "217":"الرجاء السماح باستخدام خدمة الموقع",
+      "218":"يحتاج هذا التطبيق إلى أذونات الموقع ليعمل بشكل صحيح",
+      "219":"تم رفض الإذن بشكل دائم",
+      "220":"يرجى تمكين أذونات الموقع في إعدادات التطبيق",
+      "221":"اضف عنوان جديد",
     },
     "en": {
       "1": "Choose Language",
@@ -432,6 +439,13 @@ class MyTranslation extends Translations {
       "212":"Offers",
       "213":"Cart",
       "214":"Total Price",
+      "215":"Location Services Disabled",
+      "216":"Please enable location services to use this feature",
+      "217":"Location Permission Required",
+      "218":"This app needs location permissions to work properly",
+      "219":"Permission Permanently Denied",
+      "220":"Please enable location permissions in app settings",
+      "221":"Add a new address",
 
     }
   };

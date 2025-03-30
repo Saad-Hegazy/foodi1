@@ -54,6 +54,7 @@ class CheckoutController extends GetxController {
     print("=============================== getShippingAddressController $response");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
+      dataaddress.clear();
       if (response['status'] == "success") {
         List listdata = response['data'];
         dataaddress.addAll(listdata.map((e) => AddressModel.fromJson(e)));
