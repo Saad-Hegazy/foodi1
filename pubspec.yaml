@@ -82,6 +82,8 @@ dependencies:
   rating_dialog: ^2.0.4
   app_settings: ^5.1.1
   google_fonts: ^6.2.1
+  js: ^0.6.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

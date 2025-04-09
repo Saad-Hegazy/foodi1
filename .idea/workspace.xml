@@ -9,9 +9,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="12/3/2025">
+    <list default="true" id="fa54f0e8-4c3b-4ca3-bbcc-56d4754dc284" name="Changes" comment="31/3/2025">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/orders/details_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/orders/details_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/screen/notification.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/notification.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/screen/orders/details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/screen/orders/details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/widget/home/ImageSliderScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/widget/home/ImageSliderScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
@@ -73,7 +77,7 @@
     "git-widget-placeholder": "master",
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/LENOVO/projects/foodi1project/deliveryfoodi1",
+    "last_opened_file_path": "C:/Users/LENOVO/projects/foodi1project/foodi1",
     "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -319,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743355359432</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="31/3/2025">
+      <option name="closed" value="true" />
+      <created>1743431430226</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1743431430227</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -357,6 +369,7 @@
     <MESSAGE value="7-3-2025&#10;update add function" />
     <MESSAGE value="RollBack" />
     <MESSAGE value="12/3/2025" />
-    <option name="LAST_COMMIT_MESSAGE" value="12/3/2025" />
+    <MESSAGE value="31/3/2025" />
+    <option name="LAST_COMMIT_MESSAGE" value="31/3/2025" />
   </component>
 </project>

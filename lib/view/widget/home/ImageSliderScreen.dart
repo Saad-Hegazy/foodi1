@@ -25,7 +25,7 @@ class ImageSlider extends StatelessWidget {
                 color: AppColor.primaryColor,
               ):
                 CachedNetworkImage (
-                  imageUrl:  "${AppLink.imageSliderUpload}/" +  controller.imageSlider[index]["ImageSlider_name"],
+                 imageUrl:  "${AppLink.imageSliderUpload}/" +  controller.imageSlider[index]["ImageSlider_name"],
                   height: 100,
                   fit: BoxFit.fill,
                   placeholder: (context, url) => CircularProgressIndicator(

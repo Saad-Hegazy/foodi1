@@ -27,7 +27,7 @@ Get.put(NotificationController());
                                 children: [
                                      ListTile(
                                       title: Text(controller.data[index]
-                                      ['notification_title']  +"                                  "+ DateFormat('dd-MMM-yyyy').format(
+                                      ['notification_title']  +"             "+ DateFormat('dd-MMM-yyyy').format(
                                         DateTime.parse(controller.data[index]['notification_datetime']),
                                       ),style: const TextStyle(
                                           color: AppColor.primaryColor,
